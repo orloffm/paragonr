@@ -10,7 +10,7 @@ using Paragonr.Entities;
 namespace Paragonr.Entities.Migrations
 {
     [DbContext(typeof(BudgetContext))]
-    [Migration("20190415130559_Initial")]
+    [Migration("20190416094822_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace Paragonr.Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool?>("IsMain");
+                    b.Property<bool>("IsMain");
 
                     b.Property<string>("IsoCode")
                         .IsRequired()

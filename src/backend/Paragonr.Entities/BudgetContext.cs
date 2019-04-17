@@ -18,7 +18,13 @@ namespace Paragonr.Entities
         {
             
         }
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Make currencies non-main by default.
+            modelBuilder.Entity<Currency>().Property(c => c.IsMain).HasDefaultValue(false);
+        }
+
         public DbSet<Spending> Spendings { get; set; }
 
         public DbSet<Currency> Currencies { get; set; }
