@@ -8,13 +8,12 @@ namespace Paragonr.Entities
     {
         public DateTime Date { get; set; }
 
-        public long CurrencyId { get; set; }
+        public long TargetId { get; set; }
+        public Currency Target { get; set; }
 
-        [ForeignKey(nameof(CurrencyId))]
-        public Currency Currency { get; set; }
+        public long BaseId { get; set; }
+        public Currency Base { get; set; }
 
-        [Required]
-        [Column(TypeName = "decimal(19, 6)")]
-        public decimal RateToMain { get; set; }
+        public decimal Rate { get; set; }
     }
 }

@@ -1,28 +1,24 @@
-﻿using System;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Paragonr.Entities;
 
-namespace Paragonr.Entities
+namespace Paragonr.Persistence
 {
-
-
     public sealed class BudgetContext : DbContext
     {
         public BudgetContext()
         {
-            
+
         }
 
         public BudgetContext(DbContextOptions<BudgetContext> options)
         : base(options)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Make currencies non-main by default.
-            modelBuilder.Entity<Currency>().Property(c => c.IsMain).HasDefaultValue(false);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(BudgetContext).Assembly);
         }
 
         public DbSet<Spending> Spendings { get; set; }

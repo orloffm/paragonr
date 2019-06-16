@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Paragonr.Entities\Paragonr.Entities.csproj" />
+    <ProjectReference Include="..\Paragonr.Persistence\Paragonr.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

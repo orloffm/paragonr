@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 
 namespace Paragonr.Entities
 {
@@ -6,7 +6,8 @@ namespace Paragonr.Entities
     {
         public long? DomainId { get; set; }
 
-        [ForeignKey(nameof(DomainId))]
         public Domain Domain { get; set; }
+
+        public virtual ICollection<Spending> Spendings { get; set; }
     }
 }

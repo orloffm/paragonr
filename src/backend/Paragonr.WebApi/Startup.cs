@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Paragonr.Entities;
+using Paragonr.Persistence;
 
 namespace Paragonr.WebApi
 {

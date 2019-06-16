@@ -1,5 +1,5 @@
-dotnet ef migrations add Initial --startup-project Paragonr.WebApi --project Paragonr.Entities
+dotnet ef migrations add Initial --startup-project Paragonr.WebApi --project Paragonr.Persistence
 
-dotnet ef database update --startup-project Paragonr.WebApi --project Paragonr.Entities
+dotnet ef database update --startup-project Paragonr.WebApi --project Paragonr.Persistence
 
 dotnet aspnet-codegenerator controller -p Paragonr.WebApi -name CurrenciesController -m Currency -dc BudgetContext --relativeFolderPath Controllers -api

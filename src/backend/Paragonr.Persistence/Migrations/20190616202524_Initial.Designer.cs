@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Paragonr.Entities;
+using Paragonr.Persistence;
 
-namespace Paragonr.Entities.Migrations
+namespace Paragonr.Persistence.Migrations
 {
     [DbContext(typeof(BudgetContext))]
-    partial class BudgetContextModelSnapshot : ModelSnapshot
+    [Migration("20190616202524_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,10 +42,6 @@ namespace Paragonr.Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("IsMain")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
-
                     b.Property<string>("IsoCode")
                         .IsRequired()
                         .HasMaxLength(3);
@@ -59,16 +57,21 @@ namespace Paragonr.Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("CurrencyId");
+                    b.Property<long>("BaseId");
 
-                    b.Property<DateTime>("Date");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("Date");
 
-                    b.Property<decimal>("RateToMain")
+                    b.Property<decimal>("Rate")
                         .HasColumnType("decimal(19, 6)");
+
+                    b.Property<long>("TargetId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CurrencyId");
+                    b.HasIndex("BaseId");
+
+                    b.HasIndex("TargetId");
 
                     b.ToTable("CurrencyRates");
                 });
@@ -85,7 +88,9 @@ namespace Paragonr.Entities.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DefaultCategoryId");
+                    b.HasIndex("DefaultCategoryId")
+                        .IsUnique()
+                        .HasFilter("[DefaultCategoryId] IS NOT NULL");
 
                     b.ToTable("Domains");
                 });
@@ -97,7 +102,7 @@ namespace Paragonr.Entities.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18, 6)");
+                        .HasColumnType("decimal(19, 6)");
 
                     b.Property<long?>("CategoryId");
 
@@ -120,33 +125,42 @@ namespace Paragonr.Entities.Migrations
                 {
                     b.HasOne("Paragonr.Entities.Domain", "Domain")
                         .WithMany("Categories")
-                        .HasForeignKey("DomainId");
+                        .HasForeignKey("DomainId")
+                        .HasConstraintName("FK_Category_Domain");
                 });
 
             modelBuilder.Entity("Paragonr.Entities.CurrencyRate", b =>
                 {
-                    b.HasOne("Paragonr.Entities.Currency", "Currency")
+                    b.HasOne("Paragonr.Entities.Currency", "Base")
                         .WithMany()
-                        .HasForeignKey("CurrencyId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BaseId")
+                        .HasConstraintName("FK_CurrencyRate_BaseCurrency");
+
+                    b.HasOne("Paragonr.Entities.Currency", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId")
+                        .HasConstraintName("FK_CurrencyRate_TargetCurrency");
                 });
 
             modelBuilder.Entity("Paragonr.Entities.Domain", b =>
                 {
                     b.HasOne("Paragonr.Entities.Category", "DefaultCategory")
-                        .WithMany()
-                        .HasForeignKey("DefaultCategoryId");
+                        .WithOne()
+                        .HasForeignKey("Paragonr.Entities.Domain", "DefaultCategoryId")
+                        .HasConstraintName("FK_Domain_DefaultCategory");
                 });
 
             modelBuilder.Entity("Paragonr.Entities.Spending", b =>
                 {
                     b.HasOne("Paragonr.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
+                        .WithMany("Spendings")
+                        .HasForeignKey("CategoryId")
+                        .HasConstraintName("FK_Spending_Category");
 
                     b.HasOne("Paragonr.Entities.Currency", "Currency")
                         .WithMany()
-                        .HasForeignKey("CurrencyId");
+                        .HasForeignKey("CurrencyId")
+                        .HasConstraintName("FK_Spending_Currency");
                 });
 #pragma warning restore 612, 618
         }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Paragonr.Entities;
+using Paragonr.Persistence;
 
 namespace Paragonr.WebApi.Controllers
 {

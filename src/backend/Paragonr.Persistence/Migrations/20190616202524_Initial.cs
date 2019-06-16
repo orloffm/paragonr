@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Paragonr.Entities.Migrations
+namespace Paragonr.Persistence.Migrations
 {
     public partial class Initial : Migration
     {
@@ -14,8 +14,7 @@ namespace Paragonr.Entities.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IsoCode = table.Column<string>(maxLength: 3, nullable: false),
-                    IsMain = table.Column<bool>(nullable: false)
+                    IsoCode = table.Column<string>(maxLength: 3, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,19 +27,26 @@ namespace Paragonr.Entities.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Date = table.Column<DateTime>(nullable: false),
-                    CurrencyId = table.Column<long>(nullable: false),
-                    RateToMain = table.Column<decimal>(type: "decimal(19, 6)", nullable: false)
+                    Date = table.Column<DateTime>(type: "Date", nullable: false),
+                    TargetId = table.Column<long>(nullable: false),
+                    BaseId = table.Column<long>(nullable: false),
+                    Rate = table.Column<decimal>(type: "decimal(19, 6)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CurrencyRates", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CurrencyRates_Currencies_CurrencyId",
-                        column: x => x.CurrencyId,
+                        name: "FK_CurrencyRate_BaseCurrency",
+                        column: x => x.BaseId,
                         principalTable: "Currencies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CurrencyRate_TargetCurrency",
+                        column: x => x.TargetId,
+                        principalTable: "Currencies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,7 +75,7 @@ namespace Paragonr.Entities.Migrations
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Categories_Domains_DomainId",
+                        name: "FK_Category_Domain",
                         column: x => x.DomainId,
                         principalTable: "Domains",
                         principalColumn: "Id",
@@ -83,7 +89,7 @@ namespace Paragonr.Entities.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CurrencyId = table.Column<long>(nullable: true),
-                    Amount = table.Column<decimal>(type: "decimal(18, 6)", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(19, 6)", nullable: false),
                     CategoryId = table.Column<long>(nullable: true),
                     Place = table.Column<string>(nullable: true),
                     Note = table.Column<string>(nullable: true)
@@ -92,13 +98,13 @@ namespace Paragonr.Entities.Migrations
                 {
                     table.PrimaryKey("PK_Spendings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Spendings_Categories_CategoryId",
+                        name: "FK_Spending_Category",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Spendings_Currencies_CurrencyId",
+                        name: "FK_Spending_Currency",
                         column: x => x.CurrencyId,
                         principalTable: "Currencies",
                         principalColumn: "Id",
@@ -111,14 +117,21 @@ namespace Paragonr.Entities.Migrations
                 column: "DomainId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CurrencyRates_CurrencyId",
+                name: "IX_CurrencyRates_BaseId",
                 table: "CurrencyRates",
-                column: "CurrencyId");
+                column: "BaseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CurrencyRates_TargetId",
+                table: "CurrencyRates",
+                column: "TargetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Domains_DefaultCategoryId",
                 table: "Domains",
-                column: "DefaultCategoryId");
+                column: "DefaultCategoryId",
+                unique: true,
+                filter: "[DefaultCategoryId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Spendings_CategoryId",
@@ -131,7 +144,7 @@ namespace Paragonr.Entities.Migrations
                 column: "CurrencyId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Domains_Categories_DefaultCategoryId",
+                name: "FK_Domain_DefaultCategory",
                 table: "Domains",
                 column: "DefaultCategoryId",
                 principalTable: "Categories",
@@ -142,7 +155,7 @@ namespace Paragonr.Entities.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Categories_Domains_DomainId",
+                name: "FK_Category_Domain",
                 table: "Categories");
 
             migrationBuilder.DropTable(
