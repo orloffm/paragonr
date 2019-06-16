@@ -1,16 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Paragonr.Application;
 using Paragonr.Entities;
 
 namespace Paragonr.Persistence
 {
-    public sealed class BudgetContext : DbContext
+    public class BudgetDbContext : DbContext, IBudgetDbContext
     {
-        public BudgetContext()
+        public BudgetDbContext()
         {
 
         }
 
-        public BudgetContext(DbContextOptions<BudgetContext> options)
+        public BudgetDbContext(DbContextOptions<BudgetDbContext> options)
         : base(options)
         {
 
@@ -18,7 +19,7 @@ namespace Paragonr.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(BudgetContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(BudgetDbContext).Assembly);
         }
 
         public DbSet<Spending> Spendings { get; set; }

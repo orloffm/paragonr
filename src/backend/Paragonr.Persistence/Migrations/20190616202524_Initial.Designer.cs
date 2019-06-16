@@ -9,7 +9,7 @@ using Paragonr.Persistence;
 
 namespace Paragonr.Persistence.Migrations
 {
-    [DbContext(typeof(BudgetContext))]
+    [DbContext(typeof(BudgetDbContext))]
     [Migration("20190616202524_Initial")]
     partial class Initial
     {

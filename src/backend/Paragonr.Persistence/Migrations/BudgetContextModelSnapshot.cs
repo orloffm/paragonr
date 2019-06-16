@@ -8,7 +8,7 @@ using Paragonr.Persistence;
 
 namespace Paragonr.Persistence.Migrations
 {
-    [DbContext(typeof(BudgetContext))]
+    [DbContext(typeof(BudgetDbContext))]
     partial class BudgetContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

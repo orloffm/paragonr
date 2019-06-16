@@ -14,9 +14,9 @@ namespace Paragonr.WebApi.Controllers
     [ApiController]
     public class SpendingsController : ControllerBase
     {
-        private readonly BudgetContext _context;
+        private readonly BudgetDbContext _context;
 
-        public SpendingsController(BudgetContext context)
+        public SpendingsController(BudgetDbContext context)
         {
             _context = context;
         }

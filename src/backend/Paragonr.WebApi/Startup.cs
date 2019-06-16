@@ -30,7 +30,7 @@ namespace Paragonr.WebApi
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<BudgetContext>
+            services.AddDbContext<BudgetDbContext>
                 (options => options.UseSqlServer(
                 @"data source=.;initial catalog=Paragonr;integrated security=True;MultipleActiveResultSets=True;",
                 sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()));

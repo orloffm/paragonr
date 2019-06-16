@@ -14,9 +14,9 @@ namespace Paragonr.WebApi.Controllers
     [ApiController]
     public class CurrenciesController : ControllerBase
     {
-        private readonly BudgetContext _context;
+        private readonly BudgetDbContext _context;
 
-        public CurrenciesController(BudgetContext context)
+        public CurrenciesController(BudgetDbContext context)
         {
             _context = context;
         }
