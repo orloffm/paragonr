@@ -7,7 +7,9 @@ namespace Paragonr.Persistence.Configurations
     {
         protected override void ConfigureEntity(EntityTypeBuilder<Currency> builder)
         {
-            builder.Property(c => c.IsoCode).IsRequired().HasMaxLength(3);
+            builder.Property(c => c.IsoCode)
+                .IsRequired()
+                .HasMaxLength(3);
         }
     }
 }

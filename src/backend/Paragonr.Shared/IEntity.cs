@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Paragonr.Shared
+﻿namespace Paragonr.Shared
 {
     public interface IEntity
     {

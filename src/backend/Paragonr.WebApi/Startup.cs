@@ -1,17 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Paragonr.Entities;
+using Paragonr.Application.Currencies.Queries.GetCurrenciesList;
+using Paragonr.Application.Infrastructure;
+using Paragonr.Application.Interfaces;
 using Paragonr.Persistence;
 
 namespace Paragonr.WebApi
@@ -25,17 +26,6 @@ namespace Paragonr.WebApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            services.AddDbContext<BudgetDbContext>
-                (options => options.UseSqlServer(
-                @"data source=.;initial catalog=Paragonr;integrated security=True;MultipleActiveResultSets=True;",
-                sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()));
-        }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -43,13 +33,34 @@ namespace Paragonr.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public IServiceProvider ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc()
+                .AddControllersAsServices()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
+            services.AddMediatR(typeof(GetCurrenciesListQueryHandler).GetTypeInfo().Assembly);
+
+            services.AddDbContext<IBudgetDbContext, BudgetDbContext>(
+                options => options.UseSqlServer(
+                    @"data source=.;initial catalog=Paragonr;integrated security=True;MultipleActiveResultSets=True;",
+                    sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()
+                )
+            );
+
+            var builder = new ContainerBuilder();
+            builder.Populate(services);
+            IContainer container = builder.Build();
+
+            var provider = new AutofacServiceProvider(container);
+            return provider;
         }
     }
 }

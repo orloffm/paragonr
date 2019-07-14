@@ -9,7 +9,7 @@ namespace Paragonr.Persistence
     {
         public static void Initialize(BudgetDbContext context)
         {
-            BudgetDbInitializer initializer = new BudgetDbInitializer();
+            var initializer = new BudgetDbInitializer();
             initializer.SeedEverything(context);
         }
 
@@ -61,7 +61,7 @@ namespace Paragonr.Persistence
         private void AddDefaultCurrencyRates(BudgetDbContext context)
         {
             Dictionary<string, long> currencyIds = context.Currencies.ToDictionary(c => c.IsoCode, c => c.Id);
-            DateTime date = new DateTime(2019, 7, 14);
+            var date = new DateTime(2019, 7, 14);
 
             CurrencyRate MakeRate(string baseCurrencyCode, string targetCurrencyCode, decimal rate)
             {

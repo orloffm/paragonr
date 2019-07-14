@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Paragonr.Application;
 using Paragonr.Application.Interfaces;
 using Paragonr.Entities;
 
@@ -9,21 +8,13 @@ namespace Paragonr.Persistence
     {
         public BudgetDbContext()
         {
-
         }
 
-        public BudgetDbContext(DbContextOptions<BudgetDbContext> options)
-        : base(options)
+        public BudgetDbContext(DbContextOptions<BudgetDbContext> options) : base(options)
         {
-
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(BudgetDbContext).Assembly);
-        }
-
-        public DbSet<Spending> Spendings { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public DbSet<Currency> Currencies { get; set; }
 
@@ -31,6 +22,11 @@ namespace Paragonr.Persistence
 
         public DbSet<Domain> Domains { get; set; }
 
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Spending> Spendings { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(BudgetDbContext).Assembly);
+        }
     }
 }

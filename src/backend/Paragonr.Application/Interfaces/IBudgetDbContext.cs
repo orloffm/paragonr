@@ -7,7 +7,7 @@ namespace Paragonr.Application.Interfaces
 {
     public interface IBudgetDbContext
     {
-        DbSet<Spending> Spendings { get; set; }
+        DbSet<Category> Categories { get; set; }
 
         DbSet<Currency> Currencies { get; set; }
 
@@ -15,7 +15,7 @@ namespace Paragonr.Application.Interfaces
 
         DbSet<Domain> Domains { get; set; }
 
-        DbSet<Category> Categories { get; set; }
+        DbSet<Spending> Spendings { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

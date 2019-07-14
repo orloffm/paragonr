@@ -8,4 +8,13 @@
     <ProjectReference Include="..\Paragonr.Entities\Paragonr.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Currencies\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+  </ItemGroup>
+
 </Project>

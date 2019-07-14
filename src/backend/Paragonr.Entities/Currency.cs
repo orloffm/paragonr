@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Paragonr.Entities
+﻿namespace Paragonr.Entities
 {
     public class Currency : EntityBase
     {

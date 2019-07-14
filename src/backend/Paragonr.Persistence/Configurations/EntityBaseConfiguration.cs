@@ -11,11 +11,12 @@ namespace Paragonr.Persistence.Configurations
             ConfigureBase(builder);
             ConfigureEntity(builder);
         }
-        protected abstract void ConfigureEntity(EntityTypeBuilder<T> builder);
 
         private void ConfigureBase(EntityTypeBuilder<T> builder)
         {
             builder.HasKey(e => e.Id);
         }
+
+        protected abstract void ConfigureEntity(EntityTypeBuilder<T> builder);
     }
 }
