@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Paragonr.Application.Infrastructure;
 using Paragonr.Application.Interfaces;
 using Paragonr.Persistence;
@@ -59,6 +60,10 @@ namespace Paragonr.WebApi
                     sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()
                 )
             );
+
+            // To support EF migrations.
+            services.TryAdd(new ServiceDescriptor(typeof(BudgetDbContext), typeof(BudgetDbContext), ServiceLifetime.Scoped));
+
 
             var builder = new ContainerBuilder();
             builder.Populate(services);

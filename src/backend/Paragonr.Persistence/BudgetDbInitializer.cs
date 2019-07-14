@@ -34,22 +34,26 @@ namespace Paragonr.Persistence
                 new Currency
                 {
                     IsoCode = "PLN",
-                    Name = "Polish złoty"
+                    Name = "Polish złoty",
+                    Symbol = "zł"
                 },
                 new Currency
                 {
                     IsoCode = "USD",
-                    Name = "US dollar"
+                    Name = "US dollar",
+                    Symbol = "$"
                 },
                 new Currency
                 {
                     IsoCode = "EUR",
-                    Name = "Euro"
+                    Name = "Euro",
+                    Symbol = "€"
                 },
                 new Currency
                 {
                     IsoCode = "RUB",
-                    Name = "Russian ruble"
+                    Name = "Russian ruble",
+                    Symbol = "₽"
                 }
             };
 

@@ -1,17 +1,15 @@
 import React from "react";
-import "./App.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-import Currencies from "./components/Currencies";
+import Currencies from "./components/currencies";
 import currenciesData from "./data/currencies-list";
 
-// import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 
 const App: React.FC = () => {
   return (
     <main className="container">
-      <Navbar />
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="#home">Paragonr</Navbar.Brand>
+      </Navbar>
       <Currencies data={currenciesData.currencies} />
     </main>
   );

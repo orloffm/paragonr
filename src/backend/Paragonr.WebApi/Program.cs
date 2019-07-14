@@ -52,6 +52,7 @@ namespace Paragonr.WebApi
                 catch (Exception ex)
                 {
                     logger.Error(ex, "An error occurred while migrating or initializing the database.");
+                    throw;
                 }
             }
 

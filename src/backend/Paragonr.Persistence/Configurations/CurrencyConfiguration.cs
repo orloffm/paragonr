@@ -10,6 +10,10 @@ namespace Paragonr.Persistence.Configurations
             builder.Property(c => c.IsoCode)
                 .IsRequired()
                 .HasMaxLength(3);
+
+            builder.Property(c => c.Symbol)
+                .IsRequired()
+                .HasMaxLength(3);
         }
     }
 }
