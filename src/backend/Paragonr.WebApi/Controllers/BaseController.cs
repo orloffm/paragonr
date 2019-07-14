@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Paragonr.Application.Currencies;
 
 namespace Paragonr.WebApi.Controllers
 {

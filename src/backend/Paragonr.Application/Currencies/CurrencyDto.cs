@@ -1,7 +1,7 @@
 ﻿using Paragonr.Application.Infrastructure;
 using Paragonr.Entities;
 
-namespace Paragonr.Application.Currencies.Queries.GetCurrenciesList
+namespace Paragonr.Application.Currencies
 {
     public sealed class CurrencyDto : EntityBaseDto, IMapFrom<Currency>
     {

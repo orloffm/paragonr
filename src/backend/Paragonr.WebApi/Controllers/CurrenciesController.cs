@@ -1,17 +1,15 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Paragonr.Application.Currencies.Queries.GetCurrenciesList;
+using Paragonr.Application.Currencies;
+using Paragonr.Application.Queries.List;
 
 namespace Paragonr.WebApi.Controllers
 {
-    public sealed class CurrenciesController : BaseController
+    public sealed class CurrenciesController : EntityBaseController<CurrencyDto>
     {
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<CurrenciesListViewModel>> GetAll()
-        {
-            return Ok(await Mediator.Send(new GetCurrenciesListQuery()));
-        }
+      
+
+
     }
 }

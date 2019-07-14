@@ -1,4 +1,4 @@
-﻿namespace Paragonr.Application
+﻿namespace Paragonr.Application.Infrastructure
 {
     public interface IEntityDto
     {
