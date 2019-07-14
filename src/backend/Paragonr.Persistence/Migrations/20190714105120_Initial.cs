@@ -14,7 +14,8 @@ namespace Paragonr.Persistence.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IsoCode = table.Column<string>(maxLength: 3, nullable: false)
+                    IsoCode = table.Column<string>(maxLength: 3, nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

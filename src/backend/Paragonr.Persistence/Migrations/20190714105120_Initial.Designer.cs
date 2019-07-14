@@ -10,7 +10,7 @@ using Paragonr.Persistence;
 namespace Paragonr.Persistence.Migrations
 {
     [DbContext(typeof(BudgetDbContext))]
-    [Migration("20190616202524_Initial")]
+    [Migration("20190714105120_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,8 @@ namespace Paragonr.Persistence.Migrations
                     b.Property<string>("IsoCode")
                         .IsRequired()
                         .HasMaxLength(3);
+
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 

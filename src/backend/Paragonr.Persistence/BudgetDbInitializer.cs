@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using Paragonr.Entities;
 
 namespace Paragonr.Persistence
 {
@@ -8,7 +9,7 @@ namespace Paragonr.Persistence
     {
         public static void Initialize(BudgetDbContext context)
         {
-            var initializer = new BudgetDbInitializer();
+            BudgetDbInitializer initializer = new BudgetDbInitializer();
             initializer.SeedEverything(context);
         }
 
@@ -16,6 +17,73 @@ namespace Paragonr.Persistence
         {
             context.Database.EnsureCreated();
 
+            if (context.Currencies.Any())
+            {
+                return;
+            }
+
+            AddCurrencies(context);
+
+            AddDefaultCurrencyRates(context);
+        }
+
+        private void AddCurrencies(BudgetDbContext context)
+        {
+            Currency[] currencies =
+            {
+                new Currency
+                {
+                    IsoCode = "PLN",
+                    Name = "Polish złoty"
+                },
+                new Currency
+                {
+                    IsoCode = "USD",
+                    Name = "US dollar"
+                },
+                new Currency
+                {
+                    IsoCode = "EUR",
+                    Name = "Euro"
+                },
+                new Currency
+                {
+                    IsoCode = "RUB",
+                    Name = "Russian ruble"
+                }
+            };
+
+            context.Currencies.AddRange(currencies);
+
+            context.SaveChanges();
+        }
+
+        private void AddDefaultCurrencyRates(BudgetDbContext context)
+        {
+            Dictionary<string, long> currencyIds = context.Currencies.ToDictionary(c => c.IsoCode, c => c.Id);
+            DateTime date = new DateTime(2019, 7, 14);
+
+            CurrencyRate MakeRate(string baseCurrencyCode, string targetCurrencyCode, decimal rate)
+            {
+                return new CurrencyRate
+                {
+                    BaseId = currencyIds[baseCurrencyCode],
+                    TargetId = currencyIds[targetCurrencyCode],
+                    Rate = rate,
+                    Date = date
+                };
+            }
+
+            CurrencyRate[] currencyRates =
+            {
+                MakeRate("PLN", "USD", 3.79m),
+                MakeRate("PLN", "EUR", 4.28m),
+                MakeRate("PLN", "RUB", 0.0601292m)
+            };
+
+            context.CurrencyRates.AddRange(currencyRates);
+
+            context.SaveChanges();
         }
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Paragonr.Application;
+using Paragonr.Application.Interfaces;
 using Paragonr.Persistence;
 
 namespace Paragonr.WebApi
@@ -28,7 +29,7 @@ namespace Paragonr.WebApi
 
                     var concreteContext = (BudgetDbContext)context;
                     concreteContext.Database.Migrate();
-                    BudgetInitializer.Initialize(concreteContext);
+                    BudgetDbInitializer.Initialize(concreteContext);
                 }
                 catch (Exception ex)
                 {

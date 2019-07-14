@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Paragonr.Entities;
-using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Paragonr.Entities;
 
-namespace Paragonr.Application
+namespace Paragonr.Application.Interfaces
 {
     public interface IBudgetDbContext
     {

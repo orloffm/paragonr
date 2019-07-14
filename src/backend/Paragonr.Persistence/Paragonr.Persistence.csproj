@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Paragonr.Application\Paragonr.Application.csproj" />
     <ProjectReference Include="..\Paragonr.Entities\Paragonr.Entities.csproj" />
+    <ProjectReference Include="..\Paragonr.Tools.EntityFramework\Paragonr.Tools.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

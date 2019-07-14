@@ -9,7 +9,7 @@ using Paragonr.Persistence;
 namespace Paragonr.Persistence.Migrations
 {
     [DbContext(typeof(BudgetDbContext))]
-    partial class BudgetContextModelSnapshot : ModelSnapshot
+    partial class BudgetDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,8 @@ namespace Paragonr.Persistence.Migrations
                     b.Property<string>("IsoCode")
                         .IsRequired()
                         .HasMaxLength(3);
+
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
