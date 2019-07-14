@@ -12,7 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Paragonr.Application.Infrastructure;
 using Paragonr.Application.Interfaces;
-using Paragonr.Application.Queries.List;
 using Paragonr.Persistence;
 
 namespace Paragonr.WebApi
@@ -45,8 +44,14 @@ namespace Paragonr.WebApi
                 .AddControllersAsServices()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
-            services.AddMediatR(typeof(EntityBaseDto).GetTypeInfo().Assembly);
+            services.AddAutoMapper(
+                typeof(AutoMapperProfile).GetTypeInfo()
+                    .Assembly
+            );
+            services.AddMediatR(
+                typeof(EntityBaseDto).GetTypeInfo()
+                    .Assembly
+            );
 
             services.AddDbContext<IBudgetDbContext, BudgetDbContext>(
                 options => options.UseSqlServer(

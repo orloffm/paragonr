@@ -31,10 +31,12 @@ namespace Paragonr.Application.Infrastructure
 
                 foreach (Type mapFromInterface in mapFromInterfaces)
                 {
-                    Type source = mapFromInterface.GetGenericArguments().First();
+                    Type source = mapFromInterface.GetGenericArguments()
+                        .First();
                     Type destination = type;
 
-                    CreateMap(source, destination).ReverseMap();
+                    CreateMap(source, destination)
+                        .ReverseMap();
                 }
             }
         }
