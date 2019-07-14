@@ -2,9 +2,9 @@
 
 namespace Paragonr.Application.Queries.List
 {
-    public sealed class DetailQuery<TItem> : IRequest<DetailResult<TItem>>
+    public sealed class CurrencyQuery : IRequest<CurrencyResult>
     {
-        public DetailQuery(long id)
+        public CurrencyQuery(long id)
         {
             Id = id;
         }

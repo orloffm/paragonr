@@ -2,7 +2,7 @@
 
 namespace Paragonr.Application.Queries.List
 {
-    public sealed class ListQuery<TItem> : IRequest<ListResult<TItem>>
+    public sealed class CurrencyListQuery : IRequest<CurrencyListResult>
     {
     }
 }

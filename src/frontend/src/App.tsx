@@ -1,16 +1,18 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-import Spendings from "./components/Spendings";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import Currencies from "./components/Currencies";
+import currenciesData from "./data/currencies-list";
 
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
 
 const App: React.FC = () => {
   return (
     <main className="container">
-      <Spendings />
+      <Navbar />
+      <Currencies data={currenciesData.currencies} />
     </main>
   );
 };

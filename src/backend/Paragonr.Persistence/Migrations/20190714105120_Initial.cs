@@ -28,10 +28,7 @@ namespace Paragonr.Persistence.Migrations
                 table => new
                 {
                     Id = table.Column<long>()
-                        .Annotation(
-                            "SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn
-                        ),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     IsoCode = table.Column<string>(maxLength: 3),
                     Name = table.Column<string>(nullable: true)
                 },
@@ -43,10 +40,7 @@ namespace Paragonr.Persistence.Migrations
                 table => new
                 {
                     Id = table.Column<long>()
-                        .Annotation(
-                            "SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn
-                        ),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Date = table.Column<DateTime>("Date"),
                     TargetId = table.Column<long>(),
                     BaseId = table.Column<long>(),
@@ -77,10 +71,7 @@ namespace Paragonr.Persistence.Migrations
                 table => new
                 {
                     Id = table.Column<long>()
-                        .Annotation(
-                            "SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn
-                        ),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     DefaultCategoryId = table.Column<long>(nullable: true)
                 },
@@ -92,22 +83,13 @@ namespace Paragonr.Persistence.Migrations
                 table => new
                 {
                     Id = table.Column<long>()
-                        .Annotation(
-                            "SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn
-                        ),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DomainId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                    table.ForeignKey(
-                        "FK_Category_Domain",
-                        x => x.DomainId,
-                        "Domains",
-                        "Id",
-                        onDelete: ReferentialAction.Restrict
-                    );
+                    table.ForeignKey("FK_Category_Domain", x => x.DomainId, "Domains", "Id", onDelete: ReferentialAction.Restrict);
                 }
             );
 
@@ -116,10 +98,7 @@ namespace Paragonr.Persistence.Migrations
                 table => new
                 {
                     Id = table.Column<long>()
-                        .Annotation(
-                            "SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn
-                        ),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CurrencyId = table.Column<long>(nullable: true),
                     Amount = table.Column<decimal>("decimal(19, 6)"),
                     CategoryId = table.Column<long>(nullable: true),
@@ -129,20 +108,8 @@ namespace Paragonr.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Spendings", x => x.Id);
-                    table.ForeignKey(
-                        "FK_Spending_Category",
-                        x => x.CategoryId,
-                        "Categories",
-                        "Id",
-                        onDelete: ReferentialAction.Restrict
-                    );
-                    table.ForeignKey(
-                        "FK_Spending_Currency",
-                        x => x.CurrencyId,
-                        "Currencies",
-                        "Id",
-                        onDelete: ReferentialAction.Restrict
-                    );
+                    table.ForeignKey("FK_Spending_Category", x => x.CategoryId, "Categories", "Id", onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey("FK_Spending_Currency", x => x.CurrencyId, "Currencies", "Id", onDelete: ReferentialAction.Restrict);
                 }
             );
 

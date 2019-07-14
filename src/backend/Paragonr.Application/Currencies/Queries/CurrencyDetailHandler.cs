@@ -1,18 +1,36 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
+using MediatR;
 using Paragonr.Application.Interfaces;
-using Paragonr.Application.Queries.Detail;
+using Paragonr.Application.Queries.List;
 using Paragonr.Entities;
 
 namespace Paragonr.Application.Currencies.Queries
 {
-    public sealed class CurrencyDetailHandler : DetailQueryHandler<Currency, CurrencyDto>
+    public sealed class CurrencyDetailHandler : IRequestHandler<CurrencyQuery, CurrencyResult>
     {
-        public CurrencyDetailHandler(IBudgetDbContext context, IMapper mapper) : base(mapper)
+        private readonly IBudgetDbContext _context;
+        private readonly IMapper _mapper;
+
+        public CurrencyDetailHandler(IBudgetDbContext context, IMapper mapper)
         {
-            EntityDbSet = context.Currencies;
+            _context = context;
+            _mapper = mapper;
         }
 
-        protected override DbSet<Currency> EntityDbSet { get; }
+        public async Task<CurrencyResult> Handle(CurrencyQuery request, CancellationToken cancellationToken)
+        {
+            Currency entity = await _context.Currencies.FindAsync(request.Id);
+
+            if (entity == null)
+            {
+                throw new Exception($"Currency {request.Id} was not found.");
+            }
+
+            var dto = _mapper.Map<CurrencyDto>(entity);
+            return new CurrencyResult(dto);
+        }
     }
 }

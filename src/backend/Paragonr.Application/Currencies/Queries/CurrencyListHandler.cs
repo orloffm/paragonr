@@ -1,18 +1,32 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Paragonr.Application.Interfaces;
 using Paragonr.Application.Queries.List;
-using Paragonr.Entities;
 
 namespace Paragonr.Application.Currencies.Queries
 {
-    public sealed class CurrencyListHandler : ListQueryHandler<Currency, CurrencyDto>
+    public sealed class CurrencyListQueryHandler : IRequestHandler<CurrencyListQuery, CurrencyListResult>
     {
-        public CurrencyListHandler(IBudgetDbContext context, IMapper mapper) : base(mapper)
+        private readonly IBudgetDbContext _context;
+        private readonly IMapper _mapper;
+
+        public CurrencyListQueryHandler(IBudgetDbContext context, IMapper mapper)
         {
-            EntityDbSet = context.Currencies;
+            _context = context;
+            _mapper = mapper;
         }
 
-        protected override DbSet<Currency> EntityDbSet { get; }
+        public async Task<CurrencyListResult> Handle(CurrencyListQuery request, CancellationToken cancellationToken)
+        {
+            List<CurrencyDto> items = await _context.Currencies.ProjectTo<CurrencyDto>(_mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
+
+            return new CurrencyListResult(items);
+        }
     }
 }
