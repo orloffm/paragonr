@@ -1,14 +1,15 @@
 ﻿using Paragonr.Application.Infrastructure;
-using Paragonr.Entities;
 
-namespace Paragonr.Application.Currencies
+namespace Paragonr.Application.Dtos
 {
-    public sealed class CurrencyDto : EntityBaseDto, IMapFrom<Currency>
+    public sealed class CurrencyDto : EntityBaseDto, IMapFrom<Entities.Currency>
     {
         public string IsoCode { get; set; }
 
         public string Symbol { get; set; }
 
         public string Name { get; set; }
+
+        public decimal? RateToMain { get; set; }
     }
 }

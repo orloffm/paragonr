@@ -9,11 +9,10 @@ namespace Paragonr.Application.Infrastructure
     {
         public AutoMapperProfile()
         {
-            LoadSimpleMappings();
-            LoadCustomMappings();
+            LoadMappings();
         }
 
-        public void LoadSimpleMappings()
+        void LoadMappings()
         {
             Type[] types = Assembly.GetExecutingAssembly()
                 .GetExportedTypes();
@@ -25,24 +24,44 @@ namespace Paragonr.Application.Infrastructure
                     continue;
                 }
 
-                Type[] mapFromInterfaces = type.GetInterfaces()
-                    .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>))
-                    .ToArray();
+                LoadSimpleMappingsFromType(type);
 
-                foreach (Type mapFromInterface in mapFromInterfaces)
-                {
-                    Type source = mapFromInterface.GetGenericArguments()
-                        .First();
-                    Type destination = type;
-
-                    CreateMap(source, destination)
-                        .ReverseMap();
-                }
+                LoadCustomMappingsFromType(type);
             }
         }
 
-        private void LoadCustomMappings()
+        private void LoadCustomMappingsFromType(Type type)
         {
+            Type customMappingInterface = type.GetInterfaces()
+                .FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICustomMapping<,>));
+
+            if (customMappingInterface == null)
+            {
+                return;
+            }
+
+            Type[] genericArguments = customMappingInterface.GenericTypeArguments;
+
+            var instance = (ICustomMapping<,>)Activator.CreateInstance(type);
+            instance.CreateMappings(this);
         }
+
+        private void LoadSimpleMappingsFromType(Type type)
+        {
+            Type[] mapFromInterfaces = type.GetInterfaces()
+                .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>))
+                .ToArray();
+
+            foreach (Type mapFromInterface in mapFromInterfaces)
+            {
+                Type source = mapFromInterface.GetGenericArguments()
+                    .First();
+                Type destination = type;
+
+                CreateMap(source, destination)
+                    .ReverseMap();
+            }
+        }
+
     }
 }

@@ -7,24 +7,7 @@ namespace Paragonr.Persistence.Configurations
 {
     public class SpendingConfiguration : EntityBaseConfiguration<Spending>
     {
-        [Column(TypeName = "decimal(18, 6)")]
-        public decimal Amount { get; set; }
-
-        [ForeignKey(nameof(CategoryId))]
-        public Category Category { get; set; }
-
-        public long? CategoryId { get; set; }
-
-        [ForeignKey(nameof(CurrencyId))]
-        public Currency Currency { get; set; }
-
-        public long? CurrencyId { get; set; }
-
-        public string Note { get; set; }
-
-        public string Place { get; set; }
-
-        protected override void ConfigureEntity(EntityTypeBuilder<Spending> builder)
+      protected override void ConfigureEntity(EntityTypeBuilder<Spending> builder)
         {
             builder.Property(d => d.Amount)
                 .IsRequired()
@@ -39,6 +22,14 @@ namespace Paragonr.Persistence.Configurations
                 .WithMany()
                 .HasForeignKey(d => d.CurrencyId)
                 .HasConstraintName("FK_Spending_Currency");
+
+            builder.Property(d => d.Key)
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
+            builder.HasIndex(d => d.Key)
+                .IsUnique();
+
         }
     }
 }

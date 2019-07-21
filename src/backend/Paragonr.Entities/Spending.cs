@@ -1,4 +1,6 @@
-﻿namespace Paragonr.Entities
+﻿using System;
+
+namespace Paragonr.Entities
 {
     public class Spending : EntityBase
     {
@@ -15,5 +17,7 @@
         public string Note { get; set; }
 
         public string Place { get; set; }
+
+        public Guid Key { get; set; }
     }
 }

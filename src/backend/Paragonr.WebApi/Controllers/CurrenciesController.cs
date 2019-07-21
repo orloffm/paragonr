@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Paragonr.Application.Queries.List;
+using Paragonr.Application.Queries.Info;
 
 namespace Paragonr.WebApi.Controllers
 {
@@ -17,9 +17,19 @@ namespace Paragonr.WebApi.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<CurrencyListResult>> List()
+        public async Task<ActionResult<InfoResult>> List()
         {
-            return Ok(await Mediator.Send(new CurrencyListQuery()));
+            return Ok(await Mediator.Send(new InfoQuery()));
+        }
+    }
+
+    public sealed class CategoriesController : BaseController
+    {
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<DomainsAndCategoriesResult>> List()
+        {
+            return Ok(await Mediator.Send(new DomainsAndCategoriesQuery()));
         }
     }
 }
