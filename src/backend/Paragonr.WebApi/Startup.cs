@@ -12,7 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Paragonr.Application.Infrastructure;
-using Paragonr.Application.Interfaces;
+using Paragonr.Business.Interfaces;
+using Paragonr.Business.Services;
 using Paragonr.Persistence;
 
 namespace Paragonr.WebApi
@@ -45,14 +46,8 @@ namespace Paragonr.WebApi
                 .AddControllersAsServices()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddAutoMapper(
-                typeof(AutoMapperProfile).GetTypeInfo()
-                    .Assembly
-            );
-            services.AddMediatR(
-                typeof(EntityBaseDto).GetTypeInfo()
-                    .Assembly
-            );
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+            services.AddMediatR(typeof(EntityBaseDto).Assembly);
 
             services.AddDbContext<IBudgetDbContext, BudgetDbContext>(
                 options => options.UseSqlServer(
@@ -64,9 +59,10 @@ namespace Paragonr.WebApi
             // To support EF migrations.
             services.TryAdd(new ServiceDescriptor(typeof(BudgetDbContext), typeof(BudgetDbContext), ServiceLifetime.Scoped));
 
-
             var builder = new ContainerBuilder();
             builder.Populate(services);
+            builder.RegisterAssemblyTypes(typeof(RateProvider).Assembly).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(typeof(EntityBaseDto).Assembly).AsImplementedInterfaces();
             IContainer container = builder.Build();
 
             var provider = new AutofacServiceProvider(container);

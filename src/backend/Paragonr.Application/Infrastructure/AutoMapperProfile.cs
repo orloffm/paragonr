@@ -12,7 +12,21 @@ namespace Paragonr.Application.Infrastructure
             LoadMappings();
         }
 
-        void LoadMappings()
+        private void LoadCustomMappingsFromType(Type type)
+        {
+            bool hasCustomInterface = type.GetInterfaces()
+                .Any(i => i == typeof(ICustomMapping));
+
+            if (!hasCustomInterface)
+            {
+                return;
+            }
+
+            var instance = (ICustomMapping) Activator.CreateInstance(type);
+            instance.CreateMappings(this);
+        }
+
+        private void LoadMappings()
         {
             Type[] types = Assembly.GetExecutingAssembly()
                 .GetExportedTypes();
@@ -28,22 +42,6 @@ namespace Paragonr.Application.Infrastructure
 
                 LoadCustomMappingsFromType(type);
             }
-        }
-
-        private void LoadCustomMappingsFromType(Type type)
-        {
-            Type customMappingInterface = type.GetInterfaces()
-                .FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICustomMapping<,>));
-
-            if (customMappingInterface == null)
-            {
-                return;
-            }
-
-            Type[] genericArguments = customMappingInterface.GenericTypeArguments;
-
-            var instance = (ICustomMapping<,>)Activator.CreateInstance(type);
-            instance.CreateMappings(this);
         }
 
         private void LoadSimpleMappingsFromType(Type type)
@@ -62,6 +60,5 @@ namespace Paragonr.Application.Infrastructure
                     .ReverseMap();
             }
         }
-
     }
 }

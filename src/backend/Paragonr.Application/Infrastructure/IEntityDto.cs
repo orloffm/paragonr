@@ -2,6 +2,5 @@
 {
     public interface IEntityDto
     {
-        long Id { get; }
     }
 }

@@ -1,22 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Paragonr.Application.Dtos;
+﻿using Paragonr.Application.Dtos;
 
 namespace Paragonr.Application.Queries.Info
 {
     public sealed class InfoResult
     {
-        public InfoResult(IList<CurrencyDto> items)
+        public InfoResult(
+            CurrencyDto[] currencies,
+            CurrentRatesInfoDto ratesInfo,
+            DomainDto[] domains,
+            CategoryDto[] categories
+        ) 
         {
-            Currencies = items.ToArray();
+            Currencies = currencies;
+            RatesInfo = ratesInfo;
+            Domains = domains;
+            Categories = categories;
         }
+
+        public CategoryDto[] Categories { get; }
 
         public CurrencyDto[] Currencies { get; }
 
-        public string MainCurrencyCode { get; }
-
         public DomainDto[] Domains { get; }
 
-        public CategoryDto[] Categories { get; }
+        public CurrentRatesInfoDto RatesInfo { get; }
     }
 }

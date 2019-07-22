@@ -4,16 +4,13 @@ using Paragonr.Entities;
 
 namespace Paragonr.Application.Mappings
 {
-    public abstract class EntityToEntityDtoMappingBase<TEntity, TDto> : ICustomMapping<TEntity, TDto> 
-        where TEntity: EntityBase
-        where TDto: EntityBaseDto
+    public abstract class EntityToEntityDtoMappingBase<TEntity, TDto> : ICustomMapping<TEntity, TDto>
+        where TEntity : EntityBase where TDto : EntityBaseDto
 
     {
         public void CreateMappings(Profile configuration)
         {
-            var expression = configuration.CreateMap<TEntity, TDto>()
-                .ForMember(pDTO => pDTO.Id, opt => opt.MapFrom(e => e.Id))
-                ;
+            IMappingExpression<TEntity, TDto> expression = configuration.CreateMap<TEntity, TDto>();
 
             ConfigureMapping(expression);
         }

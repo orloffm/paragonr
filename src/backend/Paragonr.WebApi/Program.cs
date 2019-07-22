@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using NLog.Web;
-using Paragonr.Application.Interfaces;
+using Paragonr.Business.Interfaces;
 using Paragonr.Persistence;
 
 namespace Paragonr.WebApi

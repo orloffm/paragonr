@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Paragonr.Entities;
 
@@ -7,7 +6,7 @@ namespace Paragonr.Persistence.Configurations
 {
     public class SpendingConfiguration : EntityBaseConfiguration<Spending>
     {
-      protected override void ConfigureEntity(EntityTypeBuilder<Spending> builder)
+        protected override void ConfigureEntity(EntityTypeBuilder<Spending> builder)
         {
             builder.Property(d => d.Amount)
                 .IsRequired()
@@ -29,7 +28,6 @@ namespace Paragonr.Persistence.Configurations
 
             builder.HasIndex(d => d.Key)
                 .IsUnique();
-
         }
     }
 }

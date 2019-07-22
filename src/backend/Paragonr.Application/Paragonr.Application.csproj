@@ -5,12 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\**" />
-    <EmbeddedResource Remove="Models\**" />
-    <None Remove="Models\**" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Paragonr.Business\Paragonr.Business.csproj" />
     <ProjectReference Include="..\Paragonr.Entities\Paragonr.Entities.csproj" />
   </ItemGroup>
 

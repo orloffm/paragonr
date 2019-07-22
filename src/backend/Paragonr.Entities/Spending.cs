@@ -14,10 +14,10 @@ namespace Paragonr.Entities
 
         public long? CurrencyId { get; set; }
 
+        public Guid Key { get; set; }
+
         public string Note { get; set; }
 
         public string Place { get; set; }
-
-        public Guid Key { get; set; }
     }
 }

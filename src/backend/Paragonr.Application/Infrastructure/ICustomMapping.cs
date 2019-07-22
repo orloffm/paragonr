@@ -2,9 +2,8 @@
 
 namespace Paragonr.Application.Infrastructure
 {
-    public interface ICustomMapping<TSource, TDestination>: ICustomMapping
+    public interface ICustomMapping<TSource, TDestination> : ICustomMapping
     {
-        
     }
 
     public interface ICustomMapping
