@@ -1,6 +1,6 @@
 import React from "react";
 import Currencies from "./components/currencies";
-import currenciesData from "./data/currencies-list";
+import currenciesData from "./data/info-generic";
 
 import Navbar from "react-bootstrap/Navbar";
 

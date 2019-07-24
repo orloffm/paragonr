@@ -25,7 +25,6 @@ class CurrenciesTable extends React.Component<
   };
 
   columns: Array<ColumnInfo> = [
-    { path: "id", label: "No" },
     { path: "isoCode", label: "Code" },
     { path: "symbol", label: "Symbol" },
     { path: "name", label: "Name" }
