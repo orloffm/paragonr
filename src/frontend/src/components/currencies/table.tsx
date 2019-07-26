@@ -3,10 +3,10 @@ import TableWrapped from "../common/table/tableWrapped";
 import { ColumnInfo } from "../common/table/ColumnInfo";
 import { SortColumnInfo } from "../common/table/SortColumnInfo";
 import _ from "lodash";
-import { CurrenciesRow } from "./CurrenciesRow";
+import { CurrencyRow } from "./CurrencyRow";
 
 export interface CurrenciesTableProps {
-  data: CurrenciesRow[];
+  data: CurrencyRow[];
 }
 
 export interface CurrenciesTableState {

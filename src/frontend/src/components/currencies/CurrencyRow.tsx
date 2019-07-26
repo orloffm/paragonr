@@ -1,7 +1,7 @@
-import { CurrenciesData } from "../../dtos/CurrenciesData";
+import { CurrencyDto } from "../../dtos/CurrencyDto";
 
-export class CurrenciesRow {
-  constructor(cd: CurrenciesData) {
+export class CurrencyRow {
+  constructor(cd: CurrencyDto) {
     this.isoCode = cd.isoCode;
     this.name = cd.name;
     this.symbol = cd.symbol;

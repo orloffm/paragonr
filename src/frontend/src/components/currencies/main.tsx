@@ -1,32 +1,32 @@
 import * as React from "react";
-import { CurrenciesData } from "../../dtos/CurrenciesData";
 import CurrenciesTable from "./table";
-import { RatesInfoData } from "../../dtos/RatesInfoData";
-import { CurrenciesRow } from "./CurrenciesRow";
-import { RateInfoData } from "../../dtos/RateInfoData";
+import { CurrencyDto } from "../../dtos/CurrencyDto";
+import { CurrentRatesInfoDto } from "../../dtos/CurrentRatesInfoDto";
+import { CurrencyRow } from "./CurrencyRow";
+import { CurrencyRateInfoDto } from "../../dtos/CurrencyRateInfoDto";
 
 export interface CurrenciesProps {
-  currencies: CurrenciesData[];
-  ratesInfo: RatesInfoData;
+  currencies: CurrencyDto[];
+  ratesInfo: CurrentRatesInfoDto;
 }
 
 export interface CurrenciesState {}
 
 class Currencies extends React.Component<CurrenciesProps, CurrenciesState> {
   render() {
-    let rows: Array<CurrenciesRow> = [];
+    let rows: Array<CurrencyRow> = [];
 
     for (let i = 0; i < this.props.currencies.length; i++) {
       const currency = this.props.currencies[i];
       const defaultIsoCode = this.props.ratesInfo.defaultCurrency;
       const rates = this.props.ratesInfo.rates;
 
-      let row: CurrenciesRow = new CurrenciesRow(currency);
+      let row: CurrencyRow = new CurrencyRow(currency);
 
       if (defaultIsoCode === currency.isoCode) {
         row.isMain = true;
       } else {
-        const rateInfo: RateInfoData | undefined = rates.find(
+        const rateInfo: CurrencyRateInfoDto | undefined = rates.find(
           r => r.isoCode === currency.isoCode
         );
         if (rateInfo !== undefined) {
