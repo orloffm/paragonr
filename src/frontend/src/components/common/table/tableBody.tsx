@@ -13,7 +13,9 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
   renderCell = (item: any, column: ColumnInfo) => {
     if (column.content) return column.content(item);
 
-    return _.get(item, column.path);
+    if (column.path) return _.get(item, column.path);
+
+    return "";
   };
 
   createKey = (item: any, column: ColumnInfo) => {

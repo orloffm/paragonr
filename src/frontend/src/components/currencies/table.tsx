@@ -27,7 +27,9 @@ class CurrenciesTable extends React.Component<
   columns: Array<ColumnInfo> = [
     { path: "isoCode", label: "Code" },
     { path: "symbol", label: "Symbol" },
-    { path: "name", label: "Name" }
+    { path: "name", label: "Name" },
+    { path: "rateToMain", label: "Rate" },
+    { path: "date", label: "Date" }
   ];
 
   onSort = (what: SortColumnInfo) => {

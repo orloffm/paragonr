@@ -13,5 +13,5 @@ export class CurrenciesRow {
   symbol: string;
   rateToMain?: number;
   isMain: boolean;
-  date?: Date;
+  date?: string;
 }
