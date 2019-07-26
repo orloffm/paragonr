@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Newtonsoft.Json;
 using Paragonr.Application.Infrastructure;
 using Paragonr.Business.Interfaces;
 using Paragonr.Business.Services;
@@ -44,7 +45,12 @@ namespace Paragonr.WebApi
         {
             services.AddMvc()
                 .AddControllersAsServices()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+                });
 
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             services.AddMediatR(typeof(EntityBaseDto).Assembly);

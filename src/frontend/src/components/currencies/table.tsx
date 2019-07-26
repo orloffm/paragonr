@@ -1,12 +1,12 @@
 import React from "react";
-import TableWrapped from "./common/table/tableWrapped";
-import { CurrenciesData } from "./currenciesData";
-import { ColumnInfo } from "./common/table/ColumnInfo";
-import { SortColumnInfo } from "./common/table/SortColumnInfo";
+import TableWrapped from "../common/table/tableWrapped";
+import { ColumnInfo } from "../common/table/ColumnInfo";
+import { SortColumnInfo } from "../common/table/SortColumnInfo";
 import _ from "lodash";
+import { CurrenciesRow } from "./CurrenciesRow";
 
 export interface CurrenciesTableProps {
-  data: CurrenciesData[];
+  data: CurrenciesRow[];
 }
 
 export interface CurrenciesTableState {
