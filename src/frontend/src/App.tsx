@@ -9,7 +9,7 @@ import {
   Switch,
   BrowserRouter
 } from "react-router-dom";
-import Categories from "./components/categories";
+import Categories from "./components/categories/main";
 import Spendings from "./components/spendings";
 import NotFound from "./components/notFound";
 import Home from "./components/home";
@@ -31,7 +31,15 @@ const App: React.FC = () => {
               />
             )}
           />
-          <Route path="/categories" component={Categories} />
+          <Route
+            path="/categories"
+            render={() => (
+              <Categories
+                domains={infoGeneric.domains}
+                categories={infoGeneric.categories}
+              />
+            )}
+          />
           <Route path="/spendings" component={Spendings} />
           <Route path="/not-found" component={NotFound} />
           <Route path="/" exact component={Home} />

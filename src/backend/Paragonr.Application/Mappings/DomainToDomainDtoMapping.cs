@@ -9,7 +9,8 @@ namespace Paragonr.Application.Mappings
         protected override void ConfigureMapping(IMappingExpression<Domain, DomainDto> map)
         {
             map.ForMember(d => d.Name, c => c.MapFrom(e => e.Name))
-                .ForMember(d => d.DefaultCategoryName, c => c.MapFrom(e => e.DefaultCategory != null ? e.DefaultCategory.Name : null));
+                .ForMember(d => d.DefaultCategoryName, c => c.MapFrom(e => e.DefaultCategory != null ? e.DefaultCategory.Name : null))
+                .ForMember(d => d.Key, c => c.MapFrom(e => e.Key));
         }
     }
 }

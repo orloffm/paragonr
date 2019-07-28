@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Paragonr.Entities;
+using Paragonr.Persistence.Helpers;
 
 namespace Paragonr.Persistence.Configurations
 {
@@ -12,6 +13,8 @@ namespace Paragonr.Persistence.Configurations
                 .WithMany(p => p.Categories)
                 .HasForeignKey(d => d.DomainId)
                 .HasConstraintName("FK_Category_Domain");
+
+            KeyEnabledEntityConfigurationHelper.ConfigureKey(builder);
         }
     }
 }

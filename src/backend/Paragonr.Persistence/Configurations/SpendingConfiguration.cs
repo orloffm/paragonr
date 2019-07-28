@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Paragonr.Entities;
+using Paragonr.Persistence.Helpers;
 
 namespace Paragonr.Persistence.Configurations
 {
@@ -26,8 +27,7 @@ namespace Paragonr.Persistence.Configurations
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 
-            builder.HasIndex(d => d.Key)
-                .IsUnique();
+            KeyEnabledEntityConfigurationHelper.ConfigureKey(builder);
         }
     }
 }

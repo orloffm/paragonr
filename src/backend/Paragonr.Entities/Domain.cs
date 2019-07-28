@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Paragonr.Shared;
 
 namespace Paragonr.Entities
 {
-    public class Domain : EntityBase
+    public class Domain : EntityBase, IKeyEnabledEntity
     {
         public virtual ICollection<Category> Categories { get; set; }
 
@@ -11,5 +13,7 @@ namespace Paragonr.Entities
         public long? DefaultCategoryId { get; set; }
 
         public string Name { get; set; }
+
+        public Guid Key { get; set; }
     }
 }

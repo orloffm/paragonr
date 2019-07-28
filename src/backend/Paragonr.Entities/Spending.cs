@@ -1,8 +1,9 @@
 ﻿using System;
+using Paragonr.Shared;
 
 namespace Paragonr.Entities
 {
-    public class Spending : EntityBase
+    public class Spending : EntityBase, IKeyEnabledEntity
     {
         public decimal Amount { get; set; }
 
