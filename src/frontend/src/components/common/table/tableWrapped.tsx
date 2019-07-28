@@ -3,12 +3,13 @@ import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 import { ColumnInfo } from "./ColumnInfo";
 import { SortColumnInfo } from "./SortColumnInfo";
+import { RowInfo } from "./RowInfo";
 
 export interface TableProps {
   columns: Array<ColumnInfo>;
   sortColumn: SortColumnInfo;
   onSort(what: SortColumnInfo): void;
-  data: Array<any>;
+  data: Array<RowInfo>;
 }
 
 export interface TableState {}

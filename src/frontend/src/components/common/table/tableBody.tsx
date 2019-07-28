@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { ColumnInfo } from "./ColumnInfo";
+import { RowInfo } from "./RowInfo";
 
 export interface TableBodyProps {
-  data: Array<any>;
+  data: Array<RowInfo>;
   columns: Array<ColumnInfo>;
 }
 
 export interface TableBodyState {}
 
 class TableBody extends React.Component<TableBodyProps, TableBodyState> {
-  renderCell = (item: any, column: ColumnInfo) => {
+  renderCell = (item: RowInfo, column: ColumnInfo) => {
     if (column.content) return column.content(item);
 
     if (column.path) return _.get(item, column.path);
@@ -18,8 +19,14 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
     return "";
   };
 
-  createKey = (item: any, column: ColumnInfo) => {
+  createKey = (item: RowInfo, column: ColumnInfo) => {
     return item._id + (column.path || column.key);
+  };
+
+  getRowClass = (item: RowInfo) => {
+    if (item.isPrimary) return "table-primary";
+
+    return "";
   };
 
   render() {
@@ -27,8 +34,8 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
 
     return (
       <tbody>
-        {data.map((item: { _id: number }) => (
-          <tr key={item._id}>
+        {data.map(item => (
+          <tr key={item._id} className={this.getRowClass(item)}>
             {columns.map((column: any) => (
               <td key={this.createKey(item, column)}>
                 {this.renderCell(item, column)}

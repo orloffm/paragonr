@@ -1,17 +1,20 @@
 import { CurrencyDto } from "../../dtos/CurrencyDto";
+import { RowInfo } from "../common/table/RowInfo";
 
-export class CurrencyRow {
+export class CurrencyRow implements RowInfo {
   constructor(cd: CurrencyDto) {
+    this._id = cd.isoCode;
     this.isoCode = cd.isoCode;
     this.name = cd.name;
     this.symbol = cd.symbol;
-    this.isMain = false;
+    this.isPrimary = false;
   }
 
+  _id: string;
   isoCode: string;
   name: string;
   symbol: string;
   rateToMain?: number;
-  isMain: boolean;
+  isPrimary: boolean;
   date?: string;
 }

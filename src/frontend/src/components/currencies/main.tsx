@@ -24,7 +24,7 @@ class Currencies extends React.Component<CurrenciesProps, CurrenciesState> {
       let row: CurrencyRow = new CurrencyRow(currency);
 
       if (defaultIsoCode === currency.isoCode) {
-        row.isMain = true;
+        row.isPrimary = true;
       } else {
         const rateInfo: CurrencyRateInfoDto | undefined = rates.find(
           r => r.isoCode === currency.isoCode
