@@ -13,6 +13,7 @@ namespace Paragonr.Persistence.Helpers
                 .IsUnique();
 
             builder.Property(d => d.Key)
+                .IsRequired()
                 .HasDefaultValueSql("NEWID()")
                 .ValueGeneratedOnAdd();
         }

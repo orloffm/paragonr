@@ -20,7 +20,7 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
   };
 
   createKey = (item: RowInfo, column: ColumnInfo) => {
-    return item._id + (column.path || column.key);
+    return item.key + (column.path || column.key);
   };
 
   getRowClass = (item: RowInfo) => {
@@ -35,7 +35,7 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
     return (
       <tbody>
         {data.map(item => (
-          <tr key={item._id} className={this.getRowClass(item)}>
+          <tr key={item.key} className={this.getRowClass(item)}>
             {columns.map((column: any) => (
               <td key={this.createKey(item, column)}>
                 {this.renderCell(item, column)}

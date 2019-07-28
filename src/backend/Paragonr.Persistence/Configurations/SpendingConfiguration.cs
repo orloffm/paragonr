@@ -23,10 +23,6 @@ namespace Paragonr.Persistence.Configurations
                 .HasForeignKey(d => d.CurrencyId)
                 .HasConstraintName("FK_Spending_Currency");
 
-            builder.Property(d => d.Key)
-                .IsRequired()
-                .ValueGeneratedOnAdd();
-
             KeyEnabledEntityConfigurationHelper.ConfigureKey(builder);
         }
     }

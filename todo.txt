@@ -1,1 +1,1 @@
-1) Guid for categories.
+Move sorting down to table.

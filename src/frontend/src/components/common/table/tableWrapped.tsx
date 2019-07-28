@@ -7,8 +7,8 @@ import { RowInfo } from "./RowInfo";
 
 export interface TableProps {
   columns: Array<ColumnInfo>;
-  sortColumn: SortColumnInfo;
-  onSort(what: SortColumnInfo): void;
+  sortColumn?: SortColumnInfo;
+  onSort?(what: SortColumnInfo): void;
   data: Array<RowInfo>;
 }
 

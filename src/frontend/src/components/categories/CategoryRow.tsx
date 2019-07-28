@@ -1,20 +1,16 @@
-import { CurrencyDto } from "../../dtos/CurrencyDto";
+import { CategoryDto } from "../../dtos/CategoryDto";
 import { RowInfo } from "../common/table/RowInfo";
 
-export class CurrencyRow implements RowInfo {
-  constructor(cd: CurrencyDto) {
-    this._id = cd.isoCode;
-    this.isoCode = cd.isoCode;
+export class CategoryRow implements RowInfo {
+  constructor(cd: CategoryDto) {
+    this.key = cd.key;
     this.name = cd.name;
-    this.symbol = cd.symbol;
+    this.domainName = cd.domainName;
     this.isPrimary = false;
   }
 
-  _id: string;
-  isoCode: string;
+  key: string;
+  domainName: string;
   name: string;
-  symbol: string;
-  rateToMain?: number;
   isPrimary: boolean;
-  date?: string;
 }

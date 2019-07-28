@@ -1,56 +1,33 @@
 import React from "react";
 import TableWrapped from "../common/table/tableWrapped";
 import { ColumnInfo } from "../common/table/ColumnInfo";
-import { SortColumnInfo } from "../common/table/SortColumnInfo";
 import _ from "lodash";
-import { CurrencyRow } from "./CurrencyRow";
+import { CategoryRow } from "./CategoryRow";
 
-export interface CurrenciesTableProps {
-  data: CurrencyRow[];
+export interface CategoriesTableProps {
+  data: CategoryRow[];
 }
 
-export interface CurrenciesTableState {
-  sortColumn: SortColumnInfo;
-}
+export interface CategoriesTableState {}
 
-class CurrenciesTable extends React.Component<
-  CurrenciesTableProps,
-  CurrenciesTableState
+class CategoriesTable extends React.Component<
+  CategoriesTableProps,
+  CategoriesTableState
 > {
-  state: CurrenciesTableState = {
-    sortColumn: {
-      path: "isoCode",
-      order: "asc"
-    }
-  };
-
   columns: Array<ColumnInfo> = [
-    { path: "isoCode", label: "Code" },
-    { path: "symbol", label: "Symbol" },
-    { path: "name", label: "Name" },
-    { path: "rateToMain", label: "Rate" },
-    { path: "date", label: "Date" }
+    { path: "domainName", label: "Domain" },
+    { path: "name", label: "Category" }
   ];
 
-  onSort = (what: SortColumnInfo) => {
-    this.setState({ sortColumn: what });
-  };
-
   render() {
-    const { data } = this.props;
-    const { sortColumn } = this.state;
-
-    const sorted = _.orderBy(data, [sortColumn.path], [sortColumn.order]);
-
-    return (
-      <TableWrapped
-        columns={this.columns}
-        data={sorted}
-        sortColumn={sortColumn}
-        onSort={path => this.onSort(path)}
-      />
+    const data = _.orderBy(
+      this.props.data,
+      ["domainName", "name"],
+      ["asc", "asc"]
     );
+
+    return <TableWrapped columns={this.columns} data={data} />;
   }
 }
 
-export default CurrenciesTable;
+export default CategoriesTable;
