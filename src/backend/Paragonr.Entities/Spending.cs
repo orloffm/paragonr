@@ -15,6 +15,14 @@ namespace Paragonr.Entities
 
         public long? CurrencyId { get; set; }
 
+        public Budget Budget { get; set; }
+
+        public long? BudgetId { get; set; }
+
+        public User AddedBy { get; set; }
+
+        public long AddedById { get; set; }
+
         public Guid Key { get; set; }
 
         public string Note { get; set; }
