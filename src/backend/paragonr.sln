@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paragonr.Tools.EntityFramew
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paragonr.Shared", "Paragonr.Shared\Paragonr.Shared.csproj", "{E0B06149-3F3B-4784-AAC3-0C570590FAE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paragonr.Business", "Paragonr.Business\Paragonr.Business.csproj", "{3D6A6786-471D-4872-A498-22F761CDB20D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{63351383-3AD9-4D5E-96A9-0887516798A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,13 +47,13 @@ Global
 		{E0B06149-3F3B-4784-AAC3-0C570590FAE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0B06149-3F3B-4784-AAC3-0C570590FAE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0B06149-3F3B-4784-AAC3-0C570590FAE6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D6A6786-471D-4872-A498-22F761CDB20D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D6A6786-471D-4872-A498-22F761CDB20D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D6A6786-471D-4872-A498-22F761CDB20D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D6A6786-471D-4872-A498-22F761CDB20D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{394A38F6-2043-41A9-8B89-60F672894B1F} = {63351383-3AD9-4D5E-96A9-0887516798A7}
+		{E0B06149-3F3B-4784-AAC3-0C570590FAE6} = {63351383-3AD9-4D5E-96A9-0887516798A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D89E1E74-ECC3-430D-A9BD-C0F2DB849D7F}

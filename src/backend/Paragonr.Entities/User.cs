@@ -1,4 +1,6 @@
-﻿namespace Paragonr.Entities
+﻿using System.Collections.Generic;
+
+namespace Paragonr.Entities
 {
     public class User : EntityBase
     {
@@ -8,8 +10,12 @@
 
         public string Username { get; set; }
 
+        public string Email { get; set; }
+
         public byte[] PasswordHash { get; set; }
 
         public byte[] PasswordSalt { get; set; }
+
+        public virtual ICollection<Membership> Memberships { get; set; }
     }
 }

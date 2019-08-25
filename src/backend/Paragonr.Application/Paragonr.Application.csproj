@@ -5,13 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Paragonr.Business\Paragonr.Business.csproj" />
     <ProjectReference Include="..\Paragonr.Entities\Paragonr.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

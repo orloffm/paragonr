@@ -6,6 +6,10 @@ namespace Paragonr.Entities
 {
     public class Domain : EntityBase, IKeyEnabledEntity
     {
+        public long BudgetId { get; set; }
+
+        public Budget Budget { get; set; }
+
         public virtual ICollection<Category> Categories { get; set; }
 
         public Category DefaultCategory { get; set; }

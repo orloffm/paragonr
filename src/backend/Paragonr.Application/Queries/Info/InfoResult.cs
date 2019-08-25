@@ -4,12 +4,7 @@ namespace Paragonr.Application.Queries.Info
 {
     public sealed class InfoResult
     {
-        public InfoResult(
-            CurrencyDto[] currencies,
-            CurrentRatesInfoDto ratesInfo,
-            DomainDto[] domains,
-            CategoryDto[] categories
-        ) 
+        public InfoResult(CurrencyDto[] currencies, CurrentRatesInfoDto ratesInfo, DomainDto[] domains, CategoryDto[] categories)
         {
             Currencies = currencies;
             RatesInfo = ratesInfo;

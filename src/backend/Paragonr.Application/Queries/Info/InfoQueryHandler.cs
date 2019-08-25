@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -10,6 +9,7 @@ using Paragonr.Application.Dtos;
 using Paragonr.Business.Interfaces;
 using Paragonr.Business.Models;
 using Paragonr.Entities;
+using IBudgetDbContext = Paragonr.Application.Interfaces.IBudgetDbContext;
 
 namespace Paragonr.Application.Queries.Info
 {
@@ -18,8 +18,8 @@ namespace Paragonr.Application.Queries.Info
     {
         private const string DefaultCurrencyIsoCode = "PLN";
         private readonly IBudgetDbContext _context;
-        private readonly IRateProvider _rates;
         private readonly IMapper _mapper;
+        private readonly IRateProvider _rates;
 
         public InfoQueryHandler(IBudgetDbContext context, IRateProvider rates, IMapper mapper)
         {
@@ -39,13 +39,6 @@ namespace Paragonr.Application.Queries.Info
             CategoryDto[] categories = await ProjectAsync<Category, CategoryDto>(_context.Categories, cancellationToken);
 
             return new InfoResult(currencies, ratesInfo, domains, categories);
-        }
-
-        private async Task<TDto[]> ProjectAsync<TEntity, TDto>(DbSet<TEntity> source, CancellationToken token)
-        where TEntity : EntityBase
-        {
-            return await source.ProjectTo<TDto>(_mapper.ConfigurationProvider)
-                .ToArrayAsync(token);
         }
 
         private CurrentRatesInfoDto LoadRates(CurrencyDto[] currencies)
@@ -72,6 +65,12 @@ namespace Paragonr.Application.Queries.Info
             var ratesInfo = new CurrentRatesInfoDto(rates, DefaultCurrencyIsoCode);
 
             return ratesInfo;
+        }
+
+        private async Task<TDto[]> ProjectAsync<TEntity, TDto>(DbSet<TEntity> source, CancellationToken token) where TEntity : EntityBase
+        {
+            return await source.ProjectTo<TDto>(_mapper.ConfigurationProvider)
+                .ToArrayAsync(token);
         }
     }
 }

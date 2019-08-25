@@ -1,6 +1,5 @@
 ﻿using System;
 using Paragonr.Application.Infrastructure;
-using Paragonr.Entities;
 
 namespace Paragonr.Application.Dtos
 {
@@ -8,8 +7,8 @@ namespace Paragonr.Application.Dtos
     {
         public string DefaultCategoryName { get; set; }
 
-        public string Name { get; set; }
-
         public Guid Key { get; set; }
+
+        public string Name { get; set; }
     }
 }

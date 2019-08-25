@@ -14,6 +14,11 @@ namespace Paragonr.Persistence.Configurations
                 .HasForeignKey<Domain>(d => d.DefaultCategoryId)
                 .HasConstraintName("FK_Domain_DefaultCategory");
 
+            builder.HasOne(m => m.Budget)
+                .WithMany(b => b.Domains)
+                .HasForeignKey(m => m.BudgetId)
+                .HasConstraintName("FK_Domain_Budget");
+
             KeyEnabledEntityConfigurationHelper.ConfigureKey(builder);
         }
     }

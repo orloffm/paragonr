@@ -23,6 +23,11 @@ namespace Paragonr.Persistence.Configurations
                 .HasForeignKey(d => d.CurrencyId)
                 .HasConstraintName("FK_Spending_Currency");
 
+            builder.HasOne(b => b.Budget)
+                .WithMany(b=>b.Spendings)
+                .HasForeignKey(s => s.BudgetId)
+                .HasConstraintName("FK_Spending_Budget");
+
             KeyEnabledEntityConfigurationHelper.ConfigureKey(builder);
         }
     }

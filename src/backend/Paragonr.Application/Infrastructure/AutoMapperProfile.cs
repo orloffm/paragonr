@@ -9,7 +9,7 @@ namespace Paragonr.Application.Infrastructure
     {
         public AutoMapperProfile()
         {
-            LoadMappings();
+            CreateMappings();
         }
 
         private void LoadCustomMappingsFromType(Type type)
@@ -26,7 +26,7 @@ namespace Paragonr.Application.Infrastructure
             instance.CreateMappings(this);
         }
 
-        private void LoadMappings()
+        private void CreateMappings()
         {
             Type[] types = Assembly.GetExecutingAssembly()
                 .GetExportedTypes();

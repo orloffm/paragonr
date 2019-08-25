@@ -5,8 +5,8 @@ using Paragonr.Entities;
 namespace Paragonr.Persistence.Configurations
 {
     public class CurrencyRateConfiguration : EntityBaseConfiguration<CurrencyRate>
-    {
-        protected override void ConfigureEntity(EntityTypeBuilder<CurrencyRate> builder)
+        {
+            protected override void ConfigureEntity(EntityTypeBuilder<CurrencyRate> builder)
         {
             builder.HasOne(d => d.Base)
                 .WithMany()

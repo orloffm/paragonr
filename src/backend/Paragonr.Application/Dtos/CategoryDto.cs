@@ -7,8 +7,8 @@ namespace Paragonr.Application.Dtos
     {
         public string DomainName { get; set; }
 
-        public string Name { get; set; }
-
         public Guid Key { get; set; }
+
+        public string Name { get; set; }
     }
 }

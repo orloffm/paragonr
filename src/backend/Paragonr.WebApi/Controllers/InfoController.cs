@@ -1,10 +1,12 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Paragonr.Application.Queries.Info;
 
 namespace Paragonr.WebApi.Controllers
 {
+    [Authorize]
     public sealed class InfoController : BaseController
     {
         [HttpGet]

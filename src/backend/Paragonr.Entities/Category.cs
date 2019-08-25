@@ -10,6 +10,10 @@ namespace Paragonr.Entities
 
         public long? DomainId { get; set; }
 
+        public long BudgetId { get; set; }
+
+        public Budget Budget { get; set; }
+
         public string Name { get; set; }
 
         public virtual ICollection<Spending> Spendings { get; set; }
