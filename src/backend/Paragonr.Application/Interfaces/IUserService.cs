@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Paragonr.Entities;
 
-namespace Paragonr.Business.Interfaces
+namespace Paragonr.Application.Interfaces
 {
     public interface IUserService
     {

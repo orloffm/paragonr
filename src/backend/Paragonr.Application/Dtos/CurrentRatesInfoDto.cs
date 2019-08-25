@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Paragonr.Application.Queries.Info
+namespace Paragonr.Application.Dtos
 {
     public class CurrentRatesInfoDto
     {

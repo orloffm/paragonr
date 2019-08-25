@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Paragonr.Business.Models
+namespace Paragonr.Application.Models
 {
     public sealed class RateInfo
     {

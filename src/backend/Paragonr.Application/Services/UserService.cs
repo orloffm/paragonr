@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Paragonr.Business.Interfaces;
+using Paragonr.Application.Interfaces;
 using Paragonr.Entities;
 
-namespace Paragonr.Business.Services
+namespace Paragonr.Application.Services
 {
     public class UserService : IUserService
     {

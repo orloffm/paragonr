@@ -13,8 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using Paragonr.Application.Infrastructure;
-using Paragonr.Business.Interfaces;
-using Paragonr.Business.Services;
+using Paragonr.Application.Services;
 using Paragonr.Persistence;
 
 namespace Paragonr.WebApi

@@ -1,7 +1,7 @@
 ﻿using System;
-using Paragonr.Business.Interfaces;
+using Paragonr.Shared.Interfaces;
 
-namespace Paragonr.Business.Services
+namespace Paragonr.Shared.Services
 {
     public sealed class DateTimeService : IDateTimeService
     {

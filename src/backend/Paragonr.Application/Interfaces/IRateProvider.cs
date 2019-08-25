@@ -1,7 +1,7 @@
 ﻿using System;
-using Paragonr.Business.Models;
+using Paragonr.Application.Models;
 
-namespace Paragonr.Business.Interfaces
+namespace Paragonr.Application.Interfaces
 {
     public interface IRateProvider
     {

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Paragonr.Business.Interfaces;
-using Paragonr.Business.Models;
+using Paragonr.Application.Interfaces;
+using Paragonr.Application.Models;
+using Paragonr.Shared.Interfaces;
 
-namespace Paragonr.Business.Services
+namespace Paragonr.Application.Services
 {
     public sealed class RateProvider : IRateProvider
     {

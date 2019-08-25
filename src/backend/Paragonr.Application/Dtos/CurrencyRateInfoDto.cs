@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Paragonr.Application.Queries.Info
+namespace Paragonr.Application.Dtos
 {
     public sealed class CurrencyRateInfoDto
     {

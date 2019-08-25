@@ -6,8 +6,8 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Paragonr.Application.Dtos;
-using Paragonr.Business.Interfaces;
-using Paragonr.Business.Models;
+using Paragonr.Application.Interfaces;
+using Paragonr.Application.Models;
 using Paragonr.Entities;
 using IBudgetDbContext = Paragonr.Application.Interfaces.IBudgetDbContext;
 

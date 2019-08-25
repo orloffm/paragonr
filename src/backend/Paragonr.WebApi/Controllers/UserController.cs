@@ -10,7 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Paragonr.Application.Dtos;
 using Paragonr.Application.Infrastructure;
-using Paragonr.Business.Interfaces;
+using Paragonr.Application.Interfaces;
 using Paragonr.Entities;
 using Paragonr.WebApi.Infrastructure;
 

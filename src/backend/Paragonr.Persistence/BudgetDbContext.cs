@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Paragonr.Business.Interfaces;
 using Paragonr.Entities;
 
 namespace Paragonr.Persistence

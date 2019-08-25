@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Paragonr.Business.Interfaces
+namespace Paragonr.Shared.Interfaces
 {
     public interface IDateTimeService
     {
