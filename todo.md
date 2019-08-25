@@ -1,4 +1,9 @@
-# Add users/passwords as in the example. Also add Jwt workflow.
+# Add Jwt workflow to controller.
+# Framework, Lib, Apps folders. Project for business services.
 # Redux: read and understand the basics.
 # R#: don't auto-remove redundant parentheses.
-# 
+
+
+
+https://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example
+https://jasonwatmore.com/post/2018/06/26/aspnet-core-21-simple-api-for-authentication-registration-and-user-management
