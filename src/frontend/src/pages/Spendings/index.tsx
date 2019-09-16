@@ -5,10 +5,8 @@ export interface SpendingsProps {}
 
 export interface SpendingsState {}
 
-class Spendings extends React.Component<SpendingsProps, SpendingsState> {
+export class Spendings extends React.Component<SpendingsProps, SpendingsState> {
   render() {
     return "Spendings.";
   }
 }
-
-export default Spendings;

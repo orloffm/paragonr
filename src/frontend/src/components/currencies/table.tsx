@@ -1,7 +1,7 @@
 import React from "react";
-import TableWrapped from "../common/table/tableWrapped";
-import { ColumnInfo } from "../common/table/ColumnInfo";
-import { SortColumnInfo } from "../common/table/SortColumnInfo";
+import TableWrapped from "../common/Table";
+import { ColumnInfo } from "../common/Table/ColumnInfo";
+import { SortColumnInfo } from "../common/Table/SortColumnInfo";
 import _ from "lodash";
 import { CurrencyRow } from "./CurrencyRow";
 

@@ -11,7 +11,10 @@ export interface CategoriesProps {
 
 export interface CategoriesState {}
 
-class Categories extends React.Component<CategoriesProps, CategoriesState> {
+export class Categories extends React.Component<
+  CategoriesProps,
+  CategoriesState
+> {
   render() {
     let rows: Array<CategoryRow> = [];
 
@@ -26,5 +29,3 @@ class Categories extends React.Component<CategoriesProps, CategoriesState> {
     return <CategoriesTable data={rows} />;
   }
 }
-
-export default Categories;

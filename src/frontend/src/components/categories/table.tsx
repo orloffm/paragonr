@@ -1,6 +1,6 @@
 import React from "react";
-import TableWrapped from "../common/table/tableWrapped";
-import { ColumnInfo } from "../common/table/ColumnInfo";
+import TableWrapped from "../common/Table";
+import { ColumnInfo } from "../common/Table/ColumnInfo";
 import _ from "lodash";
 import { CategoryRow } from "./CategoryRow";
 

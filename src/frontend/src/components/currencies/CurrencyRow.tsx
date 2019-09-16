@@ -1,5 +1,5 @@
 import { CurrencyDto } from "../../dtos/CurrencyDto";
-import { RowInfo } from "../common/table/RowInfo";
+import { RowInfo } from "../common/Table/RowInfo";
 
 export class CurrencyRow implements RowInfo {
   constructor(cd: CurrencyDto) {

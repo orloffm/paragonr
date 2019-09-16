@@ -12,7 +12,10 @@ export interface CurrenciesProps {
 
 export interface CurrenciesState {}
 
-class Currencies extends React.Component<CurrenciesProps, CurrenciesState> {
+export class Currencies extends React.Component<
+  CurrenciesProps,
+  CurrenciesState
+> {
   render() {
     let rows: Array<CurrencyRow> = [];
 
@@ -41,5 +44,3 @@ class Currencies extends React.Component<CurrenciesProps, CurrenciesState> {
     return <CurrenciesTable data={rows} />;
   }
 }
-
-export default Currencies;
