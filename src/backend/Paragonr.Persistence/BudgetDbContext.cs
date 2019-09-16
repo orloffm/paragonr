@@ -7,13 +7,7 @@ namespace Paragonr.Persistence
 {
     public class BudgetDbContext : DbContext, IBudgetDbContext
     {
-        public BudgetDbContext()
-        {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("Constructed 1!");
-        }
-
-        public BudgetDbContext(DbContextOptions<BudgetDbContext> options) : base(options)
+       public BudgetDbContext(DbContextOptions<BudgetDbContext> options) : base(options)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Constructed 2!");

@@ -54,7 +54,7 @@ namespace Paragonr.WebApi
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             services.AddMediatR(typeof(EntityBaseDto).Assembly);
 
-            services.AddDbContext<BudgetDbContext>(
+            services.AddDbContext<IBudgetDbContext, BudgetDbContext>(
                 options => options.UseSqlServer(
                     @"data source=.;initial catalog=Paragonr;integrated security=True;MultipleActiveResultSets=True;",
                     sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()
