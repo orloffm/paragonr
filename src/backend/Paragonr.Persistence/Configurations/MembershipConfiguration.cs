@@ -4,10 +4,12 @@ using Paragonr.Entities;
 
 namespace Paragonr.Persistence.Configurations
 {
-    public class MembershipConfiguration : EntityBaseConfiguration<Membership>
+    public sealed class MembershipConfiguration : EntityBaseConfiguration<Membership>
     {
         protected override void ConfigureEntity(EntityTypeBuilder<Membership> builder)
         {
+            builder.HasKey(bc => new { bc.BudgetId, bc.UserId });
+
             builder.HasOne(m => m.Budget)
                 .WithMany(b => b.Memberships)
                 .HasForeignKey(m => m.BudgetId)

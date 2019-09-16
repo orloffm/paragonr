@@ -5,19 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using NLog.Web;
+using Paragonr.Application.Interfaces;
 using Paragonr.Persistence;
 
 namespace Paragonr.WebApi
 {
     public class Program
     {
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                .UseNLog()
-                .UseStartup<Startup>();
-        }
-
         public static void Main(string[] args)
         {
             IWebHost host;
@@ -28,7 +22,9 @@ namespace Paragonr.WebApi
             try
             {
                 logger.Debug("init main");
-                host = CreateWebHostBuilder(args)
+                host = WebHost.CreateDefaultBuilder(args)
+                    .UseNLog()
+                    .UseStartup<Startup>()
                     .Build();
             }
             catch (Exception e)
@@ -44,7 +40,7 @@ namespace Paragonr.WebApi
                 {
                     var context = scope.ServiceProvider.GetService<IBudgetDbContext>();
 
-                    var concreteContext = (BudgetDbContext) context;
+                    BudgetDbContext concreteContext = (BudgetDbContext) context;
                     concreteContext.Database.Migrate();
                     BudgetDbInitializer.Initialize(concreteContext);
                 }

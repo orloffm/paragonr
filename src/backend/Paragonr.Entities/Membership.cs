@@ -10,6 +10,6 @@
 
         public User User { get; set; }
 
-        public bool IsReadOnly { get; set; }
+        public bool IsManager { get; set; }
     }
 }

@@ -7,7 +7,6 @@ namespace Paragonr.Persistence.Configurations
     {
         protected override void ConfigureEntity(EntityTypeBuilder<Budget> builder)
         {
-
         }
     }
 }

@@ -1,21 +1,31 @@
-2019-09-16
+# TODO
 
-# Restore create-react-app.
+- Complete Orlov budget init - users.
+- Add Jwt workflow to controller.
+- Framework, Lib, Apps folders. Project for business services.
+- Redux: read and understand the basics.
+- R#: don't auto-remove redundant parentheses.
 
-# Install everything from the counter playground.
+# Links
 
-# Make it work.
+JWT workflow:
 
-# Add Jwt workflow to controller.
+- https://github.com/orloffm/aspnet-core-role-based-authorization-api
+- https://github.com/cornflourblue/react-role-based-authorization-example
 
-# Framework, Lib, Apps folders. Project for business services.
+- https://github.com/supasate/connected-react-router
+- https://github.com/piotrwitek/react-redux-typescript-guide
 
-# Redux: read and understand the basics.
+## Experiments
 
-# R#: don't auto-remove redundant parentheses.
+- Example counter app with history, router and redux: https://github.com/orloffm/rr-counter
+- Saga basic tutorial: https://github.com/orloffm/rr-saga-basic
 
-https://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example
-https://jasonwatmore.com/post/2018/06/26/aspnet-core-21-simple-api-for-authentication-registration-and-user-management
+# Log
 
-https://github.com/supasate/connected-react-router
-https://github.com/piotrwitek/react-redux-typescript-guide
+## 2019-09-16
+
+- Restore create-react-app.
+- Install everything from the counter playground.
+- Make it work.
+- Saga example based on their basic tutorial.

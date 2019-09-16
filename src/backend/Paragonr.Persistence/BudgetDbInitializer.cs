@@ -22,7 +22,7 @@ namespace Paragonr.Persistence
 
             AddDefaultCurrencyRates(context);
 
-            AddDomainsAndCategories(context);
+            OrlovBudgetInitializer.AddCustomOrlovBudgetAndUsers(context);
         }
 
         private void AddCurrencies(BudgetDbContext context)
@@ -91,91 +91,6 @@ namespace Paragonr.Persistence
 
             context.CurrencyRates.AddRange(currencyRates);
 
-            context.SaveChanges();
-        }
-
-        [SuppressMessage("ReSharper", "StringLiteralTypo")]
-        private void AddDomainsAndCategories(BudgetDbContext context)
-        {
-            var domainsAndCategories = new Dictionary<string, string[]>
-            {
-                {
-                    "Дети", new[]
-                    {
-                        "Одежда",
-                        "Еда",
-                        "Подгузники",
-                        "Развлечения"
-                    }
-                },
-                {
-                    "Еда", new[]
-                    {
-                        "Рестораны",
-                        "Снэки"
-                    }
-                },
-                {
-                    "Жизнь", new[]
-                    {
-                        "Квартира",
-                        "Медицина",
-                        "Путешествия",
-                        "Развлечения",
-                        "Сервисы",
-                        "Страховка",
-                        "Транспорт",
-                        "Одежда",
-                        "Чтение"
-                    }
-                },
-                {
-                    "Коты", new string [0]
-                },
-                {
-                    "Машина", new[]
-                    {
-                        "Бензин",
-                        "Парковка",
-                        "Обслуживание"
-                    }
-                }
-            };
-
-            if (context.Domains.Any() == false)
-            {
-                context.Domains.AddRange(domainsAndCategories.Select(kvp => new Domain(){Name = kvp.Key}));
-                context.SaveChanges();
-            }
-
-            if (context.Categories.Any())
-                return;
-
-            var categories = new List<Category>();
-            foreach (KeyValuePair<string, string[]> domainAndCategories in domainsAndCategories)
-            {
-                Domain d = context.Domains.Single(e => e.Name == domainAndCategories.Key);
-
-                var defaultCategory = new Category
-                {
-                    Domain = d,
-                    Name = "-"
-                };
-                d.DefaultCategory = defaultCategory;
-                categories.Add(defaultCategory);
-
-                foreach (string category in domainAndCategories.Value)
-                {
-                    var c = new Category
-                    {
-                        Domain = d,
-                        Name = category
-                    };
-                    categories.Add(c);
-                }
-            }
-
-            context.Categories.AddRange(categories);
             context.SaveChanges();
         }
     }

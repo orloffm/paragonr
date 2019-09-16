@@ -10,7 +10,7 @@ namespace Paragonr.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<string>> Index()
         {
-            return Ok("Default ping controller response.");
+            return Ok();
         }
     }
 }
