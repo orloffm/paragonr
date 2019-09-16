@@ -1,5 +1,6 @@
 # TODO
 
+- Migrations recover. 32b8a06ce9f9c08c2d worked.
 - Complete Orlov budget init - users.
 - Add Jwt workflow to controller.
 - Framework, Lib, Apps folders. Project for business services.
