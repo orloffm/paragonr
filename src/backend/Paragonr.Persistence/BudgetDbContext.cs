@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Paragonr.Application.Interfaces;
 using Paragonr.Entities;
 
 namespace Paragonr.Persistence
@@ -7,10 +9,14 @@ namespace Paragonr.Persistence
     {
         public BudgetDbContext()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Constructed 1!");
         }
 
         public BudgetDbContext(DbContextOptions<BudgetDbContext> options) : base(options)
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Constructed 2!");
         }
 
         public DbSet<Category> Categories { get; set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Paragonr.Application.Infrastructure;
 using Paragonr.Application.Interfaces;
 using Paragonr.Entities;
 
@@ -24,7 +25,7 @@ namespace Paragonr.Application.Services
                 return null;
             }
 
-            User user = _context.Users.SingleOrDefault(x => x.Username == username);
+            var user = _context.Users.SingleOrDefault(x => x.Username == username);
 
             // check if username exists
             if (user == null)
@@ -69,7 +70,7 @@ namespace Paragonr.Application.Services
 
         public void Delete(int id)
         {
-            User user = _context.Users.Find(id);
+            var user = _context.Users.Find(id);
             if (user != null)
             {
                 _context.Users.Remove(user);
@@ -89,7 +90,7 @@ namespace Paragonr.Application.Services
 
         public void Update(User userParam, string password = null)
         {
-            User user = _context.Users.Find(userParam.Id);
+            var user = _context.Users.Find(userParam.Id);
 
             if (user == null)
             {
@@ -169,8 +170,8 @@ namespace Paragonr.Application.Services
 
             using (var hmac = new HMACSHA512(storedSalt))
             {
-                byte[] computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i < computedHash.Length; i++)
+                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                for (var i = 0; i < computedHash.Length; i++)
                 {
                     if (computedHash[i] != storedHash[i])
                     {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 using Paragonr.Entities;
 
 namespace Paragonr.Persistence
@@ -15,13 +16,18 @@ namespace Paragonr.Persistence
             if (context.Budgets.Any(b => b.Name == BudgetName))
                 return;
 
-            Budget budget = new Budget()
-            {
-                Name = BudgetName
-            };
+            var budget = context.Budgets.FirstOrDefault(b => b.Name == BudgetName);
 
-            context.Budgets.Add(budget);
-            context.SaveChanges();
+            if (budget == null)
+            {
+                budget = new Budget()
+                {
+                    Name = BudgetName
+                };
+
+                context.Budgets.Add(budget);
+                context.SaveChanges();
+            }
 
             AddDomainsAndCategories(context, budget);
         }
@@ -83,15 +89,38 @@ namespace Paragonr.Persistence
 
         private static void AddUsers(BudgetDbContext context, Budget orlovBudget)
         {
-            void AddUser()
+            void AddUser(string firstName, string lastName, string email, string login, string password)
             {
-                var user = new User()
-                {
+                User user = context.Users.FirstOrDefault(u => u.Username == login);
 
+                if (user != null)
+                {
+                    return;
+                }
+
+                user = new User()
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Email = email,
+                    Username = login,
+                    PasswordHash = Encoding.UTF8.GetBytes(password),
+                    PasswordSalt = null
                 };
+
+                var membership = new Membership()
+                {
+                    User = user,
+                    Budget = orlovBudget,
+                    IsManager = true
+                };
+
+                context.Users.Add(user);
+                context.Memberships.Add(membership);
             }
 
-            
+            AddUser("Mikhail", "Orlov", "orloffm@gmail.com", "orloffm", "password");
+            AddUser("Ekaterina", "Orlova", "egogotha@gmail.com", "egogotha", "password");
 
             context.SaveChanges();
         }
@@ -105,15 +134,21 @@ namespace Paragonr.Persistence
                 void AddCategory(string name, bool isDefault = false)
                 {
                     if (d.Categories.Any(c => c.Name == name))
+                    {
                         return;
+                    }
 
                     var category = new Category
                     {
                         Domain = d,
                         Name = name
                     };
+
                     if (isDefault)
+                    {
                         d.DefaultCategory = category;
+                    }
+
                     context.Categories.Add(category);
                 }
 
@@ -133,7 +168,9 @@ namespace Paragonr.Persistence
             void AddDomain(string name)
             {
                 if (orlovBudget.Domains.Any(d => d.Name == name))
+                {
                     return;
+                }
 
                 var domain = new Domain()
                 {

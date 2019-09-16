@@ -38,9 +38,9 @@ namespace Paragonr.WebApi
             {
                 try
                 {
-                    var context = scope.ServiceProvider.GetService<IBudgetDbContext>();
+                    var context = scope.ServiceProvider.GetService<BudgetDbContext>();
 
-                    BudgetDbContext concreteContext = (BudgetDbContext) context;
+                    var concreteContext = (BudgetDbContext) context;
                     concreteContext.Database.Migrate();
                     BudgetDbInitializer.Initialize(concreteContext);
                 }

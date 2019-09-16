@@ -1,5 +1,4 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Paragonr.WebApi.Controllers
@@ -8,7 +7,7 @@ namespace Paragonr.WebApi.Controllers
     public sealed class PingController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<string>> Index()
+        public ActionResult<string> Index()
         {
             return Ok();
         }
