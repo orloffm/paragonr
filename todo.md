@@ -8,13 +8,19 @@
 
 # Links
 
-JWT workflow:
+## JWT workflow
 
 - https://github.com/orloffm/aspnet-core-role-based-authorization-api
 - https://github.com/cornflourblue/react-role-based-authorization-example
 
+## Reacting general
+
 - https://github.com/supasate/connected-react-router
 - https://github.com/piotrwitek/react-redux-typescript-guide
+
+## Saga
+
+- https://medium.com/@lavitr01051977/make-your-first-call-to-api-using-redux-saga-15aa995df5b6
 
 ## Experiments
 
