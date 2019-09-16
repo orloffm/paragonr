@@ -1,3 +1,11 @@
+2019-09-16
+
+# Restore create-react-app.
+
+# Install everything from the counter playground.
+
+# Make it work.
+
 # Add Jwt workflow to controller.
 
 # Framework, Lib, Apps folders. Project for business services.
