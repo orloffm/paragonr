@@ -7,10 +7,8 @@ namespace Paragonr.Persistence
 {
     public class BudgetDbContext : DbContext, IBudgetDbContext
     {
-       public BudgetDbContext(DbContextOptions<BudgetDbContext> options) : base(options)
+        public BudgetDbContext(DbContextOptions<BudgetDbContext> options) : base(options)
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("Constructed 2!");
         }
 
         public DbSet<Category> Categories { get; set; }

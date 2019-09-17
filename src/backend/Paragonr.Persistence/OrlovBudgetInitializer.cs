@@ -133,7 +133,7 @@ namespace Paragonr.Persistence
 
                 void AddCategory(string name, bool isDefault = false)
                 {
-                    if (d.Categories.Any(c => c.Name == name))
+                    if (d.Categories?.Any(c => c.Name == name) == true)
                     {
                         return;
                     }
@@ -167,7 +167,7 @@ namespace Paragonr.Persistence
         {
             void AddDomain(string name)
             {
-                if (orlovBudget.Domains.Any(d => d.Name == name))
+                if (orlovBudget.Domains?.Any(d => d.Name == name) == true)
                 {
                     return;
                 }

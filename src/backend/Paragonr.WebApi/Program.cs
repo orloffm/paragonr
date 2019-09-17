@@ -12,6 +12,13 @@ namespace Paragonr.WebApi
 {
     public class Program
     {
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
+                .UseNLog()
+                .UseStartup<Startup>();
+        }
+
         public static void Main(string[] args)
         {
             IWebHost host;
@@ -22,10 +29,7 @@ namespace Paragonr.WebApi
             try
             {
                 logger.Debug("init main");
-                host = WebHost.CreateDefaultBuilder(args)
-                    .UseNLog()
-                    .UseStartup<Startup>()
-                    .Build();
+                host = CreateWebHostBuilder(args).Build();
             }
             catch (Exception e)
             {
