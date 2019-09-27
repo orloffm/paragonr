@@ -4,7 +4,7 @@ using Paragonr.Domain.Entities;
 
 namespace Paragonr.Application.Mappings
 {
-    public sealed class DomainToDomainDtoMapping : EntityToEntityDtoMappingBase<Field, FieldDto>
+    public sealed class FieldToFieldDtoMapping : EntityToEntityDtoMappingBase<Field, FieldDto>
     {
         protected override void ConfigureMapping(IMappingExpression<Field, FieldDto> map)
         {

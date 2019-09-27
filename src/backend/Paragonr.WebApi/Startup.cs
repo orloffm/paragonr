@@ -13,11 +13,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using Paragonr.Application.Infrastructure;
 using Paragonr.Application.Interfaces;
 using Paragonr.Application.Services;
 using Paragonr.Persistence;
+using Paragonr.WebApi.Common;
 using Paragonr.WebApi.Infrastructure;
 
 namespace Paragonr.WebApi
@@ -56,11 +56,10 @@ namespace Paragonr.WebApi
 
             services.AddMvc()
                 .AddControllersAsServices()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddJsonOptions(options =>
                 {
-                    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+                    options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
                 });
 
             // configure strongly typed settings objects
