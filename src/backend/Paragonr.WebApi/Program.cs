@@ -16,6 +16,7 @@ namespace Paragonr.WebApi
         {
             return WebHost.CreateDefaultBuilder(args)
                 .UseNLog()
+                .UseUrls("http://localhost:4000")
                 .UseStartup<Startup>();
         }
 
@@ -44,7 +45,7 @@ namespace Paragonr.WebApi
                 {
                     var context = scope.ServiceProvider.GetService<IBudgetDbContext>();
 
-                    var concreteContext = (BudgetDbContext) context;
+                    var concreteContext = (BudgetDbContext)context;
                     concreteContext.Database.Migrate();
                     BudgetDbInitializer.Initialize(concreteContext);
                 }

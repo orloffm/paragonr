@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Paragonr.Entities;
+using Paragonr.Domain.Entities;
 
 namespace Paragonr.Persistence.Configurations
 {

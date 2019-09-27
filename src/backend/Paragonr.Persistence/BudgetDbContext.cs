@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Paragonr.Application.Interfaces;
-using Paragonr.Entities;
+using Paragonr.Domain.Entities;
 
 namespace Paragonr.Persistence
 {
@@ -17,7 +17,7 @@ namespace Paragonr.Persistence
 
         public DbSet<CurrencyRate> CurrencyRates { get; set; }
 
-        public DbSet<Domain> Domains { get; set; }
+        public DbSet<Field> Fields { get; set; }
 
         public DbSet<Spending> Spendings { get; set; }
 

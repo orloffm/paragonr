@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Paragonr.Application.Infrastructure;
 using Paragonr.Application.Interfaces;
-using Paragonr.Entities;
+using Paragonr.Domain.Entities;
 
 namespace Paragonr.Application.Services
 {

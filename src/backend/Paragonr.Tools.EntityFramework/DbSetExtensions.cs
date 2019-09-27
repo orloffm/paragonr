@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Paragonr.Shared;
+using Paragonr.Tools;
 
 namespace Paragonr.Tools.EntityFramework
 {

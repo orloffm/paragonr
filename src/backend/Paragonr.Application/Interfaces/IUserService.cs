@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Paragonr.Entities;
+using Paragonr.Domain.Entities;
 
 namespace Paragonr.Application.Interfaces
 {

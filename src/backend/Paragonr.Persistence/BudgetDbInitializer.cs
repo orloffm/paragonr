@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Paragonr.Entities;
+using Paragonr.Domain.Entities;
 
 namespace Paragonr.Persistence
 {

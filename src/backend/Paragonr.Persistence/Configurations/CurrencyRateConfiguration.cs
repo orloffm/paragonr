@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Paragonr.Entities;
+using Paragonr.Domain.Entities;
 
 namespace Paragonr.Persistence.Configurations
 {
     public class CurrencyRateConfiguration : EntityBaseConfiguration<CurrencyRate>
-        {
-            protected override void ConfigureEntity(EntityTypeBuilder<CurrencyRate> builder)
+    {
+        protected override void ConfigureEntity(EntityTypeBuilder<CurrencyRate> builder)
         {
             builder.HasOne(d => d.Base)
                 .WithMany()

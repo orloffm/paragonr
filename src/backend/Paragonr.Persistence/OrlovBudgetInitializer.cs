@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using Paragonr.Entities;
+using Paragonr.Domain.Entities;
 
 namespace Paragonr.Persistence
 {
@@ -129,7 +129,7 @@ namespace Paragonr.Persistence
         {
             foreach (KeyValuePair<string, string[]> domainAndCategories in domainsAndCategories)
             {
-                Domain d = orlovBudget.Domains.Single(e => e.Name == domainAndCategories.Key);
+                var d = orlovBudget.Fields.Single(e => e.Name == domainAndCategories.Key);
 
                 void AddCategory(string name, bool isDefault = false)
                 {
@@ -140,7 +140,7 @@ namespace Paragonr.Persistence
 
                     var category = new Category
                     {
-                        Domain = d,
+                        Field = d,
                         Name = name
                     };
 
@@ -167,18 +167,18 @@ namespace Paragonr.Persistence
         {
             void AddDomain(string name)
             {
-                if (orlovBudget.Domains?.Any(d => d.Name == name) == true)
+                if (orlovBudget.Fields?.Any(d => d.Name == name) == true)
                 {
                     return;
                 }
 
-                var domain = new Domain()
+                var domain = new Field()
                 {
                     Name = name,
                     Budget = orlovBudget
                 };
 
-                context.Domains.Add(domain);
+                context.Fields.Add(domain);
             }
 
             foreach (string domainName in domainsAndCategories.Select(kvp => kvp.Key))

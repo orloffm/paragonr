@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Paragonr.Entities;
+using Paragonr.Domain.Entities;
 using Paragonr.Persistence.Helpers;
 
 namespace Paragonr.Persistence.Configurations
@@ -24,7 +24,7 @@ namespace Paragonr.Persistence.Configurations
                 .HasConstraintName("FK_Spending_Currency");
 
             builder.HasOne(b => b.Budget)
-                .WithMany(b=>b.Spendings)
+                .WithMany(b => b.Spendings)
                 .HasForeignKey(s => s.BudgetId)
                 .HasConstraintName("FK_Spending_Budget");
 

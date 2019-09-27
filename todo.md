@@ -1,7 +1,6 @@
 # TODO
 
-- Migrations recover. 32b8a06ce9f9c08c2d worked.
-- Complete Orlov budget init - users.
+- SDK 3.0
 - Add Jwt workflow to controller.
 - Framework, Lib, Apps folders. Project for business services.
 - Redux: read and understand the basics.

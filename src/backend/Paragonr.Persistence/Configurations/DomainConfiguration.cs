@@ -1,23 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Paragonr.Entities;
+using Paragonr.Domain.Entities;
 using Paragonr.Persistence.Helpers;
 
 namespace Paragonr.Persistence.Configurations
 {
-    public class DomainConfiguration : EntityBaseConfiguration<Domain>
+    public class FieldConfiguration : EntityBaseConfiguration<Field>
     {
-        protected override void ConfigureEntity(EntityTypeBuilder<Domain> builder)
+        protected override void ConfigureEntity(EntityTypeBuilder<Field> builder)
         {
             builder.HasOne(d => d.DefaultCategory)
                 .WithOne()
-                .HasForeignKey<Domain>(d => d.DefaultCategoryId)
-                .HasConstraintName("FK_Domain_DefaultCategory");
+                .HasForeignKey<Field>(d => d.DefaultCategoryId)
+                .HasConstraintName("FK_Field_DefaultCategory");
 
             builder.HasOne(m => m.Budget)
-                .WithMany(b => b.Domains)
+                .WithMany(b => b.Fields)
                 .HasForeignKey(m => m.BudgetId)
-                .HasConstraintName("FK_Domain_Budget");
+                .HasConstraintName("FK_Field_Budget");
 
             KeyEnabledEntityConfigurationHelper.ConfigureKey(builder);
         }

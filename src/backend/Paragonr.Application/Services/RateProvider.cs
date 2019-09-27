@@ -2,7 +2,7 @@
 using System.Linq;
 using Paragonr.Application.Interfaces;
 using Paragonr.Application.Models;
-using Paragonr.Shared.Interfaces;
+using Paragonr.Tools.Interfaces;
 
 namespace Paragonr.Application.Services
 {
