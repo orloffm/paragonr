@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Paragonr.Domain.Entities;
 
-namespace Paragonr.Application.Interfaces
+namespace Paragonr.Domain
 {
     public interface IBudgetDbContext
     {

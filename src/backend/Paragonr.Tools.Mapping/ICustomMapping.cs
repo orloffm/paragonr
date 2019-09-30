@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 
-namespace Paragonr.Application.Infrastructure
+namespace Paragonr.Tools.Mapping
 {
     [SuppressMessage("ReSharper", "UnusedTypeParameter")]
     public interface ICustomMapping<TSource, TDestination> : ICustomMapping

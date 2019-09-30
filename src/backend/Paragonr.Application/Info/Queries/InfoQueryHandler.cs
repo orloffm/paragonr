@@ -2,16 +2,15 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Paragonr.Application.Dtos;
+using Paragonr.Application.Currencies;
 using Paragonr.Application.Interfaces;
 using Paragonr.Application.Models;
+using Paragonr.Domain;
 using Paragonr.Domain.Entities;
-using IBudgetDbContext = Paragonr.Application.Interfaces.IBudgetDbContext;
+using Paragonr.Tools.Mapping.Extensions;
 
-namespace Paragonr.Application.Queries.Info
+namespace Paragonr.Application.Info.Queries
 {
     // ReSharper disable once UnusedMember.Global
     public sealed class InfoQueryHandler : IRequestHandler<InfoQuery, InfoResult>
@@ -30,15 +29,12 @@ namespace Paragonr.Application.Queries.Info
 
         public async Task<InfoResult> Handle(InfoQuery request, CancellationToken cancellationToken)
         {
-            CurrencyDto[] currencies = await ProjectAsync<Currency, CurrencyDto>(_context.Currencies, cancellationToken);
+            CurrencyDto[] currencies =
+                await _context.Currencies.ProjectAsync<Currency, CurrencyDto>(_mapper.ConfigurationProvider, cancellationToken);
 
             CurrentRatesInfoDto ratesInfo = LoadRates(currencies);
 
-            FieldDto[] fields = await ProjectAsync<Field, FieldDto>(_context.Fields, cancellationToken);
-
-            CategoryDto[] categories = await ProjectAsync<Category, CategoryDto>(_context.Categories, cancellationToken);
-
-            return new InfoResult(currencies, ratesInfo, fields, categories);
+            return new InfoResult(currencies, ratesInfo);
         }
 
         private CurrentRatesInfoDto LoadRates(CurrencyDto[] currencies)
@@ -65,12 +61,6 @@ namespace Paragonr.Application.Queries.Info
             var ratesInfo = new CurrentRatesInfoDto(rates, DefaultCurrencyIsoCode);
 
             return ratesInfo;
-        }
-
-        private async Task<TDto[]> ProjectAsync<TEntity, TDto>(DbSet<TEntity> source, CancellationToken token) where TEntity : EntityBase
-        {
-            return await source.ProjectTo<TDto>(_mapper.ConfigurationProvider)
-                .ToArrayAsync(token);
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using NLog.Web;
 using Paragonr.Application.Interfaces;
+using Paragonr.Domain;
 using Paragonr.Persistence;
 
 namespace Paragonr.WebApi

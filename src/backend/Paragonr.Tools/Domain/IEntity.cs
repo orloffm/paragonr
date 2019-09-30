@@ -1,4 +1,4 @@
-﻿namespace Paragonr.Tools
+﻿namespace Paragonr.Tools.Domain
 {
     public interface IEntity
     {

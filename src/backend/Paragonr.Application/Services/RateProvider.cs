@@ -2,6 +2,7 @@
 using System.Linq;
 using Paragonr.Application.Interfaces;
 using Paragonr.Application.Models;
+using Paragonr.Domain;
 using Paragonr.Tools.Interfaces;
 
 namespace Paragonr.Application.Services
@@ -48,7 +49,7 @@ namespace Paragonr.Application.Services
                 return null;
             }
 
-            decimal rate = newestMatch.Rate;
+            var rate = newestMatch.Rate;
 
             if (newestMatch.Target == sourceIsoCode)
             {

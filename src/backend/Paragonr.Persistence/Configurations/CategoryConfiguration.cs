@@ -19,7 +19,7 @@ namespace Paragonr.Persistence.Configurations
                 .HasForeignKey(m => m.BudgetId)
                 .HasConstraintName("FK_Category_Budget");
 
-            KeyEnabledEntityConfigurationHelper.ConfigureKey(builder);
+            RefKeyEnabledEntityConfigurationHelper.ConfigureKey(builder);
         }
     }
 }

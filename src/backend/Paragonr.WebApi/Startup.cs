@@ -12,11 +12,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using Paragonr.Application.Infrastructure;
+using Paragonr.Application.Common.Mapping;
 using Paragonr.Application.Interfaces;
 using Paragonr.Application.Services;
+using Paragonr.Domain;
 using Paragonr.Persistence;
+using Paragonr.Tools.Mapping.Dto;
 using Paragonr.WebApi.Common;
 using Paragonr.WebApi.Infrastructure;
 
@@ -32,12 +35,22 @@ namespace Paragonr.WebApi
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             //  app.UseCors(x => x
             //     .AllowAnyOrigin()
@@ -45,8 +58,6 @@ namespace Paragonr.WebApi
             //     .AllowAnyHeader());
 
             //  app.UseHttpsRedirection();
-            app.UseAuthentication();
-            app.UseMvc();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.

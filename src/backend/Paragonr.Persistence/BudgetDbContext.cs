@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Paragonr.Application.Interfaces;
+using Paragonr.Domain;
 using Paragonr.Domain.Entities;
 
 namespace Paragonr.Persistence

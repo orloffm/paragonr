@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Paragonr.Tools;
+using Paragonr.Tools.Domain;
 
 namespace Paragonr.Domain.Entities
 {
-    public class User : EntityBase
+    public class User : EntityBase, IRefKeyEnabledEntity
     {
         public string FirstName { get; set; }
 
@@ -17,5 +20,9 @@ namespace Paragonr.Domain.Entities
         public byte[] PasswordSalt { get; set; }
 
         public virtual ICollection<Membership> Memberships { get; set; }
+        
+        public bool IsAdmin { get; set; }
+
+        public Guid RefKey { get; }
     }
 }

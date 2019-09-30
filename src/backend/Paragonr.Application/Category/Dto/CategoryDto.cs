@@ -1,7 +1,7 @@
 ﻿using System;
-using Paragonr.Application.Infrastructure;
+using Paragonr.Tools.Mapping.Dto;
 
-namespace Paragonr.Application.Dtos
+namespace Paragonr.Application.Category.Dto
 {
     public sealed class CategoryDto : EntityBaseDto, IKeyEnabledEntityDto
     {

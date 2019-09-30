@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Paragonr.Tools;
+using Paragonr.Tools.Domain;
 
 namespace Paragonr.Domain.Entities
 {
-    public class Field : EntityBase, IKeyEnabledEntity
+    public class Field : EntityBase, IRefKeyEnabledEntity
     {
         public long BudgetId { get; set; }
 
@@ -18,6 +19,6 @@ namespace Paragonr.Domain.Entities
 
         public string Name { get; set; }
 
-        public Guid Key { get; set; }
+        public Guid RefKey { get; set; }
     }
 }

@@ -2,28 +2,15 @@
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
+using Paragonr.Tools.Mapping;
 
-namespace Paragonr.Application.Infrastructure
+namespace Paragonr.Application.Common.Mapping
 {
     public sealed class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
         {
             CreateMappings();
-        }
-
-        private void LoadCustomMappingsFromType(Type type)
-        {
-            bool hasCustomInterface = type.GetInterfaces()
-                .Any(i => i == typeof(ICustomMapping));
-
-            if (!hasCustomInterface)
-            {
-                return;
-            }
-
-            var instance = (ICustomMapping) Activator.CreateInstance(type);
-            instance.CreateMappings(this);
         }
 
         private void CreateMappings()
@@ -42,6 +29,20 @@ namespace Paragonr.Application.Infrastructure
 
                 LoadCustomMappingsFromType(type);
             }
+        }
+
+        private void LoadCustomMappingsFromType(Type type)
+        {
+            var hasCustomInterface = type.GetInterfaces()
+                .Any(i => i == typeof(ICustomMapping));
+
+            if (!hasCustomInterface)
+            {
+                return;
+            }
+
+            var instance = (ICustomMapping)Activator.CreateInstance(type);
+            instance.CreateMappings(this);
         }
 
         private void LoadSimpleMappingsFromType(Type type)

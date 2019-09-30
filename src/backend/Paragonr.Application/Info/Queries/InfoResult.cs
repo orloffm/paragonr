@@ -1,22 +1,16 @@
-﻿using Paragonr.Application.Dtos;
+﻿using Paragonr.Application.Currencies;
 
-namespace Paragonr.Application.Queries.Info
+namespace Paragonr.Application.Info.Queries
 {
     public sealed class InfoResult
     {
-        public InfoResult(CurrencyDto[] currencies, CurrentRatesInfoDto ratesInfo, FieldDto[] fields, CategoryDto[] categories)
+        public InfoResult(CurrencyDto[] currencies, CurrentRatesInfoDto ratesInfo)
         {
             Currencies = currencies;
             RatesInfo = ratesInfo;
-            Fields = fields;
-            Categories = categories;
         }
 
-        public CategoryDto[] Categories { get; }
-
         public CurrencyDto[] Currencies { get; }
-
-        public FieldDto[] Fields { get; }
 
         public CurrentRatesInfoDto RatesInfo { get; }
     }

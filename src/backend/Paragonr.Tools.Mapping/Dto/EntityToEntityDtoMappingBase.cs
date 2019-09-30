@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using Paragonr.Application.Infrastructure;
 using Paragonr.Domain.Entities;
 
-namespace Paragonr.Application.Mappings
+namespace Paragonr.Tools.Mapping.Dto
 {
     public abstract class EntityToEntityDtoMappingBase<TEntity, TDto> : ICustomMapping<TEntity, TDto>
         where TEntity : EntityBase where TDto : EntityBaseDto

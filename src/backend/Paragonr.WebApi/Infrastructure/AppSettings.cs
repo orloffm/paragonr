@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Paragonr.WebApi.Infrastructure
+﻿namespace Paragonr.WebApi.Infrastructure
 {
     public class AppSettings
     {

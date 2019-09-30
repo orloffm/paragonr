@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Paragonr.Application.Queries.Info;
+using Paragonr.Application.Info.Queries;
 
 namespace Paragonr.WebApi.Controllers
 {

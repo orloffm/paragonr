@@ -1,4 +1,4 @@
-﻿namespace Paragonr.Application.Infrastructure
+﻿namespace Paragonr.Tools.Mapping.Dto
 {
     public abstract class EntityBaseDto : IEntityDto
     {

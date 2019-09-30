@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MediatR;
+﻿using MediatR;
 
 namespace Paragonr.Application.Auth.Commands.Login
 {
-   public sealed  class LoginCommand : IRequest<LoginResponse>
+    public sealed class LoginCommand : IRequest<LoginResult>
     {
-        public string User { get; set; }
-
         public string Password { get; set; }
+
+        public string UserQuery { get; set; }
     }
 }

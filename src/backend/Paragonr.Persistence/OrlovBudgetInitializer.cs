@@ -119,8 +119,8 @@ namespace Paragonr.Persistence
                 context.Memberships.Add(membership);
             }
 
-            AddUser("Mikhail", "Orlov", "orloffm@gmail.com", "orloffm", "password");
-            AddUser("Ekaterina", "Orlova", "egogotha@gmail.com", "egogotha", "password");
+            AddUser("Mikhail", "Orlov", "orloffm@gmail.com", "orloffm", null);
+            AddUser("Ekaterina", "Orlova", "egogotha@gmail.com", "egogotha", null);
 
             context.SaveChanges();
         }

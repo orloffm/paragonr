@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Paragonr.Application.Infrastructure
+namespace Paragonr.Tools.Mapping
 {
     [SuppressMessage("ReSharper", "UnusedTypeParameter")]
     public interface IMapFrom<TEntity>

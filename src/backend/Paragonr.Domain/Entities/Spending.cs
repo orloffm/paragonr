@@ -1,9 +1,10 @@
 ﻿using System;
 using Paragonr.Tools;
+using Paragonr.Tools.Domain;
 
 namespace Paragonr.Domain.Entities
 {
-    public class Spending : EntityBase, IKeyEnabledEntity
+    public class Spending : EntityBase, IRefKeyEnabledEntity
     {
         public decimal Amount { get; set; }
 
@@ -23,7 +24,7 @@ namespace Paragonr.Domain.Entities
 
         public long AddedById { get; set; }
 
-        public Guid Key { get; set; }
+        public Guid RefKey { get; set; }
 
         public string Note { get; set; }
 

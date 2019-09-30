@@ -1,7 +1,6 @@
 # TODO
 
-- SDK 3.0
-- Add Jwt workflow to controller.
+- Custom exceptions handler.
 - Framework, Lib, Apps folders. Project for business services.
 - Redux: read and understand the basics.
 - R#: don't auto-remove redundant parentheses.

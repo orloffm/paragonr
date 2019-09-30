@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
-using Paragonr.Application.Dtos;
-using Paragonr.Domain.Entities;
+using Paragonr.Tools.Mapping.Dto;
 
-namespace Paragonr.Application.Mappings
+namespace Paragonr.Application.Category.Dto
 {
-    public sealed class CategoryToCategoryDtoMapping : EntityToEntityDtoMappingBase<Category, CategoryDto>
+    public sealed class CategoryToCategoryDtoMapping : EntityToEntityDtoMappingBase<Domain.Entities.Category, CategoryDto>
     {
-        protected override void ConfigureMapping(IMappingExpression<Category, CategoryDto> map)
+        protected override void ConfigureMapping(IMappingExpression<Domain.Entities.Category, CategoryDto> map)
         {
             map.ForMember(d => d.Name, c => c.MapFrom(e => e.Name))
                 .ForMember(d => d.DomainName, c => c.MapFrom(e => e.Field.Name))
-                .ForMember(d => d.Key, c => c.MapFrom(e => e.Key));
+                .ForMember(d => d.Key, c => c.MapFrom(e => e.RefKey));
         }
     }
 }

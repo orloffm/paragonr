@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -17,7 +17,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Paragonr.Domain\Paragonr.Domain.csproj" />
+    <ProjectReference Include="..\Paragonr.Tools.EntityFramework\Paragonr.Tools.EntityFramework.csproj" />
     <ProjectReference Include="..\Paragonr.Tools.Mapping\Paragonr.Tools.Mapping.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Info" />
   </ItemGroup>
 
 </Project>

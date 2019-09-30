@@ -1,4 +1,4 @@
-﻿namespace Paragonr.Application.Infrastructure
+﻿namespace Paragonr.Tools.Mapping.Dto
 {
     public interface IEntityDto
     {

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Paragonr.Tools;
+using Paragonr.Tools.Domain;
 
 namespace Paragonr.Domain.Entities
 {
-    public class Category : EntityBase, IKeyEnabledEntity
+    public class Category : EntityBase, IRefKeyEnabledEntity
     {
         public Field Field { get; set; }
 
@@ -18,6 +19,6 @@ namespace Paragonr.Domain.Entities
 
         public virtual ICollection<Spending> Spendings { get; set; }
 
-        public Guid Key { get; set; }
+        public Guid RefKey { get; set; }
     }
 }
