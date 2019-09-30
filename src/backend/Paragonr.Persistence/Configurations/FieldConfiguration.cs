@@ -5,7 +5,7 @@ using Paragonr.Persistence.Helpers;
 
 namespace Paragonr.Persistence.Configurations
 {
-    public class FieldConfiguration : EntityBaseConfiguration<Field>
+    public sealed class FieldConfiguration : EntityBaseConfiguration<Field>
     {
         protected override void ConfigureEntity(EntityTypeBuilder<Field> builder)
         {

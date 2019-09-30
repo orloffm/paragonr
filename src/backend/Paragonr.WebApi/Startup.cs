@@ -26,7 +26,7 @@ namespace Paragonr.WebApi
 {
     public class Startup
     {
-        private const string ParagonrDatabaseConfigurationKey= "ParagonrDatabase";
+        private const string ParagonrDatabaseConfigurationKey = "ParagonrDatabase";
         private const string AppSettingsConfigurationKey = "AppSettings";
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
@@ -44,11 +44,11 @@ namespace Paragonr.WebApi
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                //     app.UseDatabaseErrorPage();
             }
 
             app.UseAppExceptionHandler();
-            
+
             // app.UseOpenApi();
             //
             // app.UseSwaggerUi3(settings =>
@@ -56,7 +56,7 @@ namespace Paragonr.WebApi
             //     settings.Path = "/api";
             //     //    settings.DocumentPath = "/api/specification.json";   Enable when NSwag.MSBuild is upgraded to .NET Core 3.0
             // });
-            
+
             app.UseRouting();
 
             app.UseAuthentication();
@@ -92,22 +92,23 @@ namespace Paragonr.WebApi
             var appSettingsSection = Configuration.GetSection(AppSettingsConfigurationKey);
             services.Configure<AppSettings>(appSettingsSection);
 
-            // configure jwt authentication
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             services.AddMediatR(typeof(EntityBaseDto).Assembly);
             services.AddHttpContextAccessor();
 
+            // Database.
+            var connectionString = Configuration.GetConnectionString(ParagonrDatabaseConfigurationKey);
             services.AddDbContext<BudgetDbContext>(
                 options => options.UseSqlServer(
-                    Configuration.GetConnectionString(ParagonrDatabaseConfigurationKey),
+                    connectionString,
                     sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()
                 )
             );
             services.AddScoped<IBudgetDbContext>(provider => provider.GetService<BudgetDbContext>());
 
+            // Auth.
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

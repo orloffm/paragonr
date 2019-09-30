@@ -1,10 +1,13 @@
 # TODO
 
+- Use new EF ownership for the structure.
+- Sagas to consume login sequence.
+
+## Later
+
+- R#: don't auto-remove redundant parentheses.
 - NSwag
 - AddFluentValidation
-- Framework, Lib, Apps folders. Project for business services.
-- Redux: read and understand the basics.
-- R#: don't auto-remove redundant parentheses.
 
 # Links
 
@@ -35,3 +38,8 @@
 - Install everything from the counter playground.
 - Make it work.
 - Saga example based on their basic tutorial.
+
+## 2019-09-30
+
+- JWT services
+- .NET Core 3.0

@@ -12,11 +12,6 @@ namespace Paragonr.Domain.Entities
         public virtual ICollection<Field> Fields { get; set; }
 
         /// <summary>
-        /// Categories in this budget.
-        /// </summary>
-        public virtual ICollection<Category> Categories { get; set; }
-
-        /// <summary>
         /// Users that are participants in this budget.
         /// </summary>
         public virtual ICollection<Membership> Memberships { get; set; }
