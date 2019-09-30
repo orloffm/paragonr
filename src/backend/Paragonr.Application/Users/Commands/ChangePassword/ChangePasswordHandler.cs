@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Paragonr.Application.Common.Exceptions;
 using Paragonr.Application.Interfaces;
 using Paragonr.Domain;
 using Paragonr.Domain.Entities;
+using Paragonr.Domain.Exceptions;
 
 namespace Paragonr.Application.Users.Commands.ChangePassword
 {

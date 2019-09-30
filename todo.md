@@ -1,6 +1,7 @@
 # TODO
 
-- Custom exceptions handler.
+- NSwag
+- AddFluentValidation
 - Framework, Lib, Apps folders. Project for business services.
 - Redux: read and understand the basics.
 - R#: don't auto-remove redundant parentheses.

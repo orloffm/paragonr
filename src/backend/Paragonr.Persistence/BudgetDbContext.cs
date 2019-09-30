@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Paragonr.Application.Interfaces;
 using Paragonr.Domain;
 using Paragonr.Domain.Entities;
 

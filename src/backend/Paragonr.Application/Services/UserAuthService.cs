@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Paragonr.Application.Common.Exceptions;
 using Paragonr.Application.Interfaces;
 using Paragonr.Domain;
 using Paragonr.Domain.Entities;
+using Paragonr.Domain.Exceptions;
 using Paragonr.Tools.EntityFramework.Extensions;
 
 namespace Paragonr.Application.Services

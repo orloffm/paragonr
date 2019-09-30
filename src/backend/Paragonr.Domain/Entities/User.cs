@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Paragonr.Tools;
 using Paragonr.Tools.Domain;
 
 namespace Paragonr.Domain.Entities

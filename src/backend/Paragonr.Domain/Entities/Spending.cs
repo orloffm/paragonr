@@ -1,5 +1,4 @@
 ﻿using System;
-using Paragonr.Tools;
 using Paragonr.Tools.Domain;
 
 namespace Paragonr.Domain.Entities

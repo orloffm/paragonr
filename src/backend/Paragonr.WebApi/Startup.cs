@@ -11,36 +11,51 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Paragonr.Application.Common.Mapping;
-using Paragonr.Application.Interfaces;
 using Paragonr.Application.Services;
 using Paragonr.Domain;
 using Paragonr.Persistence;
 using Paragonr.Tools.Mapping.Dto;
 using Paragonr.WebApi.Common;
+using Paragonr.WebApi.Common.Middleware;
 using Paragonr.WebApi.Infrastructure;
 
 namespace Paragonr.WebApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private const string ParagonrDatabaseConfigurationKey= "ParagonrDatabase";
+        private const string AppSettingsConfigurationKey = "AppSettings";
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
+
+            app.UseAppExceptionHandler();
+            
+            // app.UseOpenApi();
+            //
+            // app.UseSwaggerUi3(settings =>
+            // {
+            //     settings.Path = "/api";
+            //     //    settings.DocumentPath = "/api/specification.json";   Enable when NSwag.MSBuild is upgraded to .NET Core 3.0
+            // });
             
             app.UseRouting();
 
@@ -74,7 +89,7 @@ namespace Paragonr.WebApi
                 });
 
             // configure strongly typed settings objects
-            var appSettingsSection = Configuration.GetSection("AppSettings");
+            var appSettingsSection = Configuration.GetSection(AppSettingsConfigurationKey);
             services.Configure<AppSettings>(appSettingsSection);
 
             // configure jwt authentication
@@ -83,13 +98,15 @@ namespace Paragonr.WebApi
 
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             services.AddMediatR(typeof(EntityBaseDto).Assembly);
+            services.AddHttpContextAccessor();
 
-            services.AddDbContext<IBudgetDbContext, BudgetDbContext>(
+            services.AddDbContext<BudgetDbContext>(
                 options => options.UseSqlServer(
-                    @"data source=.;initial catalog=Paragonr;integrated security=True;MultipleActiveResultSets=True;",
+                    Configuration.GetConnectionString(ParagonrDatabaseConfigurationKey),
                     sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()
                 )
             );
+            services.AddScoped<IBudgetDbContext>(provider => provider.GetService<BudgetDbContext>());
 
             services.AddAuthentication(x =>
             {
@@ -108,9 +125,6 @@ namespace Paragonr.WebApi
                     ValidateAudience = false
                 };
             });
-
-            // To support EF migrations.
-            services.TryAdd(new ServiceDescriptor(typeof(BudgetDbContext), typeof(BudgetDbContext), ServiceLifetime.Scoped));
 
             var builder = new ContainerBuilder();
             builder.Populate(services);

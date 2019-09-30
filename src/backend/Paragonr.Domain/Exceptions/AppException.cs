@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Paragonr.Application.Common.Exceptions
+namespace Paragonr.Domain.Exceptions
 {
     public class AppException : Exception
     {

@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using Paragonr.Application.Common.Exceptions;
 using Paragonr.Application.Interfaces;
+using Paragonr.Domain.Exceptions;
 
 namespace Paragonr.WebApi.Services
 {

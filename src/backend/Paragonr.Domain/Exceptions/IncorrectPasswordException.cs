@@ -1,4 +1,4 @@
-﻿namespace Paragonr.Application.Common.Exceptions
+﻿namespace Paragonr.Domain.Exceptions
 {
     public sealed class IncorrectPasswordException : AppException
     {
