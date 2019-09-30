@@ -1,3 +1,4 @@
+dotnet tool install --global dotnet-ef --version 3.0.0
 dotnet ef migrations add X --startup-project Paragonr.WebApi --project Paragonr.Persistence
 
 dotnet ef migrations remove --startup-project Paragonr.WebApi --project Paragonr.Persistence
