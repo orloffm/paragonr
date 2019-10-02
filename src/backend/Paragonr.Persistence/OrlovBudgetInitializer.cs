@@ -117,11 +117,12 @@ namespace Paragonr.Persistence
 
                 context.Users.Add(user);
                 context.Memberships.Add(membership);
-                context.SaveChanges();
             }
 
             AddUser("Mikhail", "Orlov", "orloffm@gmail.com", "orloffm", null);
             AddUser("Ekaterina", "Orlova", "egogotha@gmail.com", "egogotha", null);
+
+            context.SaveChanges();
         }
 
         private static void AddCategories(BudgetDbContext context, Budget orlovBudget, Dictionary<string, string[]> domainsAndCategories)
