@@ -110,28 +110,6 @@ namespace Paragonr.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DomainId = table.Column<long>(nullable: true),
-                    BudgetId = table.Column<long>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Category_Budget",
-                        column: x => x.BudgetId,
-                        principalTable: "Budgets",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Fields",
                 columns: table => new
                 {
@@ -151,10 +129,25 @@ namespace Paragonr.Persistence.Migrations
                         principalTable: "Budgets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FieldId = table.Column<long>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Field_DefaultCategory",
-                        column: x => x.DefaultCategoryId,
-                        principalTable: "Categories",
+                        name: "FK_Category_Domain",
+                        column: x => x.FieldId,
+                        principalTable: "Fields",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -204,14 +197,9 @@ namespace Paragonr.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_BudgetId",
+                name: "IX_Categories_FieldId",
                 table: "Categories",
-                column: "BudgetId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Categories_DomainId",
-                table: "Categories",
-                column: "DomainId");
+                column: "FieldId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_RefKey",
@@ -279,24 +267,16 @@ namespace Paragonr.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Category_Domain",
-                table: "Categories",
-                column: "DomainId",
-                principalTable: "Fields",
+                name: "FK_Field_DefaultCategory",
+                table: "Fields",
+                column: "DefaultCategoryId",
+                principalTable: "Categories",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Category_Budget",
-                table: "Categories");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Field_Budget",
-                table: "Fields");
-
             migrationBuilder.DropForeignKey(
                 name: "FK_Category_Domain",
                 table: "Categories");
@@ -317,10 +297,10 @@ namespace Paragonr.Persistence.Migrations
                 name: "Currencies");
 
             migrationBuilder.DropTable(
-                name: "Budgets");
+                name: "Fields");
 
             migrationBuilder.DropTable(
-                name: "Fields");
+                name: "Budgets");
 
             migrationBuilder.DropTable(
                 name: "Categories");

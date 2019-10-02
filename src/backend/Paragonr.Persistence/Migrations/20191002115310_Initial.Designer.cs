@@ -10,7 +10,7 @@ using Paragonr.Persistence;
 namespace Paragonr.Persistence.Migrations
 {
     [DbContext(typeof(BudgetDbContext))]
-    [Migration("20190930203309_Initial")]
+    [Migration("20191002115310_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,10 +43,7 @@ namespace Paragonr.Persistence.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("BudgetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DomainId")
+                    b.Property<long?>("FieldId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")
@@ -59,9 +56,7 @@ namespace Paragonr.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BudgetId");
-
-                    b.HasIndex("DomainId");
+                    b.HasIndex("FieldId");
 
                     b.HasIndex("RefKey")
                         .IsUnique();
@@ -264,16 +259,9 @@ namespace Paragonr.Persistence.Migrations
 
             modelBuilder.Entity("Paragonr.Domain.Entities.Category", b =>
                 {
-                    b.HasOne("Paragonr.Domain.Entities.Budget", "Budget")
-                        .WithMany("Categories")
-                        .HasForeignKey("BudgetId")
-                        .HasConstraintName("FK_Category_Budget")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Paragonr.Domain.Entities.Field", "Field")
                         .WithMany("Categories")
-                        .HasForeignKey("DomainId")
+                        .HasForeignKey("FieldId")
                         .HasConstraintName("FK_Category_Domain");
                 });
 

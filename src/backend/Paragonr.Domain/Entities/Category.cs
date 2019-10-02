@@ -8,7 +8,7 @@ namespace Paragonr.Domain.Entities
     {
         public virtual Field Field { get; set; }
 
-        public long? DomainId { get; set; }
+        public long? FieldId { get; set; }
 
         public string Name { get; set; }
 
