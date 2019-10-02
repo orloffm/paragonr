@@ -8,7 +8,14 @@ namespace Paragonr.Persistence.Configurations
     {
         protected override void ConfigureEntity(EntityTypeBuilder<Membership> builder)
         {
-            builder.HasKey(bc => new { bc.BudgetId, bc.UserId });
+            builder.HasIndex(
+                    bc => new
+                    {
+                        bc.BudgetId,
+                        bc.UserId
+                    }
+                )
+                .IsUnique();
 
             builder.HasOne(m => m.Budget)
                 .WithMany(b => b.Memberships)

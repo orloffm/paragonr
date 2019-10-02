@@ -90,15 +90,15 @@ namespace Paragonr.Persistence.Migrations
                 name: "Memberships",
                 columns: table => new
                 {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BudgetId = table.Column<long>(nullable: false),
                     UserId = table.Column<long>(nullable: false),
-                    Id = table.Column<long>(nullable: false),
                     IsManager = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Memberships", x => new { x.BudgetId, x.UserId });
-                    table.UniqueConstraint("AK_Memberships_Id", x => x.Id);
+                    table.PrimaryKey("PK_Memberships", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Membership_Budget",
                         column: x => x.BudgetId,
@@ -242,6 +242,12 @@ namespace Paragonr.Persistence.Migrations
                 name: "IX_Memberships_UserId",
                 table: "Memberships",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Memberships_BudgetId_UserId",
+                table: "Memberships",
+                columns: new[] { "BudgetId", "UserId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Spendings_AddedById",

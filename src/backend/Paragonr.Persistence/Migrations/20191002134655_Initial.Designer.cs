@@ -10,7 +10,7 @@ using Paragonr.Persistence;
 namespace Paragonr.Persistence.Migrations
 {
     [DbContext(typeof(BudgetDbContext))]
-    [Migration("20191002132021_Initial")]
+    [Migration("20191002134655_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -154,23 +154,26 @@ namespace Paragonr.Persistence.Migrations
 
             modelBuilder.Entity("Paragonr.Domain.Entities.Membership", b =>
                 {
-                    b.Property<long>("BudgetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<long>("BudgetId")
                         .HasColumnType("bigint");
 
                     b.Property<bool>("IsManager")
                         .HasColumnType("boolean");
 
-                    b.HasKey("BudgetId", "UserId");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
-                    b.HasAlternateKey("Id");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("BudgetId", "UserId")
+                        .IsUnique();
 
                     b.ToTable("Memberships");
                 });
