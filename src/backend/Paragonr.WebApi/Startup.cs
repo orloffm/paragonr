@@ -98,9 +98,13 @@ namespace Paragonr.WebApi
 
             // Database.
             var connectionString = Configuration.GetConnectionString(ParagonrDatabaseConfigurationKey);
-            services.AddDbContext<BudgetDbContext>(
-                options => options.UseNpgsql(connectionString)
-            );
+            services
+                .AddEntityFrameworkNpgsql()
+                .AddDbContext<BudgetDbContext>(
+                options => options
+                    .UseNpgsql(connectionString)
+                    .EnableSensitiveDataLogging()
+                );
             services.AddScoped<IBudgetDbContext>(provider => provider.GetService<BudgetDbContext>());
 
             // Auth.

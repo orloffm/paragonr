@@ -10,13 +10,14 @@ using Paragonr.Persistence;
 namespace Paragonr.Persistence.Migrations
 {
     [DbContext(typeof(BudgetDbContext))]
-    [Migration("20191002122233_Initial")]
+    [Migration("20191002132021_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Npgsql:PostgresExtension:uuid-ossp", ",,")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
@@ -52,7 +53,7 @@ namespace Paragonr.Persistence.Migrations
                     b.Property<Guid>("RefKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasDefaultValueSql("uuid_generate_v1()");
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.HasKey("Id");
 
@@ -136,7 +137,7 @@ namespace Paragonr.Persistence.Migrations
                     b.Property<Guid>("RefKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasDefaultValueSql("uuid_generate_v1()");
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.HasKey("Id");
 
@@ -205,7 +206,7 @@ namespace Paragonr.Persistence.Migrations
                     b.Property<Guid>("RefKey")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasDefaultValueSql("uuid_generate_v1()");
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.HasKey("Id");
 

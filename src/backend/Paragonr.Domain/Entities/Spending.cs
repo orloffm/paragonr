@@ -7,19 +7,19 @@ namespace Paragonr.Domain.Entities
     {
         public decimal Amount { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         public long? CategoryId { get; set; }
 
-        public Currency Currency { get; set; }
+        public virtual Currency Currency { get; set; }
 
         public long? CurrencyId { get; set; }
 
-        public Budget Budget { get; set; }
+        public virtual Budget Budget { get; set; }
 
         public long? BudgetId { get; set; }
 
-        public User AddedBy { get; set; }
+        public virtual User AddedBy { get; set; }
 
         public long AddedById { get; set; }
 

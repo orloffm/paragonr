@@ -4,11 +4,11 @@
     {
         public long BudgetId { get; set; }
 
-        public Budget Budget { get; set; }
+        public virtual Budget Budget { get; set; }
 
         public long UserId { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         public bool IsManager { get; set; }
     }

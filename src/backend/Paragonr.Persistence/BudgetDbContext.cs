@@ -28,6 +28,9 @@ namespace Paragonr.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.HasPostgresExtension("uuid-ossp");
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(BudgetDbContext).Assembly);
         }
     }

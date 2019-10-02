@@ -8,11 +8,11 @@ namespace Paragonr.Domain.Entities
     {
         public long BudgetId { get; set; }
 
-        public Budget Budget { get; set; }
+        public virtual Budget Budget { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }
 
-        public Category DefaultCategory { get; set; }
+        public virtual Category DefaultCategory { get; set; }
 
         public long? DefaultCategoryId { get; set; }
 

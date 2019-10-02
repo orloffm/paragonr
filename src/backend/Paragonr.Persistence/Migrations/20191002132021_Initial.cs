@@ -8,6 +8,9 @@ namespace Paragonr.Persistence.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:PostgresExtension:uuid-ossp", ",,");
+
             migrationBuilder.CreateTable(
                 name: "Budgets",
                 columns: table => new
@@ -119,7 +122,7 @@ namespace Paragonr.Persistence.Migrations
                     BudgetId = table.Column<long>(nullable: false),
                     DefaultCategoryId = table.Column<long>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "uuid_generate_v1()")
+                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "uuid_generate_v4()")
                 },
                 constraints: table =>
                 {
@@ -140,7 +143,7 @@ namespace Paragonr.Persistence.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FieldId = table.Column<long>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "uuid_generate_v1()")
+                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "uuid_generate_v4()")
                 },
                 constraints: table =>
                 {
@@ -164,7 +167,7 @@ namespace Paragonr.Persistence.Migrations
                     CurrencyId = table.Column<long>(nullable: true),
                     BudgetId = table.Column<long>(nullable: true),
                     AddedById = table.Column<long>(nullable: false),
-                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "uuid_generate_v1()"),
+                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     Note = table.Column<string>(nullable: true),
                     Place = table.Column<string>(nullable: true)
                 },

@@ -7,7 +7,7 @@ namespace Paragonr.Persistence.Helpers
 {
     public static class RefKeyEnabledEntityConfigurationHelper
     {
-        private const string PostgreSqlNewIdFunctionCall = "uuid_generate_v1()";
+        private const string PostgreSqlNewIdFunctionCall = "uuid_generate_v4()";
 
         public static void ConfigureKey<T>(EntityTypeBuilder<T> builder) where T : EntityBase, IRefKeyEnabledEntity
         {

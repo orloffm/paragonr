@@ -30,6 +30,8 @@ namespace Paragonr.Persistence
             }
 
             AddDomainsAndCategories(context, budget);
+
+            AddUsers(context, budget);
         }
 
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
@@ -83,8 +85,6 @@ namespace Paragonr.Persistence
             AddDomains(context, orlovBudget, domainsAndCategories);
 
             AddCategories(context, orlovBudget, domainsAndCategories);
-
-            AddUsers(context, orlovBudget);
         }
 
         private static void AddUsers(BudgetDbContext context, Budget orlovBudget)
@@ -104,7 +104,7 @@ namespace Paragonr.Persistence
                     LastName = lastName,
                     Email = email,
                     Username = login,
-                    PasswordHash = Encoding.UTF8.GetBytes(password),
+                    PasswordHash = password != null ? Encoding.UTF8.GetBytes(password) : null,
                     PasswordSalt = null
                 };
 
@@ -117,12 +117,11 @@ namespace Paragonr.Persistence
 
                 context.Users.Add(user);
                 context.Memberships.Add(membership);
+                context.SaveChanges();
             }
 
             AddUser("Mikhail", "Orlov", "orloffm@gmail.com", "orloffm", null);
             AddUser("Ekaterina", "Orlova", "egogotha@gmail.com", "egogotha", null);
-
-            context.SaveChanges();
         }
 
         private static void AddCategories(BudgetDbContext context, Budget orlovBudget, Dictionary<string, string[]> domainsAndCategories)
