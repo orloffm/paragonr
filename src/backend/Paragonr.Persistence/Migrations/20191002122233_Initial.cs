@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Paragonr.Persistence.Migrations
 {
@@ -12,7 +13,7 @@ namespace Paragonr.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -25,7 +26,7 @@ namespace Paragonr.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IsoCode = table.Column<string>(maxLength: 3, nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Symbol = table.Column<string>(maxLength: 3, nullable: false)
@@ -40,7 +41,7 @@ namespace Paragonr.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Username = table.Column<string>(nullable: true),
@@ -59,7 +60,7 @@ namespace Paragonr.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BaseId = table.Column<long>(nullable: false),
                     Date = table.Column<DateTime>(type: "Date", nullable: false),
                     Rate = table.Column<decimal>(type: "decimal(19, 6)", nullable: false),
@@ -114,11 +115,11 @@ namespace Paragonr.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BudgetId = table.Column<long>(nullable: false),
                     DefaultCategoryId = table.Column<long>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()")
+                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "uuid_generate_v1()")
                 },
                 constraints: table =>
                 {
@@ -136,10 +137,10 @@ namespace Paragonr.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FieldId = table.Column<long>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()")
+                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "uuid_generate_v1()")
                 },
                 constraints: table =>
                 {
@@ -157,13 +158,13 @@ namespace Paragonr.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Amount = table.Column<decimal>(type: "decimal(19, 6)", nullable: false),
                     CategoryId = table.Column<long>(nullable: true),
                     CurrencyId = table.Column<long>(nullable: true),
                     BudgetId = table.Column<long>(nullable: true),
                     AddedById = table.Column<long>(nullable: false),
-                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
+                    RefKey = table.Column<Guid>(nullable: false, defaultValueSql: "uuid_generate_v1()"),
                     Note = table.Column<string>(nullable: true),
                     Place = table.Column<string>(nullable: true)
                 },
@@ -226,8 +227,7 @@ namespace Paragonr.Persistence.Migrations
                 name: "IX_Fields_DefaultCategoryId",
                 table: "Fields",
                 column: "DefaultCategoryId",
-                unique: true,
-                filter: "[DefaultCategoryId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fields_RefKey",

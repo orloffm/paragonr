@@ -99,10 +99,7 @@ namespace Paragonr.WebApi
             // Database.
             var connectionString = Configuration.GetConnectionString(ParagonrDatabaseConfigurationKey);
             services.AddDbContext<BudgetDbContext>(
-                options => options.UseSqlServer(
-                    connectionString,
-                    sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()
-                )
+                options => options.UseNpgsql(connectionString)
             );
             services.AddScoped<IBudgetDbContext>(provider => provider.GetService<BudgetDbContext>());
 
