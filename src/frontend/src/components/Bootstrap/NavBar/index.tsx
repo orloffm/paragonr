@@ -22,7 +22,11 @@ export class NavBar extends React.Component<NavBarProps> {
           <ul className="navbar-nav mr-auto">
             {this.props.items.map(item => (
               <li className="nav-item">
-                <NavLink to={"/" + item.url} className="nav-link">
+                <NavLink
+                  to={"/" + item.url}
+                  key={item.title}
+                  className="nav-link"
+                >
                   {item.title}
                 </NavLink>
               </li>
