@@ -10,6 +10,7 @@ interface AppProps {
 }
 
 const navBarItems: NavBarItem[] = [
+  { url: "login", title: "Login" },
   { url: "spendings", title: "Spendings" },
   { url: "currencies", title: "Currencies" },
   { url: "categories", title: "Categories" }
