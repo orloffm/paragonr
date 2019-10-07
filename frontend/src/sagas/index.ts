@@ -1,47 +1,11 @@
-import {
-  put,
-  takeEvery,
-  all
-  // , call
-} from "redux-saga/effects";
-import { submitLoginAsync, SUBMIT_LOGIN_REQUEST } from "../actions/login/types";
+import { fork, call } from "redux-saga/effects";
+import { rootLoginSaga } from "./login";
 
-function* helloSaga() {
-  console.log("Hello Sagas!");
-}
-
-// function* incrementAsync() {
-//   try {
-//     yield call(delay, 1000);
-//     yield put({ type: "INCREMENT" });
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
-
-// function* watchIncrementAsync() {
-//   yield takeEvery("INCREMENT_ASYNC", incrementAsync);
-// }
-
-function* submitLoginRequestSaga(
-  action: ReturnType<typeof submitLoginAsync.request>
-): Generator {
-  console.log("SUBMIT_LOGIN_REQUEST runs.");
-
-  try {
-    // const response: Todo[] = yield call(todosApi.getAll, action.payload);
-
-    yield put(submitLoginAsync.success());
-  } catch (err) {
-    yield put(submitLoginAsync.failure(err));
-  }
+function helloSaga() {
+  console.debug("Hello Sagas!");
 }
 
 export function* rootSaga() {
-  yield all([
-    helloSaga()
-    //  , watchIncrementAsync()
-  ]);
-
-  yield takeEvery(SUBMIT_LOGIN_REQUEST, submitLoginRequestSaga);
+  yield call(helloSaga);
+  yield fork(rootLoginSaga);
 }

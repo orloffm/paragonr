@@ -46,9 +46,13 @@ class LoginForm extends React.Component<LoginFormProps> {
                 <div>{errors.password}</div>
               )}
 
-              <button type="submit" disabled={this.props.isSubmitInProgress}>
-                Submit
-              </button>
+              {this.props.isSubmitInProgress && <div>running</div>}
+
+              {!this.props.isSubmitInProgress && (
+                <button type="submit" disabled={this.props.isSubmitInProgress}>
+                  Submit
+                </button>
+              )}
             </Form>
           );
         }}
