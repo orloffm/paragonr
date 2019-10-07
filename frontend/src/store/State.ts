@@ -1,6 +1,7 @@
 import { RouterState } from "connected-react-router";
+import { LoginState } from "./LoginState";
 
-export type State = {
-  // readonly count: number;
+export interface State {
+  login: LoginState;
   router: RouterState;
-};
+}

@@ -1,12 +1,12 @@
 import * as React from "react";
-import { Component } from "react";
+import LoginForm from "../../components/LoginForm";
 
-export interface LoginProps {}
+export interface LoginPageProps {}
 
-export interface LoginState {}
+export interface LoginPageState {}
 
-export class Login extends React.Component<LoginProps, LoginState> {
+export class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
   render() {
-    return "Login.";
+    return <LoginForm />;
   }
 }

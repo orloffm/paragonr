@@ -1,5 +1,5 @@
 import { ActionType } from "typesafe-actions";
 
-import * as todos from "./types";
+import * as loginActions from "./types";
 
-export type AllCountActions = ActionType<typeof todos>;
+export type AllLoginActions = ActionType<typeof loginActions>;

@@ -1,9 +1,16 @@
-import { createStandardAction } from "typesafe-actions";
+import { createAsyncAction } from "typesafe-actions";
 
-const INCREMENT = "INCREMENT";
-const DECREMENT = "DECREMENT";
-const RESET = "RESET";
+export const SUBMIT_LOGIN_REQUEST = "SUBMIT_LOGIN_REQUEST";
+export const SUBMIT_LOGIN_SUCCESS = "SUBMIT_LOGIN_SUCCESS";
+export const SUBMIT_LOGIN_FAILURE = "SUBMIT_LOGIN_FAILURE";
 
-export const increment = createStandardAction(INCREMENT)();
-export const decrement = createStandardAction(DECREMENT)();
-export const reset = createStandardAction(RESET)();
+export interface SubmitLoginPayload {
+  username: string;
+  password: string;
+}
+
+export const submitLoginAsync = createAsyncAction(
+  SUBMIT_LOGIN_REQUEST,
+  SUBMIT_LOGIN_SUCCESS,
+  SUBMIT_LOGIN_FAILURE
+)<SubmitLoginPayload, undefined, Error>();
