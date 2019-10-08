@@ -6,7 +6,7 @@ using Paragonr.Domain.Entities;
 
 namespace Paragonr.Application.Auth.Commands.Login
 {
-    public sealed class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResult>
+    public sealed class LoginCommandHandler : IRequestHandler<LoginCommand, LoginCommandResult>
     {
         private readonly IAuthTokenGenerator _authTokenGenerator;
         private readonly IRoleService _roleService;
@@ -19,14 +19,14 @@ namespace Paragonr.Application.Auth.Commands.Login
             _userAuthService = userAuthService;
         }
 
-        public async Task<LoginResult> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<LoginCommandResult> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             User user = await _userAuthService.AuthenticateOrFail(request.UserQuery, request.Password);
 
             var role = _roleService.GetRoleByAdminStatus(user.IsAdmin);
             var token = _authTokenGenerator.GenerateToken(user.Id, role);
 
-            return new LoginResult
+            return new LoginCommandResult
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,

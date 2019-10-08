@@ -2,6 +2,7 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Paragonr.Application.Common;
 using Paragonr.Domain.Exceptions;
 
 namespace Paragonr.WebApi.Common.Middleware
@@ -29,17 +30,17 @@ namespace Paragonr.WebApi.Common.Middleware
 
         private Task HandleExceptionAsync(HttpContext context, AppException exception)
         {
-            HttpStatusCode code ;
+            HttpStatusCode code;
             switch (exception)
             {
+                case NoUserAuthenticatedException _:
+                    code = HttpStatusCode.Unauthorized;
+                    break;
+
                 case IncorrectPasswordException _:
                 case MustBeAdminException _:
                 case NoProperPasswordProvidedException _:
-                case NoUserAuthenticatedException _:
                 case UserNotFoundException _:
-                    code = HttpStatusCode.Unauthorized;
-                    break;
-                
                 default:
                     code = HttpStatusCode.BadRequest;
                     break;
@@ -47,9 +48,14 @@ namespace Paragonr.WebApi.Common.Middleware
 
             context.Response.Clear();
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode =(int) code;
+            context.Response.StatusCode = (int)code;
 
-             var   result = JsonSerializer.Serialize(new { error = exception.Message });
+            var result = JsonSerializer.Serialize(
+                new ErrorResult
+                {
+                    Message = exception.Message
+                }
+            );
 
             return context.Response.WriteAsync(result);
         }

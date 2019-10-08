@@ -1,9 +1,9 @@
 import * as React from "react";
 import CurrenciesTable from "./table";
-import { CurrencyDto } from "../../dtos/CurrencyDto";
-import { CurrentRatesInfoDto } from "../../dtos/CurrentRatesInfoDto";
+import { CurrencyDto } from "../../client/dtos/CurrencyDto";
+import { CurrentRatesInfoDto } from "../../client/dtos/CurrentRatesInfoDto";
 import { CurrencyRow } from "./CurrencyRow";
-import { CurrencyRateInfoDto } from "../../dtos/CurrencyRateInfoDto";
+import { CurrencyRateInfoDto } from "../../client/dtos/CurrencyRateInfoDto";
 
 export interface CurrenciesProps {
   currencies: CurrencyDto[];

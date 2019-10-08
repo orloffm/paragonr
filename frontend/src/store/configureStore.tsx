@@ -7,7 +7,7 @@ import {
   Middleware
 } from "redux";
 import { routerMiddleware } from "connected-react-router";
-import createRootReducer from "../reducers";
+import { createRootReducer } from "../reducers";
 import { State } from "./State";
 
 export const history = createBrowserHistory();

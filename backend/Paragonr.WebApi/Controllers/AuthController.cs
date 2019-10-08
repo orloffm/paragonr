@@ -10,9 +10,9 @@ namespace Paragonr.WebApi.Controllers
     {
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginCommand command)
+        public async Task<ActionResult<LoginCommandResult>> Login([FromBody] LoginCommand command)
         {
-            var loginResponse = await Mediator.Send(command);
+            LoginCommandResult loginResponse = await Mediator.Send(command);
 
             if (loginResponse == null)
             {

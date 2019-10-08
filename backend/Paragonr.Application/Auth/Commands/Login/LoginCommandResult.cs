@@ -1,6 +1,6 @@
 ﻿namespace Paragonr.Application.Auth.Commands.Login
 {
-    public sealed class LoginResult
+    public sealed class LoginCommandResult
     {
         public string Email { get; set; }
 

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { DomainDto } from "../../dtos/DomainDto";
-import { CategoryDto } from "../../dtos/CategoryDto";
+import { DomainDto } from "../../client/dtos/DomainDto";
+import { CategoryDto } from "../../client/dtos/CategoryDto";
 import { CategoryRow } from "./CategoryRow";
 import CategoriesTable from "./table";
 

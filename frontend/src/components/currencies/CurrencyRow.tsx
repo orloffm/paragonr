@@ -1,4 +1,4 @@
-import { CurrencyDto } from "../../dtos/CurrencyDto";
+import { CurrencyDto } from "../../client/dtos/CurrencyDto";
 import { RowInfo } from "../common/Table/RowInfo";
 
 export class CurrencyRow implements RowInfo {
