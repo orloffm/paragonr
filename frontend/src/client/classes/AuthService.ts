@@ -8,18 +8,11 @@ export class AuthService {
     const requestOptions: RequestInit = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ input })
+      body: JSON.stringify({ input }),
     };
 
-    return fetch(`${ConfigValue.baseApiUrl}/auth/login`, requestOptions)
-      .then(response => handleResponse<LoginCommandResultDto>(response))
-      .then(user => {
-        // store user details and jwt token in local storage to keep
-        // user logged in between page refreshes
-        // localStorage.setItem('currentUser', JSON.stringify(user));
-        // currentUserSubject.next(user);
-
-        return user;
-      });
+    return fetch(`${ConfigValue.baseApiUrl}/auth/login`, requestOptions).then(response =>
+      handleResponse<LoginCommandResultDto>(response)
+    );
   }
 }

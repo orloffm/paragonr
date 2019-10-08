@@ -7,7 +7,7 @@ import { loginReducer } from "./loginReducer";
 const createRootReducer = (history: History) =>
   combineReducers<State, any>({
     login: loginReducer,
-    router: connectRouter(history)
+    router: connectRouter(history),
   });
 
 export { createRootReducer };

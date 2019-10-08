@@ -6,20 +6,17 @@ import { submitLoginAsync } from "../actions/login/types";
 
 const initialState: LoginState = {
   isLoggedIn: false,
-  isSubmitInProgress: false
+  isSubmitInProgress: false,
 };
 
-function loginReducer(
-  state = initialState,
-  action: AllLoginActions
-): LoginState {
+function loginReducer(state = initialState, action: AllLoginActions): LoginState {
   switch (action.type) {
     case getType(submitLoginAsync.request):
       console.debug("Processing submitLoginAsync.request.");
       return {
         ...state,
         isLoggedIn: false,
-        isSubmitInProgress: true
+        isSubmitInProgress: true,
       };
 
     case getType(submitLoginAsync.success):
@@ -27,7 +24,7 @@ function loginReducer(
       return {
         ...state,
         isLoggedIn: true,
-        isSubmitInProgress: false
+        isSubmitInProgress: false,
       };
 
     case getType(submitLoginAsync.failure):
@@ -35,7 +32,7 @@ function loginReducer(
       return {
         ...state,
         isLoggedIn: false,
-        isSubmitInProgress: false
+        isSubmitInProgress: false,
       };
 
     default:

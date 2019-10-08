@@ -1,8 +1,5 @@
 import { put, delay, takeEvery, call } from "redux-saga/effects";
-import {
-  submitLoginAsync,
-  SUBMIT_LOGIN_REQUEST
-} from "../../actions/login/types";
+import { submitLoginAsync, SUBMIT_LOGIN_REQUEST } from "../../actions/login/types";
 import { SubmitLoginPayload } from "../../actions/login/SubmitLoginPayload";
 import { LoginCommandResultDto } from "../../client/dtos/commands/LoginCommandResultDto";
 import { AuthService } from "../../client/classes/AuthService";
@@ -20,7 +17,7 @@ function* submitLoginRequestSaga(
     const authService = new AuthService();
     const input: LoginCommandDto = {
       userName: action.payload.username,
-      password: action.payload.password
+      password: action.payload.password,
     };
 
     const responseDto = yield call(authService.performLogin, input);

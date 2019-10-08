@@ -1,11 +1,5 @@
 import { createBrowserHistory } from "history";
-import {
-  applyMiddleware,
-  compose,
-  createStore,
-  DeepPartial,
-  Middleware
-} from "redux";
+import { applyMiddleware, compose, createStore, DeepPartial, Middleware } from "redux";
 import { routerMiddleware } from "connected-react-router";
 import { createRootReducer } from "../reducers";
 import { State } from "./State";
