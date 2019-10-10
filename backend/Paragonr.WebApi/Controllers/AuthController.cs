@@ -6,7 +6,7 @@ using Paragonr.Application.Auth.Commands.Login;
 namespace Paragonr.WebApi.Controllers
 {
     [Authorize]
-    public class AuthController : BaseController
+    public sealed class AuthController : BaseController
     {
         [AllowAnonymous]
         [HttpPost]

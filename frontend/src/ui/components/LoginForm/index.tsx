@@ -23,10 +23,10 @@ function mapDispatchToProps(dispatch: Redux.Dispatch<Action>): DispatchProps {
   return {
     performLogin: (values: LoginFormValues) => {
       const payload: SubmitLoginPayload = {
-        username: values.username,
+        userQuery: values.username,
         password: values.password
       };
-      dispatch(submitLoginAsync.request(values));
+      dispatch(submitLoginAsync.request(payload));
     }
   };
 }

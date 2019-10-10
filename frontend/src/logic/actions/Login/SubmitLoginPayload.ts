@@ -1,4 +1,4 @@
 export interface SubmitLoginPayload {
-  username: string;
+  userQuery: string;
   password: string;
 }

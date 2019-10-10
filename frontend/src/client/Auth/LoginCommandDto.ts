@@ -1,4 +1,4 @@
 export interface LoginCommandDto {
-  userName: string;
+  userQuery: string;
   password: string;
 }

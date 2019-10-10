@@ -1,5 +1,5 @@
-import { CategoryDto } from "../../client/dtos/CategoryDto";
 import { RowInfo } from "../common/Table/RowInfo";
+import { CategoryDto } from "../../../client/dtos/CategoryDto";
 
 export class CategoryRow implements RowInfo {
   constructor(cd: CategoryDto) {

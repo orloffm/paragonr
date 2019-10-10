@@ -1,4 +1,4 @@
-import { createStandardAction } from "./node_modules/typesafe-actions";
+import { createStandardAction } from "typesafe-actions";
 import { AuthSetPayload } from "./AuthSetPayload";
 
 export const AUTH_SET = "AUTH_SET";

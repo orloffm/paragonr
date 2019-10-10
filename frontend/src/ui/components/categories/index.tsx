@@ -1,8 +1,8 @@
 import * as React from "react";
-import { DomainDto } from "../../client/dtos/DomainDto";
-import { CategoryDto } from "../../client/dtos/CategoryDto";
 import { CategoryRow } from "./CategoryRow";
 import CategoriesTable from "./table";
+import { CategoryDto } from "../../../client/dtos/CategoryDto";
+import { DomainDto } from "../../../client/dtos/DomainDto";
 
 export interface CategoriesProps {
   categories: CategoryDto[];
@@ -11,10 +11,7 @@ export interface CategoriesProps {
 
 export interface CategoriesState {}
 
-export class Categories extends React.Component<
-  CategoriesProps,
-  CategoriesState
-> {
+export class Categories extends React.Component<CategoriesProps, CategoriesState> {
   render() {
     let rows: Array<CategoryRow> = [];
 

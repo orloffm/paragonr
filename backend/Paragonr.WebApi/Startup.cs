@@ -59,6 +59,11 @@ namespace Paragonr.WebApi
 
             app.UseRouting();
 
+            app.UseCors(x => x
+               .AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
+
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -66,11 +71,6 @@ namespace Paragonr.WebApi
             {
                 endpoints.MapControllers();
             });
-
-            //  app.UseCors(x => x
-            //     .AllowAnyOrigin()
-            //     .AllowAnyMethod()
-            //     .AllowAnyHeader());
 
             //  app.UseHttpsRedirection();
         }
@@ -132,6 +132,7 @@ namespace Paragonr.WebApi
             builder.Populate(services);
             builder.RegisterAssemblyTypes(typeof(RateProvider).Assembly).AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(typeof(EntityBaseDto).Assembly).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(typeof(Startup).Assembly).AsImplementedInterfaces();
             IContainer container = builder.Build();
 
             var provider = new AutofacServiceProvider(container);
