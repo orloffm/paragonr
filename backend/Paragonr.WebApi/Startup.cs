@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Paragonr.Application.Common.Mapping;
 using Paragonr.Application.Services;
@@ -44,6 +45,7 @@ namespace Paragonr.WebApi
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                IdentityModelEventSource.ShowPII = true;
                 //     app.UseDatabaseErrorPage();
             }
 
@@ -78,7 +80,7 @@ namespace Paragonr.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            // services.AddCors();
+            services.AddCors();
 
             services.AddMvc()
                 .AddControllersAsServices()
