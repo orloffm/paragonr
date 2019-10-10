@@ -1,0 +1,5 @@
+{
+    "prettier.printWidth": 92,
+    "editor.formatOnSave": true,
+    "editor.codeLens": false
+}

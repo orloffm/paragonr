@@ -6,12 +6,16 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import App from "./App";
 // import * as serviceWorker from "./serviceWorker";
-import configureStore, { history } from "./store/configureStore";
-import { rootSaga } from "./sagas";
+import configureStore, { history } from "./logic/state/configureStore";
+import { rootSaga } from "./logic/sagas";
+import { State } from "./logic/state/State";
+import { DeepPartial } from "redux";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = configureStore(sagaMiddleware);
+let preloadedState: DeepPartial<State> = {};
+
+const store = configureStore(sagaMiddleware, preloadedState);
 
 sagaMiddleware.run(rootSaga);
 

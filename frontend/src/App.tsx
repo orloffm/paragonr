@@ -1,9 +1,9 @@
 import React from "react";
 import { ConnectedRouter } from "connected-react-router";
 import { History } from "history";
-import routes from "./routes";
+import routes from "./ui/routes";
 
-import { NavBar, NavBarItem } from "./components/Bootstrap/NavBar";
+import { NavBar, NavBarItem } from "./ui/components/Bootstrap/NavBar";
 
 interface AppProps {
   history: History;

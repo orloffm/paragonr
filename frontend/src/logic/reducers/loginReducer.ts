@@ -1,11 +1,10 @@
 import { getType } from "typesafe-actions";
 
-import { AllLoginActions } from "../actions/login";
-import { LoginState } from "../store/LoginState";
-import { submitLoginAsync } from "../actions/login/types";
+import { AllLoginActions } from "../actions/Login";
+import { LoginState } from "../state/slices/LoginState";
+import { submitLoginAsync } from "../actions/Login/types";
 
 const initialState: LoginState = {
-  isLoggedIn: false,
   isSubmitInProgress: false,
 };
 
@@ -15,7 +14,6 @@ function loginReducer(state = initialState, action: AllLoginActions): LoginState
       console.debug("Processing submitLoginAsync.request.");
       return {
         ...state,
-        isLoggedIn: false,
         isSubmitInProgress: true,
       };
 
@@ -23,7 +21,6 @@ function loginReducer(state = initialState, action: AllLoginActions): LoginState
       console.debug("Processing submitLoginAsync.success.");
       return {
         ...state,
-        isLoggedIn: true,
         isSubmitInProgress: false,
       };
 
@@ -31,7 +28,6 @@ function loginReducer(state = initialState, action: AllLoginActions): LoginState
       console.debug("Processing submitLoginAsync.failure.");
       return {
         ...state,
-        isLoggedIn: false,
         isSubmitInProgress: false,
       };
 

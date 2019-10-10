@@ -1,4 +1,4 @@
-import { createAsyncAction } from "typesafe-actions";
+import { createAsyncAction } from "./node_modules/typesafe-actions";
 import { SubmitLoginPayload } from "./SubmitLoginPayload";
 import { SubmitLoginResponse } from "./SubmitLoginResponse";
 

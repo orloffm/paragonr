@@ -1,4 +1,4 @@
-import { ErrorResultDto } from "../dtos/commands/ErrorResultDto";
+import { ErrorResultDto } from "./ErrorResultDto";
 
 export function handleResponse<T>(response: Response): Promise<T> {
   return response.text().then(text => {
