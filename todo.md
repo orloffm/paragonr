@@ -1,11 +1,12 @@
 # TODO
 
-- Use new EF ownership for the structure.
-- Sagas to consume login sequence.
+- Change password field.
+- Show error message from server.
+- Get list of spendings.
+- Add spending for given category.
 
 ## Later
 
-- R#: don't auto-remove redundant parentheses.
 - NSwag
 - AddFluentValidation
 
