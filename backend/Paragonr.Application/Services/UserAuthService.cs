@@ -34,24 +34,33 @@ namespace Paragonr.Application.Services
 
             // Can the current user manipulate it?
             var currentUserId = _currentUserService.GetCurrentUserId();
-            if (currentUserId == user.Id)
+            if (currentUserId != user.Id)
             {
-                var matches = _passService.VerifyPasswordHash(requestOldPassword, user.PasswordHash, user.PasswordSalt);
-                if (!matches)
-                {
-                    throw new IncorrectPasswordException();
-                }
-            }
-            else
-            {
-                var isAdmin = await _context.Users.GetPropertyByIdOrNull(currentUserId, u => u.IsAdmin) ?? false;
+                bool isAdmin = await CheckIsAdmin(currentUserId);
                 if (!isAdmin)
                 {
                     throw new MustBeAdminException();
                 }
             }
+            else
+            {
+                var matches = _passService.VerifyPasswordHash(requestOldPassword, user.PasswordHash, user.PasswordSalt);
+                if (!matches)
+                {
+                    bool isAdmin = await CheckIsAdmin(currentUserId);
+                    if (!isAdmin)
+                    {
+                        throw new IncorrectPasswordException();
+                    }
+                }
+            }
 
             return user;
+        }
+
+        private async Task<bool> CheckIsAdmin(long currentUserId)
+        {
+            return await _context.Users.GetPropertyByIdOrNull(currentUserId, u => u.IsAdmin) ?? false;
         }
 
         public async Task<User> AuthenticateOrFail(string userQuery, string password)

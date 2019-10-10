@@ -1,4 +1,4 @@
-import { ActionType } from "./node_modules/typesafe-actions";
+import { ActionType } from "typesafe-actions";
 
 import * as loginActions from "./types";
 
