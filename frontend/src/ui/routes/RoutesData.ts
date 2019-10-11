@@ -27,7 +27,7 @@ export interface RouteData {
 export const AppRoutes: RoutesData = {
   notFoundKey: "not-found",
   loginKey: "login",
-  homeKey: "home",
+  homeKey: "",
   homeComponent: Home,
   notFoundComponent: NotFound,
   routes: [

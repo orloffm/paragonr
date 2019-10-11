@@ -1,27 +1,40 @@
-import React from "react";
-import { Route, Redirect, RouteProps } from "react-router-dom";
+import { connect } from "react-redux";
 
-export interface PrivateRouteProps extends RouteProps {
-  // TODO: connect isLoggedIn: boolean;
+import { State } from "../../../logic/state/State";
+import { RouteProps } from "react-router-dom";
+import { PrivateRoutePlain, PrivateRoutePlainProps } from "./plain";
+
+export interface PrivateRouteWrapperProps extends RouteProps {
+  loginPath: string;
 }
 
-class PrivateRoute extends React.Component<PrivateRouteProps> {
-  render() {
-    const currentUser = false; // this.props.isLoggedIn; // authenticationService.currentUserValue;
-    if (!currentUser) {
-      // not logged in so redirect to login page with the return url
-      return <Redirect to={{ pathname: "/login", state: { from: this.props.location } }} />;
-    }
-
-    // check if route is restricted by role
-    // if (roles && roles.indexOf(currentUser.role) === -1) {
-    //     // role not authorised so redirect to home page
-    //     return <Redirect to={{ pathname: '/'}} />
-    // }
-
-    // authorised so return component
-    return <Route {...this.props} />;
-  }
+interface StoreProps {
+  isLoggedIn: boolean;
 }
 
-export { PrivateRoute };
+function mapStateToProps(state: State): StoreProps {
+  return { isLoggedIn: state.auth.isLoggedIn };
+}
+
+function mergeProps(
+  stateProps: StoreProps,
+  _: undefined,
+  ownProps: PrivateRouteWrapperProps
+): PrivateRoutePlainProps {
+  return {
+    ...stateProps,
+    ...ownProps
+  };
+}
+
+export default connect<
+  StoreProps,
+  {},
+  PrivateRouteWrapperProps,
+  PrivateRoutePlainProps,
+  State
+>(
+  mapStateToProps,
+  undefined,
+  mergeProps
+)(PrivateRoutePlain);
