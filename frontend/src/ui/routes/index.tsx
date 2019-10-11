@@ -18,7 +18,7 @@ function getPath(key: string): string {
   return "/" + key;
 }
 
-export function getRoutes() {
+export function getRouteDatas() {
   const rr = AppRoutes;
 
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { ConnectedRouter } from "connected-react-router";
 import { History } from "history";
-import { getRoutes } from "./ui/routes";
+import { getRouteDatas } from "./ui/routes";
 
 import { NavBar, NavBarItem } from "./ui/components/Bootstrap/NavBar";
 
@@ -16,7 +16,7 @@ const navBarItems: NavBarItem[] = [
   { url: "categories", title: "Categories" }
 ];
 
-const routes = getRoutes();
+const routes = getRouteDatas();
 
 const App: React.FC<AppProps> = props => (
   <ConnectedRouter history={props.history}>
