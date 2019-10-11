@@ -3,11 +3,12 @@ import { Route, Switch, Redirect } from "react-router";
 
 import { RouteData, AppRoutes } from "./RoutesData";
 import PrivateRoute from "../components/PrivateRoute";
+import { getPath } from "./getPath";
 
 function renderRouteData(r: RouteData, loginKey: string): JSX.Element {
   const path = getPath(r.key);
 
-  if (r.public) {
+  if (r.allowAnonymous) {
     return <Route path={path} key={r.key} component={r.component} />;
   } else {
     return (
@@ -19,10 +20,6 @@ function renderRouteData(r: RouteData, loginKey: string): JSX.Element {
       />
     );
   }
-}
-
-function getPath(key: string): string {
-  return "/" + key;
 }
 
 export function renderRouteDatas() {

@@ -1,35 +1,35 @@
-import * as React from "react";
-import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
-export interface NavBarProps {
-  items: NavBarItem[];
+import { State } from "../../../../logic/state/State";
+import { RouteProps } from "react-router-dom";
+import { NavBarPlain, NavBarPlainProps } from "./plain";
+import { RouteData } from "../../../routes/RoutesData";
+
+export interface NavBarWrapperProps extends RouteProps {
+  routes: RouteData[];
 }
 
-export interface NavBarItem {
-  url: string;
-  title: string;
+interface StoreProps {
+  isLoggedIn: boolean;
 }
 
-export class NavBar extends React.Component<NavBarProps> {
-  render() {
-    return (
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <NavLink to="/" className="navbar-brand" exact>
-          Paragonr
-        </NavLink>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            {this.props.items.map(item => (
-              <li className="nav-item" key={item.title}>
-                <NavLink to={"/" + item.url} className="nav-link">
-                  {item.title}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
-    );
-  }
+function mapStateToProps(state: State): StoreProps {
+  return { isLoggedIn: state.auth.isLoggedIn };
 }
+
+function mergeProps(
+  stateProps: StoreProps,
+  _: undefined,
+  ownProps: NavBarWrapperProps
+): NavBarPlainProps {
+  return {
+    ...stateProps,
+    ...ownProps
+  };
+}
+
+export default connect<StoreProps, {}, NavBarWrapperProps, NavBarPlainProps, State>(
+  mapStateToProps,
+  undefined,
+  mergeProps
+)(NavBarPlain);

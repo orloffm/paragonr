@@ -21,7 +21,9 @@ export interface RouteData {
   component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
   key: string;
   exact?: boolean;
-  public?: boolean;
+  title: string;
+  allowAnonymous?: boolean;
+  onlyAnonymous?: boolean;
 }
 
 export const AppRoutes: RoutesData = {
@@ -33,19 +35,24 @@ export const AppRoutes: RoutesData = {
   routes: [
     {
       key: "login",
+      title: "Login",
       component: LoginPage,
-      public: true
+      allowAnonymous: true,
+      onlyAnonymous: true
     },
     {
       key: "currencies",
+      title: "Currencies",
       component: Currencies
     },
     {
       key: "categories",
+      title: "Categories",
       component: Categories
     },
     {
       key: "spendings",
+      title: "Spendings",
       component: Spendings
     }
   ]
