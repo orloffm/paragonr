@@ -1,3 +1,4 @@
+import { push } from "connected-react-router";
 import { put, delay, takeEvery, call } from "redux-saga/effects";
 import { AuthService } from "../../../client/Auth/AuthService";
 import { LoginCommandDto } from "../../../client/Auth/LoginCommandDto";
@@ -6,6 +7,8 @@ import { LoginCommandResultDto } from "../../../client/Auth/LoginCommandResultDt
 
 import { authSet, authClear } from "../../actions/Auth/types";
 import { submitLoginAsync, SUBMIT_LOGIN_REQUEST } from "../../actions/Login/types";
+import { AppRoutes } from "../../../ui/routes/RoutesData";
+import { getPath } from "../../../ui/routes/getPath";
 
 function* submitLoginRequestSaga(
   action: ReturnType<typeof submitLoginAsync.request>
@@ -38,6 +41,10 @@ function* submitLoginRequestSaga(
 
     console.debug("submitLoginRequestSaga runs: putting submitLoginAsync.success.");
     yield put(submitLoginAsync.success());
+
+    console.debug("submitLoginRequestSaga runs: navigate home.");
+    const homeUrl = getPath(AppRoutes.homeKey);
+    yield put(push(homeUrl));
   } catch (err) {
     console.debug("submitLoginRequestSaga runs: putting authClear.");
     yield put(authClear());

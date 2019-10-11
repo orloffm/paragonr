@@ -3,7 +3,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { History } from "history";
 import { renderRouteDatas } from "./ui/routes";
 
-import NavBar from "./ui/components/Bootstrap/NavBar/";
+import NavBar from "./ui/components/NavBar";
 import { AppRoutes } from "./ui/routes/RoutesData";
 
 interface AppProps {

@@ -1,7 +1,8 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
-import { RouteData } from "../../../routes/RoutesData";
-import { getPath } from "../../../routes/getPath";
+import { RouteData } from "../../routes/RoutesData";
+import { getPath } from "../../routes/getPath";
+import AuthStatus from "./AuthStatus";
 
 export interface NavBarPlainProps {
   isLoggedIn: boolean;
@@ -21,6 +22,8 @@ export class NavBarPlain extends React.Component<NavBarPlainProps> {
             {this.props.routes.map(item => this.renderNavItem(item))}
           </ul>
         </div>
+
+        <AuthStatus />
       </nav>
     );
   }

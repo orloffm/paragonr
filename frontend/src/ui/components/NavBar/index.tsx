@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 
-import { State } from "../../../../logic/state/State";
+import { State } from "../../../logic/state/State";
 import { RouteProps } from "react-router-dom";
 import { NavBarPlain, NavBarPlainProps } from "./plain";
-import { RouteData } from "../../../routes/RoutesData";
+import { RouteData } from "../../routes/RoutesData";
 
 export interface NavBarWrapperProps extends RouteProps {
   routes: RouteData[];

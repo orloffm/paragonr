@@ -1,5 +1,6 @@
 import { Formik, Form, FormikProps, Field, FormikActions } from "formik";
-import React from "react";
+import React, { Fragment } from "react";
+import ErrorAlert from "../Bootstrap/ErrorAlert";
 
 export interface LoginFormValues {
   username: string;
@@ -13,6 +14,7 @@ const initialValues: LoginFormValues = {
 
 export interface LoginFormProps {
   isSubmitInProgress?: boolean;
+  errorMessage?: string | null;
   performLogin: (values: LoginFormValues) => void;
 }
 
@@ -28,21 +30,28 @@ export class LoginForm extends React.Component<LoginFormProps> {
           const { touched, errors } = formikBag;
 
           return (
-            <Form>
-              <Field type="username" name="username" />
-              {touched.username && errors.username && <div>{errors.username}</div>}
+            <Fragment>
+              <Form>
+                <Field type="username" name="username" />
+                {touched.username && errors.username && (
+                  <ErrorAlert>{errors.password}</ErrorAlert>
+                )}
 
-              <Field type="password" name="password" />
-              {touched.password && errors.password && <div>{errors.password}</div>}
+                <Field type="password" name="password" />
+                {touched.password && errors.password && (
+                  <ErrorAlert>{errors.password}</ErrorAlert>
+                )}
 
-              {this.props.isSubmitInProgress && <div>running</div>}
+                {this.props.isSubmitInProgress && <div>running</div>}
 
-              {!this.props.isSubmitInProgress && (
-                <button type="submit" disabled={this.props.isSubmitInProgress}>
-                  Submit
-                </button>
-              )}
-            </Form>
+                {!this.props.isSubmitInProgress && (
+                  <button type="submit" disabled={this.props.isSubmitInProgress}>
+                    Submit
+                  </button>
+                )}
+              </Form>
+              {this.props.errorMessage && <ErrorAlert>{errors.password}</ErrorAlert>}
+            </Fragment>
           );
         }}
       />

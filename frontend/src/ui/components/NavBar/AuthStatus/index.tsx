@@ -1,9 +1,9 @@
 import Redux, { Action } from "redux";
 import { connect } from "react-redux";
 
-import { State } from "../../../logic/state/State";
-import { authClear } from "../../../logic/actions/Auth/types";
-import { AuthStatusProps, AuthStatus } from "./plain";
+import { State } from "../../../../logic/state/State";
+import { authClear } from "../../../../logic/actions/Auth/types";
+import { AuthStatusPlainProps, AuthStatusPlain } from "./plain";
 
 export interface AuthStatusWrapperProps {}
 
@@ -34,7 +34,7 @@ function mergeProps(
   stateProps: StoreProps,
   dispatchProps: DispatchProps,
   ownProps: AuthStatusWrapperProps
-): AuthStatusProps {
+): AuthStatusPlainProps {
   return {
     ...stateProps,
     ...ownProps,
@@ -46,10 +46,10 @@ export default connect<
   StoreProps,
   DispatchProps,
   AuthStatusWrapperProps,
-  AuthStatusProps,
+  AuthStatusPlainProps,
   State
 >(
   mapStateToProps,
   mapDispatchToProps,
   mergeProps
-)(AuthStatus);
+)(AuthStatusPlain);
