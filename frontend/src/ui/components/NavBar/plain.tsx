@@ -12,7 +12,7 @@ export interface NavBarPlainProps {
 export class NavBarPlain extends React.Component<NavBarPlainProps> {
   render() {
     return (
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav className="navbar navbar-expand navbar-dark bg-dark mb-4">
         <NavLink to="/" className="navbar-brand" exact>
           Paragonr
         </NavLink>

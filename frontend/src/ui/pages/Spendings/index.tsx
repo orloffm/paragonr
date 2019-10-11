@@ -6,6 +6,6 @@ export interface SpendingsState {}
 
 export class Spendings extends React.Component<SpendingsProps, SpendingsState> {
   render() {
-    return "Spendings.";
+    return <h1>Spendings</h1>;
   }
 }

@@ -6,6 +6,6 @@ export interface NotFoundState {}
 
 export class NotFound extends React.Component<NotFoundProps, NotFoundState> {
   render() {
-    return "NotFound.";
+    return <h1>Not Found</h1>;
   }
 }

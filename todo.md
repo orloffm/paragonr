@@ -1,5 +1,7 @@
 # TODO
 
+- Make sure error message shows when replied by the server.
+- Persist state.
 - Change password field.
 - Show error message from server.
 - Get list of spendings.

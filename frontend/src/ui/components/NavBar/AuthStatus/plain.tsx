@@ -1,5 +1,4 @@
 import React from "react";
-import { mixed } from "yup";
 
 export interface AuthStatusPlainProps {
   isLoggedIn: boolean;

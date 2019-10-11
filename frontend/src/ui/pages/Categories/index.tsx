@@ -4,11 +4,8 @@ export interface CategoriesProps {}
 
 export interface CategoriesState {}
 
-export class Categories extends React.Component<
-  CategoriesProps,
-  CategoriesState
-> {
+export class Categories extends React.Component<CategoriesProps, CategoriesState> {
   render() {
-    return "Categories.";
+    return <h1>Categories</h1>;
   }
 }

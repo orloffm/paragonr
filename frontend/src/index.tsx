@@ -13,9 +13,9 @@ import { DeepPartial } from "redux";
 
 const sagaMiddleware = createSagaMiddleware();
 
-let preloadedState: DeepPartial<State> = {};
+//let preloadedState: DeepPartial<State> = {};
 
-const store = configureStore(sagaMiddleware, preloadedState);
+const store = configureStore(sagaMiddleware);
 
 sagaMiddleware.run(rootSaga);
 
