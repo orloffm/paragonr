@@ -1,24 +1,32 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router";
 
-import Home from "../pages/Home";
-import { Currencies } from "../pages/Currencies";
-import { Categories } from "../pages/Categories";
-import { Spendings } from "../pages/Spendings";
-import { NotFound } from "../pages/NotFound";
-import { LoginPage } from "../pages/Login";
+import { RouteData, AppRoutes } from "./RoutesData";
 import { PrivateRoute } from "../components/PrivateRoute";
 
-const routes = (
-  <Switch>
-    <Route path="/login" component={LoginPage} />
-    <Route path="/currencies" component={Currencies} />
-    <Route path="/categories" component={Categories} />
-    <PrivateRoute path="/spendings" component={Spendings} isLoggedIn={false} />
-    <Route path="/not-found" component={NotFound} />
-    <Route path="/" exact component={Home} />
-    <Redirect to="/not-found" />
-  </Switch>
-);
+function renderRouteData(r: RouteData): JSX.Element {
+  const path = getPath(r.key);
 
-export default routes;
+  if (r.public == true) {
+    return <Route path={path} key={r.key} component={r.component} />;
+  } else {
+    return <PrivateRoute path={path} key={r.key} component={r.component} />;
+  }
+}
+
+function getPath(key: string): string {
+  return "/" + key;
+}
+
+export function getRoutes() {
+  const rr = AppRoutes;
+
+  return (
+    <Switch>
+      {rr.routes.map(renderRouteData)};
+      <Route path={getPath(rr.notFoundKey)} component={rr.notFoundComponent} />
+      <Route path={getPath(rr.homeKey)} exact component={rr.homeComponent} />
+      <Redirect to={getPath(rr.notFoundKey)} />
+    </Switch>
+  );
+}

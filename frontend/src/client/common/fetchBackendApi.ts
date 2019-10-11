@@ -1,4 +1,4 @@
-import { ConfigValue } from "../../data/Consts";
+import { ConfigValue } from "../../data/Config";
 import { handleResponse } from "./handleReponse";
 
 export function fetchBackendApi<TInput, TOutput>(
