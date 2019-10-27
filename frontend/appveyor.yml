@@ -5,9 +5,10 @@ stack: node 12
 
 install:
   - cd frontend
+  - pwd
   - node --version
   - npm --version
   - npm install
 
 build_script:
-  - npm build
+  - npm run-script build

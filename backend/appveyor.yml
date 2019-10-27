@@ -6,6 +6,7 @@ image: Ubuntu
 
 install:
   - cd backend
+  - pwd
   - dotnet --version
 
 before_build:
