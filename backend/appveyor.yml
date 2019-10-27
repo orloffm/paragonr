@@ -1,11 +1,8 @@
 version: 1.0.{build}
 environment:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
-
 skip_tags: true
-image: Ubuntu1804
-
-configuration: Release
+image: Ubuntu
 
 install:
   - cd backend
@@ -15,4 +12,4 @@ before_build:
   - dotnet restore  -v Minimal
 
 build_script:
-  - dotnet build -c %CONFIGURATION%
+  - dotnet build -c Release

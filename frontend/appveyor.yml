@@ -2,11 +2,9 @@ version: 1.0.{build}
 skip_tags: true
 image: Ubuntu1804
 
-environment:
-  nodejs_version: "10"
+stack: node 12
 
 install:
-  - ps: Install-Product node 12
   - cd frontend
   - node --version
   - npm --version
