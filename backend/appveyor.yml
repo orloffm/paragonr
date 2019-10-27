@@ -9,9 +9,10 @@ configuration: Release
 
 install:
   - cd backend
+  - dotnet --version
 
 before_build:
-  - appveyor-retry dotnet restore  -v Minimal
+  - dotnet restore  -v Minimal
 
 build_script:
   - dotnet build -c %CONFIGURATION%

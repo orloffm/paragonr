@@ -6,7 +6,9 @@ environment:
   nodejs_version: "10"
 
 install:
+  - ps: Install-Product node 12
   - cd frontend
+  - node --version
   - npm --version
   - npm install
 
