@@ -3,7 +3,7 @@ skip_tags: true
 image: Ubuntu1804
 
 environment:
-  - nodejs_version: "10"
+  nodejs_version: "10"
 
 install:
   - cd frontend
