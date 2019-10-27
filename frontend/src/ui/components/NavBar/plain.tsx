@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import { RouteData } from "../../routes/RoutesData";
 import { getPath } from "../../routes/getPath";
 import AuthStatus from "./AuthStatus";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 
 export interface NavBarPlainProps {
   isLoggedIn: boolean;
@@ -12,19 +14,20 @@ export interface NavBarPlainProps {
 export class NavBarPlain extends React.Component<NavBarPlainProps> {
   render() {
     return (
-      <nav className="navbar navbar-expand navbar-dark bg-dark mb-4">
-        <NavLink to="/" className="navbar-brand" exact>
-          Paragonr
-        </NavLink>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
+      <Navbar bg="dark" expand="lg" variant="dark" className="justify-content-between">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <NavLink to="/" className="navbar-brand" exact>
+              Paragonr
+            </NavLink>
             {this.props.routes.map(item => this.renderNavItem(item))}
-          </ul>
-        </div>
-
-        <AuthStatus />
-      </nav>
+          </Nav>
+          <Nav>
+            <AuthStatus />
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 
@@ -40,11 +43,9 @@ export class NavBarPlain extends React.Component<NavBarPlainProps> {
     }
 
     return (
-      <li className="nav-item" key={item.key}>
-        <NavLink to={getPath(item.key)} className="nav-link">
-          {item.title}
-        </NavLink>
-      </li>
+      <NavLink to={getPath(item.key)} key={item.key} className="nav-link">
+        {item.title}
+      </NavLink>
     );
   }
 }

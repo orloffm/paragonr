@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
-import "bootstrap/dist/css/bootstrap.css";
 
 import App from "./App";
 // import * as serviceWorker from "./serviceWorker";
