@@ -101,11 +101,11 @@ namespace Paragonr.WebApi
             // Database.
             var connectionString = Configuration.GetConnectionString(ParagonrDatabaseConfigurationKey);
             services
-                .AddEntityFrameworkNpgsql()
                 .AddDbContext<BudgetDbContext>(
-                options => options
-                    .UseNpgsql(connectionString)
-                    .EnableSensitiveDataLogging()
+                    options => options.UseSqlServer(
+                        connectionString,
+                        sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()
+                    )
                 );
             services.AddScoped<IBudgetDbContext>(provider => provider.GetService<BudgetDbContext>());
 
@@ -117,18 +117,18 @@ namespace Paragonr.WebApi
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
+                .AddJwtBearer(x =>
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
 
             var builder = new ContainerBuilder();
             builder.Populate(services);

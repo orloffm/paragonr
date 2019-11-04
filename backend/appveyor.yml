@@ -13,4 +13,16 @@ before_build:
   - dotnet restore  -v Minimal
 
 build_script:
-  - dotnet build -c Release
+  # ./Paragonr.WebApi/bin/Release/netcoreapp3.0/publish/
+  - dotnet publish -c Release
+
+artifacts:
+  - path: "/Paragonr.WebApi/bin/Release/netcoreapp3.0/publish/"
+    name: ParagonrApiArtifacts
+    type: WebDeployPackage
+
+deploy:
+  - provider: Environment
+    name: ParagonrApiDeploy
+    on:
+      branch: master
