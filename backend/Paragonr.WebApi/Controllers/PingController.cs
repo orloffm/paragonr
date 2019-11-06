@@ -9,7 +9,7 @@ namespace Paragonr.WebApi.Controllers
         [HttpGet]
         public ActionResult<string> Index()
         {
-            return Ok();
+            return Ok("Ping!");
         }
     }
 }

@@ -30,7 +30,6 @@ namespace Paragonr.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.HasPostgresExtension("uuid-ossp");
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(BudgetDbContext).Assembly);
         }
     }
