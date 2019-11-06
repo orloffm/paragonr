@@ -9,7 +9,7 @@
 
 https://chsakell.com/2018/03/03/azure-app-service-ci-cd-using-appveyor/
 https://www.phillipsj.net/posts/working-with-sql-server-on-linux-for-dotnet-development/
-https://github.com/orloffm/paragonr/commit/c165b4ece7a1d2b342da75f5ed041e6596c5372f
+https://docs.microsoft.com/en-us/sql/azure-data-studio/download?view=sql-server-ver15
 
 ## Later
 
