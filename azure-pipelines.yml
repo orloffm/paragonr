@@ -1,0 +1,34 @@
+pool:
+  vmImage: "ubuntu-latest"
+
+variables:
+  buildConfiguration: "Release"
+  backendArtifactsDirectory: "$(Build.ArtifactStagingDirectory)/backend"
+  frontendArtifactsDirectory: "$(Build.ArtifactStagingDirectory)/frontend"
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: "sdk"
+      version: "3.x"
+
+  - script: |
+      dotnet --version
+      dotnet restore -v Minimal
+      dotnet publish -c $(buildConfiguration) --output $(backendArtifactsDirectory)
+    workingDirectory: backend
+    displayName: Build Backend
+
+  - script: |
+      node --version
+      npm --version
+      npm install
+      npm run-script build
+      mkdir $(frontendArtifactsDirectory)
+      mv build/* $(frontendArtifactsDirectory)
+    workingDirectory: frontend
+    displayName: Build Frontend
+
+  - script: |
+      ls -a
+    workingDirectory: $(Build.ArtifactStagingDirectory)
