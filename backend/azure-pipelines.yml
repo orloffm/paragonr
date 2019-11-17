@@ -1,18 +1,19 @@
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 variables:
-  buildConfiguration: 'Release'
+  buildConfiguration: "Release"
 
 steps:
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '3.x'
+  - task: UseDotNet@2
+    inputs:
+      packageType: "sdk"
+      version: "3.x"
 
-- script: pwd
-- script: cd backend
-- script: dotnet --version
-- script: dotnet restore -v Minimal
-- script: dotnet build --configuration $(buildConfiguration)
-- script: dotnet publish -c $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+  - script: pwd
+  - script: cd backend
+  - script: pwd
+  - script: dotnet --version
+  - script: dotnet restore -v Minimal
+  - script: dotnet build --configuration $(buildConfiguration)
+  - script: dotnet publish -c $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
