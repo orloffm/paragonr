@@ -17,7 +17,5 @@ steps:
     workingDirectory: backend
 
   - script: |
-      dotnet --version
-      dotnet restore -v Minimal
-      dotnet publish -c $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+      ls
     workingDirectory: $(Build.ArtifactStagingDirectory)
