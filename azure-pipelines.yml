@@ -28,16 +28,15 @@ steps:
       packageForLinux: "$(backendArtifactsDirectory)"
       RuntimeStack: "DOTNETCORE|3.0"
 
-  - script: |
+  - script:
       node --version
       npm --version
-      pwd
       npm install
       npm run-script build
       mkdir $(frontendArtifactsDirectory)
       mv build/* $(frontendArtifactsDirectory)/
-      workingDirectory: frontend
-      displayName: Build Frontend
+    workingDirectory: frontend
+    displayName: Build Frontend
 
   - task: AzureWebApp@1
     inputs:
