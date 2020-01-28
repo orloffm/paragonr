@@ -28,7 +28,7 @@ steps:
       packageForLinux: "$(backendArtifactsDirectory)"
       RuntimeStack: "DOTNETCORE|3.0"
 
-  - script:
+  - script: |
       node --version
       npm --version
       npm install
