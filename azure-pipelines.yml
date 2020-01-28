@@ -10,7 +10,8 @@ steps:
   - task: UseDotNet@2
     inputs:
       packageType: "sdk"
-      version: "3.0.100"
+      useGlobalJson: true
+      workingDirectory: backend
 
   - script: |
       dotnet --version
@@ -21,12 +22,15 @@ steps:
 
   - task: AzureRmWebAppDeployment@4
     inputs:
-      ConnectionType: "AzureRM"
-      azureSubscription: "Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)"
-      appType: "webAppLinux"
-      WebAppName: "ParagonrApi"
-      packageForLinux: "$(backendArtifactsDirectory)"
-      RuntimeStack: "DOTNETCORE|3.0"
+      ConnectionType: 'AzureRM'
+      azureSubscription: 'Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)'
+      appType: 'webAppLinux'
+      WebAppName: 'ParagonrApi'
+      deployToSlotOrASE: true
+      ResourceGroupName: 'paragonr_group'
+      SlotName: 'production'
+      packageForLinux: '$(backendArtifactsDirectory)'
+      RuntimeStack: 'DOTNETCORE|3.0'
 
   - script: |
       node --version
@@ -38,13 +42,25 @@ steps:
     workingDirectory: frontend
     displayName: Build Frontend
 
-  - task: AzureWebApp@1
+  - task: AzureRmWebAppDeployment@4
     inputs:
-      azureSubscription: "Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)"
-      appType: "webAppLinux"
-      appName: "ParagonrUI"
-      package: "$(frontendArtifactsDirectory)"
-      runtimeStack: "NODE|12-lts"
+      ConnectionType: 'AzureRM'
+      azureSubscription: 'Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)'
+      appType: 'webAppLinux'
+      WebAppName: 'ParagonrUI'
+      deployToSlotOrASE: true
+      ResourceGroupName: 'paragonr_group'
+      SlotName: 'production'
+      packageForLinux: '$(frontendArtifactsDirectory)'
+      RuntimeStack: 'NODE|12-lts'
+
+#  - task: AzureWebApp@1
+#    inputs:
+#      azureSubscription: "Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)"
+#      appType: "webAppLinux"
+#      appName: "ParagonrUI"
+#      package: "$(frontendArtifactsDirectory)"
+#      runtimeStack: "NODE|12-lts"
 
   - script: |
       ls -a -r
