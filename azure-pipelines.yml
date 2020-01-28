@@ -31,6 +31,7 @@ steps:
   - script: |
       node --version
       npm --version
+      pwd
       npm install
       npm run-script build
       mkdir $(frontendArtifactsDirectory)
