@@ -15,18 +15,18 @@ steps:
   - script: |
       dotnet --version
       dotnet restore -v Minimal
-      dotnet publish -c $(buildConfiguration) --output 
+      dotnet publish -c $(buildConfiguration) --output $(backendArtifactsDirectory)
     workingDirectory: backend
     displayName: Build Backend
 
   - task: AzureRmWebAppDeployment@4
     inputs:
-      ConnectionType: 'AzureRM'
-      azureSubscription: 'Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)'
-      appType: 'webAppLinux'
-      WebAppName: 'ParagonrApi'
-      packageForLinux: '$(backendArtifactsDirectory)'
-      RuntimeStack: 'DOTNETCORE|3.0'
+      ConnectionType: "AzureRM"
+      azureSubscription: "Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)"
+      appType: "webAppLinux"
+      WebAppName: "ParagonrApi"
+      packageForLinux: "$(backendArtifactsDirectory)"
+      RuntimeStack: "DOTNETCORE|3.0"
 
   - script: |
       node --version
@@ -34,20 +34,18 @@ steps:
       npm install
       npm run-script build
       mkdir $(frontendArtifactsDirectory)
-      mv build/*
+      mv build/* $(frontendArtifactsDirectory)/
       workingDirectory: frontend
       displayName: Build Frontend
 
   - task: AzureWebApp@1
     inputs:
-      azureSubscription: 'Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)'
-      appType: 'webAppLinux'
-      appName: 'ParagonrUI'
-      package: '$(frontendArtifactsDirectory)'
-      runtimeStack: 'NODE|12-lts'
+      azureSubscription: "Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)"
+      appType: "webAppLinux"
+      appName: "ParagonrUI"
+      package: "$(frontendArtifactsDirectory)"
+      runtimeStack: "NODE|12-lts"
 
   - script: |
       ls -a -r
     workingDirectory: $(Build.ArtifactStagingDirectory)
-
-  
