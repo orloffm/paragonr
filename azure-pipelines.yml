@@ -23,7 +23,7 @@ steps:
   - task: AzureRmWebAppDeployment@4
     inputs:
       ConnectionType: "AzureRM"
-      azureSubscription: "MySub"
+      azureSubscription: "MySub(697c728d-2a2b-4592-8acd-46af8668deee)"
       appType: "webAppLinux"
       WebAppName: "ParagonrApi"
       deployToSlotOrASE: true
@@ -45,7 +45,7 @@ steps:
   - task: AzureRmWebAppDeployment@4
     inputs:
       ConnectionType: "AzureRM"
-      azureSubscription: "MySub"
+      azureSubscription: "MySub(697c728d-2a2b-4592-8acd-46af8668deee)"
       appType: "webAppLinux"
       WebAppName: "ParagonrUI"
       deployToSlotOrASE: true
@@ -56,7 +56,7 @@ steps:
 
   #  - task: AzureWebApp@1
   #    inputs:
-  #      azureSubscription: "MySub"
+  #      azureSubscription: "MySub(697c728d-2a2b-4592-8acd-46af8668deee)"
   #      appType: "webAppLinux"
   #      appName: "ParagonrUI"
   #      package: "$(frontendArtifactsDirectory)"
