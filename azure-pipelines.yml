@@ -22,15 +22,15 @@ steps:
 
   - task: AzureRmWebAppDeployment@4
     inputs:
-      ConnectionType: 'AzureRM'
-      azureSubscription: 'Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)'
-      appType: 'webAppLinux'
-      WebAppName: 'ParagonrApi'
+      ConnectionType: "AzureRM"
+      azureSubscription: "MySub"
+      appType: "webAppLinux"
+      WebAppName: "ParagonrApi"
       deployToSlotOrASE: true
-      ResourceGroupName: 'paragonr_group'
-      SlotName: 'production'
-      packageForLinux: '$(backendArtifactsDirectory)'
-      RuntimeStack: 'DOTNETCORE|3.0'
+      ResourceGroupName: "paragonr_group"
+      SlotName: "production"
+      packageForLinux: "$(backendArtifactsDirectory)"
+      RuntimeStack: "DOTNETCORE|3.1"
 
   - script: |
       node --version
@@ -44,23 +44,23 @@ steps:
 
   - task: AzureRmWebAppDeployment@4
     inputs:
-      ConnectionType: 'AzureRM'
-      azureSubscription: 'Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)'
-      appType: 'webAppLinux'
-      WebAppName: 'ParagonrUI'
+      ConnectionType: "AzureRM"
+      azureSubscription: "MySub"
+      appType: "webAppLinux"
+      WebAppName: "ParagonrUI"
       deployToSlotOrASE: true
-      ResourceGroupName: 'paragonr_group'
-      SlotName: 'production'
-      packageForLinux: '$(frontendArtifactsDirectory)'
-      RuntimeStack: 'NODE|12-lts'
+      ResourceGroupName: "paragonr_group"
+      SlotName: "production"
+      packageForLinux: "$(frontendArtifactsDirectory)"
+      RuntimeStack: "NODE|12-lts"
 
-#  - task: AzureWebApp@1
-#    inputs:
-#      azureSubscription: "Płatność zgodnie z rzeczywistym użyciem(697c728d-2a2b-4592-8acd-46af8668deee)"
-#      appType: "webAppLinux"
-#      appName: "ParagonrUI"
-#      package: "$(frontendArtifactsDirectory)"
-#      runtimeStack: "NODE|12-lts"
+  #  - task: AzureWebApp@1
+  #    inputs:
+  #      azureSubscription: "MySub"
+  #      appType: "webAppLinux"
+  #      appName: "ParagonrUI"
+  #      package: "$(frontendArtifactsDirectory)"
+  #      runtimeStack: "NODE|12-lts"
 
   - script: |
       ls -a -r
