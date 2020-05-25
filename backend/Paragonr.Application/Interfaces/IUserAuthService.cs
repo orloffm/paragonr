@@ -6,7 +6,7 @@ namespace Paragonr.Application.Interfaces
 {
     public interface IUserAuthService
     {
-        Task<User> AssertAuthority(Guid requestUserRefKey, string requestOldPassword);
+        Task<User> AssertAuthorityToOperateOn(Guid requestUserRefKey, string password);
 
         Task<User> AuthenticateOrFail(string userQuery, string password);
     }

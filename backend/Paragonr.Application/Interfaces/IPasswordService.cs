@@ -1,11 +1,13 @@
-﻿namespace Paragonr.Application.Interfaces
+﻿using Paragonr.Domain.Entities;
+
+namespace Paragonr.Application.Interfaces
 {
     public interface IPasswordService
     {
-        void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt);
+        void SetPasswordForUser(string password, User user);
 
-        bool IsPasswordPresent(byte[] storedHash, byte[] storedSalt);
+        bool IsPasswordSet(User u);
 
-        bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt);
+        bool CheckPassword(string password, User u);
     }
 }

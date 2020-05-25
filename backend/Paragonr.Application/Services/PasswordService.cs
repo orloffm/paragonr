@@ -1,76 +1,81 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Paragonr.Application.Interfaces;
+using Paragonr.Domain.Entities;
+using Paragonr.Domain.Exceptions;
 
 namespace Paragonr.Application.Services
 {
     public sealed class PasswordService : IPasswordService
     {
-        public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            if (password == null)
-            {
-                throw new ArgumentNullException(nameof(password));
-            }
+            password = AssertPasswordCorrectnessAndGroom(password);
 
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(password));
-            }
-
-            using (var hmac = new HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            }
+            using var hmac = new HMACSHA512();
+            passwordSalt = hmac.Key;
+            passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
         }
 
-        public bool IsPasswordPresent(byte[] storedHash, byte[] storedSalt)
+        public void SetPasswordForUser(string password, User user)
         {
-            return storedSalt != null && storedSalt.Length > 0;
+            CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
         }
 
-        public bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
+        public bool IsPasswordSet(User u)
         {
-            if (!IsPasswordPresent(storedHash, storedSalt))
+            return u.PasswordSalt?.Length > 0;
+        }
+
+        public bool CheckPassword(string password, User u)
+        {
+            if (!IsPasswordSet(u))
             {
-                return true;
+                // No password set - can't authenticate.
+                return false;
             }
 
-            if (password == null)
+            password = AssertPasswordCorrectnessAndGroom(password);
+
+            if (u.PasswordHash?.Length != 64)
             {
-                throw new ArgumentNullException(nameof(password));
+                throw new PasswordMustBeResetException($"User {u.Username} has invalid length of password hash (64 bytes expected). Please reset it.");
             }
 
-            if (string.IsNullOrWhiteSpace(password))
+            if (u.PasswordSalt?.Length != 128)
             {
-                throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(password));
+                throw new PasswordMustBeResetException($"User {u.Username} has invalid length of password salt (128 bytes expected).");
             }
 
-            if (storedHash.Length != 64)
-            {
-                throw new ArgumentException("Invalid length of password hash (64 bytes expected).", nameof(storedHash));
-            }
+            using var hmac = new HMACSHA512(u.PasswordSalt);
 
-            if (storedSalt.Length != 128)
+            byte[] computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            for (int i = 0; i < computedHash.Length; i++)
             {
-                throw new ArgumentException("Invalid length of password salt (128 bytes expected).", nameof(storedHash));
-            }
-
-            using (var hmac = new HMACSHA512(storedSalt))
-            {
-                byte[] computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                for (var i = 0; i < computedHash.Length; i++)
+                if (computedHash[i] != u.PasswordHash[i])
                 {
-                    if (computedHash[i] != storedHash[i])
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
 
             return true;
+        }
+
+        private string AssertPasswordCorrectnessAndGroom(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new PasswordNoProperProvidedException();
+            }
+
+            password = password.Trim();
+
+            return password;
         }
     }
 }

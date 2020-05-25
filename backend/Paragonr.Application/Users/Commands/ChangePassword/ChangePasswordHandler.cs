@@ -25,15 +25,12 @@ namespace Paragonr.Application.Users.Commands.ChangePassword
         {
             if (string.IsNullOrWhiteSpace(request.NewPassword))
             {
-                throw new NoProperPasswordProvidedException();
+                throw new PasswordNoProperProvidedException();
             }
 
-            User user = await _userAuthService.AssertAuthority(request.UserRefKey, request.OldPassword);
+            User user = await _userAuthService.AssertAuthorityToOperateOn(request.UserRefKey, request.OldPassword);
 
-            _passService.CreatePasswordHash(request.NewPassword, out byte[] passwordHash, out byte[] passwordSalt);
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
+            _passService.SetPasswordForUser(request.NewPassword, user);
             await _context.SaveChangesAsync(cancellationToken);
 
             return new ChangePasswordResult();

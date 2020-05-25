@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Paragonr.Application.Interfaces;
@@ -23,7 +24,7 @@ namespace Paragonr.Application.Services
             _currentUserService = currentUserService;
         }
 
-        public async Task<User> AssertAuthority(Guid requestUserRefKey, string requestOldPassword)
+        public async Task<User> AssertAuthorityToOperateOn(Guid requestUserRefKey, string password)
         {
             // Get the requested user.
             User user = await _context.Users.GetByRefKeyOrDefault(requestUserRefKey);
@@ -33,7 +34,7 @@ namespace Paragonr.Application.Services
             }
 
             // Can the current user manipulate it?
-            var currentUserId = _currentUserService.GetCurrentUserId();
+            long currentUserId = _currentUserService.GetCurrentUserId();
             if (currentUserId != user.Id)
             {
                 bool isAdmin = await CheckIsAdmin(currentUserId);
@@ -44,13 +45,13 @@ namespace Paragonr.Application.Services
             }
             else
             {
-                var matches = _passService.VerifyPasswordHash(requestOldPassword, user.PasswordHash, user.PasswordSalt);
+                bool matches = _passService.CheckPassword(password, user);
                 if (!matches)
                 {
                     bool isAdmin = await CheckIsAdmin(currentUserId);
                     if (!isAdmin)
                     {
-                        throw new IncorrectPasswordException();
+                        throw new PasswordIncorrectException();
                     }
                 }
             }
@@ -67,21 +68,30 @@ namespace Paragonr.Application.Services
         {
             // Get the user.
             User user = await FindUserByLoginStringOrDefault(userQuery);
-
             if (user == null)
             {
                 throw new UserNotFoundException(userQuery);
             }
 
+            if (!_passService.IsPasswordSet(user))
+            {
+                _passService.SetPasswordForUser(password, user);
+                await _context.SaveChangesAsync(CancellationToken.None);
+
+                return user;
+            }
+
             // Check the password.
-            var matches = _passService.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt);
+            bool matches = _passService.CheckPassword(password, user);
             if (!matches)
             {
-                throw new IncorrectPasswordException();
+                throw new PasswordIncorrectException();
             }
 
             return user;
         }
+
+
 
         private async Task<User> FindUserByLoginStringOrDefault(string requestUser)
         {

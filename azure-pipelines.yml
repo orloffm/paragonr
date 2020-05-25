@@ -54,14 +54,6 @@ steps:
       packageForLinux: "$(frontendArtifactsDirectory)"
       RuntimeStack: "NODE|12-lts"
 
-  #  - task: AzureWebApp@1
-  #    inputs:
-  #      azureSubscription: "MySub(697c728d-2a2b-4592-8acd-46af8668deee)"
-  #      appType: "webAppLinux"
-  #      appName: "ParagonrUI"
-  #      package: "$(frontendArtifactsDirectory)"
-  #      runtimeStack: "NODE|12-lts"
-
   - script: |
       ls -a -r
     workingDirectory: $(Build.ArtifactStagingDirectory)

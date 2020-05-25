@@ -16,7 +16,7 @@ namespace Paragonr.Tools.EntityFramework.Extensions
                 .Select(i => i.Id)
                 .SingleAsync();
         }
-        
+
         public static async Task<TEntity> GetByRefKeyOrDefault<TEntity>(this DbSet<TEntity> dbSet, Guid refKey)
             where TEntity : class, IRefKeyEnabledEntity
         {
@@ -30,6 +30,18 @@ namespace Paragonr.Tools.EntityFramework.Extensions
         ) where TEntity : class, IEntity where TProp : struct
         {
             return await dbSet.Where(e=> e.Id == id)
+                .Select(selector)
+                .Select(v => (TProp?) v)
+                .SingleOrDefaultAsync();
+        }
+
+        public static async Task<TProp?> GetPropertyByRefKeyOrNull<TEntity, TProp>(
+            this DbSet<TEntity> dbSet,
+            Guid refKey,
+            Expression<Func<TEntity, TProp>> selector
+        ) where TEntity : class, IRefKeyEnabledEntity where TProp : struct
+        {
+            return await dbSet.Where(e=> e.RefKey == refKey)
                 .Select(selector)
                 .Select(v => (TProp?) v)
                 .SingleOrDefaultAsync();

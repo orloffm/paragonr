@@ -46,10 +46,14 @@ namespace Paragonr.WebApi
             {
                 app.UseDeveloperExceptionPage();
                 IdentityModelEventSource.ShowPII = true;
-                //     app.UseDatabaseErrorPage();
+                app.UseDatabaseErrorPage();
+            }
+            else
+            {
+                app.UseHttpsRedirection();
             }
 
-            app.UseAppExceptionHandler();
+            app.UseDomainExceptionHandler();
 
             // app.UseOpenApi();
             //
@@ -73,8 +77,6 @@ namespace Paragonr.WebApi
             {
                 endpoints.MapControllers();
             });
-
-            //  app.UseHttpsRedirection();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.

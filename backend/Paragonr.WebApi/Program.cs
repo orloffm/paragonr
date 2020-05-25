@@ -16,7 +16,7 @@ namespace Paragonr.WebApi
         {
             return WebHost.CreateDefaultBuilder(args)
                 .UseNLog()
-                .UseUrls("http://localhost:4000")
+                //.UseUrls("http://localhost:4000")
                 .UseStartup<Startup>();
         }
 
@@ -39,24 +39,28 @@ namespace Paragonr.WebApi
                 throw;
             }
 
-            using (IServiceScope scope = host.Services.CreateScope())
-            {
-                try
-                {
-                    var context = scope.ServiceProvider.GetService<IBudgetDbContext>();
-
-                    var concreteContext = (BudgetDbContext)context;
-                    concreteContext.Database.Migrate();
-                    BudgetDbInitializer.Initialize(concreteContext);
-                }
-                catch (Exception ex)
-                {
-                    logger.Error(ex, "An error occurred while migrating or initializing the database.");
-                    throw;
-                }
-            }
+            PrepareDatabase(host.Services, logger);
 
             host.Run();
+        }
+
+        private static void PrepareDatabase(IServiceProvider provider, ILogger logger)
+        {
+            using IServiceScope scope = provider.CreateScope();
+
+            try
+            {
+                var context = scope.ServiceProvider.GetService<IBudgetDbContext>();
+
+                var concreteContext = (BudgetDbContext) context;
+                concreteContext.Database.Migrate();
+                BudgetDbInitializer.Initialize(concreteContext);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "An error occurred while migrating or initializing the database.");
+                throw;
+            }
         }
     }
 }

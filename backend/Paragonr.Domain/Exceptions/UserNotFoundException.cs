@@ -2,7 +2,7 @@
 
 namespace Paragonr.Domain.Exceptions
 {
-    public sealed class UserNotFoundException : AppException
+    public sealed class UserNotFoundException : DomainException
     {
         public UserNotFoundException(Guid userRefKey) : base($"User with ref key {userRefKey} not found.")
         {

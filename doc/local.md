@@ -1,5 +1,13 @@
 # Local development
 
+## Linux: Installing SQL Server
+
+Install Docker: http://gooseberryseedspittingcontest.com/post/xubuntu_notes/#docker
+
+Run the container: http://gooseberryseedspittingcontest.com/post/xubuntu_notes/#sql-server-developer-edition
+
+Install Azure Data Studio: http://gooseberryseedspittingcontest.com/post/xubuntu_notes/#azure-data-studio
+
 ## Setting up SQL Server
 
 Create the user:

@@ -7,11 +7,11 @@ using Paragonr.Domain.Exceptions;
 
 namespace Paragonr.WebApi.Common.Middleware
 {
-    public sealed class CustomExceptionHandlerMiddleware
+    public sealed class DomainExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public CustomExceptionHandlerMiddleware(RequestDelegate next)
+        public DomainExceptionHandlerMiddleware(RequestDelegate next)
         {
             _next = next;
         }
@@ -22,13 +22,13 @@ namespace Paragonr.WebApi.Common.Middleware
             {
                 await _next(context);
             }
-            catch (AppException ex)
+            catch (DomainException ex)
             {
                 await HandleExceptionAsync(context, ex);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, AppException exception)
+        private Task HandleExceptionAsync(HttpContext context, DomainException exception)
         {
             HttpStatusCode code;
             switch (exception)
@@ -37,9 +37,9 @@ namespace Paragonr.WebApi.Common.Middleware
                     code = HttpStatusCode.Unauthorized;
                     break;
 
-                case IncorrectPasswordException _:
+                case PasswordIncorrectException _:
                 case MustBeAdminException _:
-                case NoProperPasswordProvidedException _:
+                case PasswordNoProperProvidedException _:
                 case UserNotFoundException _:
                 default:
                     code = HttpStatusCode.BadRequest;
