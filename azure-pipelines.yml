@@ -1,0 +1,68 @@
+pool:
+  vmImage: "ubuntu-latest"
+
+# CI triggered from master
+trigger:
+  branches:
+    include:
+    - master
+
+# no PR triggers
+pr: none
+
+variables:
+  buildConfiguration: "Release"
+  backendArtifactsDirectory: "$(Build.ArtifactStagingDirectory)/backend"
+  frontendArtifactsDirectory: "$(Build.ArtifactStagingDirectory)/frontend"
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: "sdk"
+      useGlobalJson: true
+      workingDirectory: backend
+
+  - script: |
+      dotnet --version
+      dotnet restore -v Minimal
+      dotnet publish -c $(buildConfiguration) --output $(backendArtifactsDirectory)
+    workingDirectory: backend
+    displayName: Build Backend
+
+  - task: AzureRmWebAppDeployment@4
+    inputs:
+      ConnectionType: "AzureRM"
+      azureSubscription: "MySub(697c728d-2a2b-4592-8acd-46af8668deee)"
+      appType: "webAppLinux"
+      WebAppName: "ParagonrApi"
+      deployToSlotOrASE: true
+      ResourceGroupName: "paragonr_group"
+      SlotName: "production"
+      packageForLinux: "$(backendArtifactsDirectory)"
+      RuntimeStack: "DOTNETCORE|3.1"
+
+  - script: |
+      node --version
+      npm --version
+      npm install
+      npm run-script build
+      mkdir $(frontendArtifactsDirectory)
+      mv build/* $(frontendArtifactsDirectory)/
+    workingDirectory: frontend
+    displayName: Build Frontend
+
+  - task: AzureRmWebAppDeployment@4
+    inputs:
+      ConnectionType: "AzureRM"
+      azureSubscription: "MySub(697c728d-2a2b-4592-8acd-46af8668deee)"
+      appType: "webAppLinux"
+      WebAppName: "ParagonrUI"
+      deployToSlotOrASE: true
+      ResourceGroupName: "paragonr_group"
+      SlotName: "production"
+      packageForLinux: "$(frontendArtifactsDirectory)"
+      RuntimeStack: "NODE|12-lts"
+
+  - script: |
+      ls -a -r
+    workingDirectory: $(Build.ArtifactStagingDirectory)
