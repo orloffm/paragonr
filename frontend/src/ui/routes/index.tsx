@@ -22,12 +22,12 @@ function renderRouteData(r: RouteData, loginKey: string): JSX.Element {
   }
 }
 
-export function renderRouteDatas() {
+export function renderRouteDatas(): JSX.Element {
   const rr = AppRoutes;
 
   return (
     <Switch>
-      {rr.routes.map(r => renderRouteData(r, AppRoutes.loginKey))};
+      {rr.routes.map((r) => renderRouteData(r, AppRoutes.loginKey))};
       <Route path={getPath(rr.notFoundKey)} component={rr.notFoundComponent} />
       <Route path={getPath(rr.homeKey)} exact component={rr.homeComponent} />
       <Redirect to={getPath(rr.notFoundKey)} />

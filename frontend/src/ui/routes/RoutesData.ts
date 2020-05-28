@@ -4,6 +4,7 @@ import { Categories } from "../pages/Categories";
 import { Spendings } from "../pages/Spendings";
 import { NotFound } from "../pages/NotFound";
 import { LoginPage } from "../pages/Login";
+import { Info } from "../pages/Info";
 import Home from "../pages/Home";
 
 // Represents all routing possibilities - keys and components.
@@ -55,6 +56,13 @@ export const AppRoutes: RoutesData = {
       key: "spendings",
       title: "Spendings",
       component: Spendings
+    },
+    {
+      key: "info",
+      title: "Info",
+      component: Info,
+      allowAnonymous: true,
+      onlyAnonymous: false
     }
   ]
 };
