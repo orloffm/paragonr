@@ -1,4 +1,4 @@
-import { ConfigValue } from "../../data/Config";
+import { getConfig } from "../../data/Config";
 import { handleResponse } from "./handleReponse";
 
 export function fetchBackendApi<TInput, TOutput>(
@@ -8,14 +8,17 @@ export function fetchBackendApi<TInput, TOutput>(
   const requestOptions: RequestInit = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(input)
+    body: JSON.stringify(input),
   };
 
   if (!path.startsWith("/")) {
     path = "/" + path;
   }
 
-  const fullUrl = `${ConfigValue.baseApiUrl}${path}`;
+  const configValue = getConfig();
+  const fullUrl = `${configValue.baseApiUrl}${path}`;
 
-  return fetch(fullUrl, requestOptions).then(response => handleResponse<TOutput>(response));
+  return fetch(fullUrl, requestOptions).then((response) =>
+    handleResponse<TOutput>(response)
+  );
 }
