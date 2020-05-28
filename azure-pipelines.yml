@@ -1,10 +1,14 @@
 pool:
   vmImage: "ubuntu-latest"
 
+# CI triggered from master
 trigger:
   branches:
     include:
     - master
+
+# no PR triggers
+pr: none
 
 variables:
   buildConfiguration: "Release"
