@@ -6,14 +6,15 @@ import { NotFound } from "../pages/NotFound";
 import { LoginPage } from "../pages/Login";
 import Home from "../pages/Home";
 
+// Represents all routing possibilities - keys and components.
 export interface RoutesData {
   notFoundKey: string;
   loginKey: string;
   homeKey: string;
   homeComponent: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
   notFoundComponent:
-    | React.ComponentType<RouteComponentProps<any>>
-    | React.ComponentType<any>;
+  | React.ComponentType<RouteComponentProps<any>>
+  | React.ComponentType<any>;
   routes: RouteData[];
 }
 

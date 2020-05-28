@@ -1,11 +1,11 @@
 import Redux, { Action } from "redux";
 import { connect } from "react-redux";
 
-import { State } from "../../../../logic/state/State";
+import { GlobalState } from "../../../../logic/state/GlobalState";
 import { authClear } from "../../../../logic/actions/Auth/types";
 import { AuthStatusPlainProps, AuthStatusPlain } from "./plain";
 
-export interface AuthStatusWrapperProps {}
+export interface AuthStatusWrapperProps { }
 
 interface StoreProps {
   isLoggedIn: boolean;
@@ -16,7 +16,7 @@ interface DispatchProps {
   logOut: () => void;
 }
 
-function mapStateToProps(state: State): StoreProps {
+function mapStateToProps(state: GlobalState): StoreProps {
   const { isLoggedIn, username } = state.auth;
 
   return { isLoggedIn, username };
@@ -47,7 +47,7 @@ export default connect<
   DispatchProps,
   AuthStatusWrapperProps,
   AuthStatusPlainProps,
-  State
+  GlobalState
 >(
   mapStateToProps,
   mapDispatchToProps,

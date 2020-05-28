@@ -7,7 +7,7 @@ import App from "./App";
 // import * as serviceWorker from "./serviceWorker";
 import configureStore, { history } from "./logic/state/configureStore";
 import { rootSaga } from "./logic/sagas";
-import { State } from "./logic/state/State";
+import { GlobalState } from "./logic/state/GlobalState";
 import { DeepPartial } from "redux";
 
 const sagaMiddleware = createSagaMiddleware();

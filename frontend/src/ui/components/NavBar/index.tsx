@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import { State } from "../../../logic/state/State";
+import { GlobalState } from "../../../logic/state/GlobalState";
 import { RouteProps } from "react-router-dom";
 import { NavBarPlain, NavBarPlainProps } from "./plain";
 import { RouteData } from "../../routes/RoutesData";
@@ -13,7 +13,7 @@ interface StoreProps {
   isLoggedIn: boolean;
 }
 
-function mapStateToProps(state: State): StoreProps {
+function mapStateToProps(state: GlobalState): StoreProps {
   return { isLoggedIn: state.auth.isLoggedIn };
 }
 
@@ -28,7 +28,7 @@ function mergeProps(
   };
 }
 
-export default connect<StoreProps, {}, NavBarWrapperProps, NavBarPlainProps, State>(
+export default connect<StoreProps, {}, NavBarWrapperProps, NavBarPlainProps, GlobalState>(
   mapStateToProps,
   undefined,
   mergeProps

@@ -12,6 +12,7 @@ const initialValues: LoginFormValues = {
   password: ""
 };
 
+// Bare properties that are not aware of the outer world.
 export interface LoginFormProps {
   isSubmitInProgress?: boolean;
   errorMessage?: string | null;

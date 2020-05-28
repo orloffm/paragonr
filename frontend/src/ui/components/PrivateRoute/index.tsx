@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import { State } from "../../../logic/state/State";
+import { GlobalState } from "../../../logic/state/GlobalState";
 import { RouteProps } from "react-router-dom";
 import { PrivateRoutePlain, PrivateRoutePlainProps } from "./plain";
 
@@ -12,7 +12,7 @@ interface StoreProps {
   isLoggedIn: boolean;
 }
 
-function mapStateToProps(state: State): StoreProps {
+function mapStateToProps(state: GlobalState): StoreProps {
   return { isLoggedIn: state.auth.isLoggedIn };
 }
 
@@ -32,7 +32,7 @@ export default connect<
   {},
   PrivateRouteWrapperProps,
   PrivateRoutePlainProps,
-  State
+  GlobalState
 >(
   mapStateToProps,
   undefined,

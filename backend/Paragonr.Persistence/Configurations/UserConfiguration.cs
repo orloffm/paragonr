@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Paragonr.Domain.Entities;
+using Paragonr.Persistence.Helpers;
 
 namespace Paragonr.Persistence.Configurations
 {
@@ -7,7 +8,7 @@ namespace Paragonr.Persistence.Configurations
     {
         protected override void ConfigureEntity(EntityTypeBuilder<User> builder)
         {
-
+            RefKeyEnabledEntityConfigurationHelper.ConfigureKey(builder);
         }
     }
 }

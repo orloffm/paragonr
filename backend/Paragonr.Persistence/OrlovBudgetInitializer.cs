@@ -104,6 +104,7 @@ namespace Paragonr.Persistence
                     LastName = lastName,
                     Email = email,
                     Username = login,
+                    IsAdmin = true,
                     PasswordHash = password != null ? Encoding.UTF8.GetBytes(password) : null,
                     PasswordSalt = null
                 };
